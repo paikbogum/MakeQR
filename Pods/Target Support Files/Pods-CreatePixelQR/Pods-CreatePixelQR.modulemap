@@ -1,0 +1,6 @@
+framework module Pods_CreatePixelQR {
+  umbrella header "Pods-CreatePixelQR-umbrella.h"
+
+  export *
+  module * { export * }
+}
