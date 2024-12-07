@@ -12,6 +12,7 @@ enum QRCase {
     case url
     case wifi
     case text
+    case phone
     
     
     var categoryCase: String {
@@ -24,7 +25,17 @@ enum QRCase {
             
         case .text:
             return "text"
+        
+        case .phone:
+            return "phone"
             
         }
     }
+}
+
+enum QRCodeType {
+    case url(String)
+    case wifi(ssid: String, password: String, security: String, hidden: Bool)
+    case phone(String)
+    case text(String)
 }

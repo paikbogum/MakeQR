@@ -23,40 +23,89 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
     
     var categoryCase = ""
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         makeQRView.MakeQRViewUISetting()
         setTextfield()
         changeStateOfTF()
         changeStateOfCategory()
         changeCreateButtonState()
+        
+        print(categoryCase)
     }
     
     private func changeStateOfCategory() {
         switch categoryCase {
         case "url":
             makeQRView.secondStepLabel.text = "생성할 QR코드의 URL주소를 입력해주세요"
+            makeQRView.urlTF.placeholder = "ex) http://"
         case "wifi":
-            makeQRView.secondStepLabel.text = "생성할 QR코드의 wifi이름을 입력해주세요"
+            makeQRView.secondStepLabel.text = "생성할 QR코드의 wifi 이름을 입력해주세요"
+            makeQRView.urlTF.placeholder = "ex) iptime"
         case "text":
-            makeQRView.secondStepLabel.text = "생성할 QR코드의 텍스트를 적어주세요"
+            makeQRView.secondStepLabel.text = "생성할 QR코드의 텍스트를 입력해주세요"
+            makeQRView.urlTF.placeholder = "ex) 안녕!"
+        case "phone":
+            makeQRView.secondStepLabel.text = "생성할 QR코드의 전화번호를 입력해주세요"
+            makeQRView.urlTF.placeholder = "ex) 010-9988-3942"
         default:
             break
         }
     }
     
-    @IBAction func createButtonTapped(_ sender: UIButton) {
+    private func checkUrlMethod() {
+        // http 또는 https로 시작하지 않는 경우 처리
+        if !(makeQRView.urlTF.text!.hasPrefix("http://") || makeQRView.urlTF.text!.hasPrefix("https://")) {
+            
+            showAlert(for: makeQRView.urlTF)
+            urlTFBool = false
+            
+            changeStateOfTF()
+            changeCreateButtonState()
+        } else {
+            urlTFBool = true
+            if buttonBool {
+                if let nextVC = storyboard?.instantiateViewController(withIdentifier: "ResultViewController") as? ResultViewController {
+                    
+                    nextVC.receiveCroppedImage = makeQRView.seletedImageView.image
+                    
+                    nextVC.qrType = .url(makeQRView.urlTF.text!)
+                    
+                    navigationController?.pushViewController(nextVC, animated: true)
+                }
+            } else {
+                let qrCode = qrProcessor.generateQRCode(from: .url(makeQRView.urlTF.text!), clearRatio: 0.0, dotImage: nil)
+                
+                makeQRView.firstUIView.isHidden = false
+                textContainerBottomConstraint.constant = 330
+                makeQRView.urlTF.isUserInteractionEnabled = false
+                makeQRView.urlTF.textColor = .green
+                makeQRView.qrPreviewImageView.image = qrCode
+                
+                urlTFBool = true
+                changeStateOfImage()
+                
+                UIView.animate(withDuration: 0.3) {
+                    self.view.layoutIfNeeded()
+                }
+            }
+        }
+    }
+    
+    private func checkTextMethod() {
         if buttonBool {
             if let nextVC = storyboard?.instantiateViewController(withIdentifier: "ResultViewController") as? ResultViewController {
+                
                 nextVC.receiveCroppedImage = makeQRView.seletedImageView.image
-                nextVC.receiveUrl = makeQRView.urlTF.text!
+                
+                nextVC.qrType = .text(makeQRView.urlTF.text!)
+                //nextVC.receiveUrl = makeQRView.urlTF.text!
                 
                 navigationController?.pushViewController(nextVC, animated: true)
             }
         } else {
-            let qrCode = qrProcessor.generateQRCode(from: makeQRView.urlTF.text!, clearRatio: 0.0)
+            let qrCode = qrProcessor.generateQRCode(from: .text(makeQRView.urlTF.text!), clearRatio: 0.0, dotImage: nil)
             
             makeQRView.firstUIView.isHidden = false
             textContainerBottomConstraint.constant = 330
@@ -66,10 +115,53 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
             
             urlTFBool = true
             changeStateOfImage()
-
+            
             UIView.animate(withDuration: 0.3) {
                 self.view.layoutIfNeeded()
             }
+        }
+    }
+    
+    private func checkPhoneMethod() {
+        if buttonBool {
+            if let nextVC = storyboard?.instantiateViewController(withIdentifier: "ResultViewController") as? ResultViewController {
+                
+                nextVC.receiveCroppedImage = makeQRView.seletedImageView.image
+                
+                
+                nextVC.qrType = .phone(makeQRView.urlTF.text!)
+                //nextVC.receiveUrl = makeQRView.urlTF.text!
+                
+                navigationController?.pushViewController(nextVC, animated: true)
+            }
+        } else {
+            let qrCode = qrProcessor.generateQRCode(from: .phone(makeQRView.urlTF.text!), clearRatio: 0.0, dotImage: nil)
+            
+            makeQRView.firstUIView.isHidden = false
+            textContainerBottomConstraint.constant = 330
+            makeQRView.urlTF.isUserInteractionEnabled = false
+            makeQRView.urlTF.textColor = .green
+            makeQRView.qrPreviewImageView.image = qrCode
+            
+            urlTFBool = true
+            changeStateOfImage()
+            
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    @IBAction func createButtonTapped(_ sender: UIButton) {
+        switch categoryCase {
+        case "url":
+            checkUrlMethod()
+        case "text":
+            checkTextMethod()
+        case "phone":
+            checkPhoneMethod()
+        default:
+            break
         }
     }
     
@@ -104,7 +196,7 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
             makeQRView.firstStepButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
             makeQRView.firstStepButton.tintColor = .green
             makeQRView.firstStepLabel.textColor = .green
-
+            
             makeQRView.createButton.setTitle("Make QR!", for: .normal)
             makeQRView.createButton.isEnabled = true
             
@@ -114,14 +206,13 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
             makeQRView.firstStepButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
             makeQRView.firstStepButton.tintColor = .lightGray
             makeQRView.firstStepLabel.textColor = .lightGray
-
+            
             makeQRView.createButton.setTitle("STEP 2", for: .normal)
             makeQRView.createButton.isEnabled = false
         }
         
         changeCreateButtonState()
     }
-    
     
     private func changeStateOfTF() {
         if urlTFBool {
@@ -156,7 +247,6 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
     
     private func setTextfield() {
         makeQRView.urlTF.delegate = self
-        makeQRView.urlTF.placeholder = "ex) http://"
         makeQRView.urlTF.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
     }
     
@@ -176,6 +266,7 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
     }
     
     @objc func textFieldEditingChanged(_ textField: UITextField) {
+        // 첫 글자가 공백인 경우 처리
         if textField.text?.count == 1 {
             if textField.text?.first == " " {
                 textField.text = ""
@@ -183,17 +274,28 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
             }
         }
         
-        guard let text = makeQRView.urlTF.text,
-              !text.isEmpty else {
-            
+        // 텍스트가 없는 경우 처리
+        guard let text = makeQRView.urlTF.text, !text.isEmpty else {
             urlTFBool = false
             changeStateOfTF()
             return
         }
         
-        urlTFBool = true
         
+        // 모든 조건을 만족한 경우
+        urlTFBool = true
         changeStateOfTF()
+        
+    }
+    
+    // Alert 표시 함수
+    func showAlert(for textField: UITextField) {
+        let alert = UIAlertController(title: "Invalid URL", message: "URL은 http:// 또는 https://로 시작해야 합니다.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
+            // 알림 닫고 텍스트필드 초기화
+            textField.text = ""
+        }))
+        present(alert, animated: true, completion: nil)
     }
 }
 

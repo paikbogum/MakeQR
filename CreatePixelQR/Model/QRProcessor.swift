@@ -9,11 +9,12 @@ import UIKit
 import CoreImage
 
 class QRProcessor {
-    // url QR 코드 생성
-    func generateQRCode(from string: String, clearRatio: CGFloat) -> UIImage? {
-        guard !string.isEmpty, let data = string.data(using: .ascii) else { return nil }
+    // QR 코드 생성
+    func generateQRCode(from type: QRCodeType, clearRatio: CGFloat, dotImage: UIImage?) -> UIImage? {
+        guard let qrDataString = convertToQRDataString(from: type),
+              let data = qrDataString.data(using: .ascii),
+              let filter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
         
-        guard let filter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
         filter.setValue(data, forKey: "inputMessage")
         filter.setValue("H", forKey: "inputCorrectionLevel")
         
@@ -23,16 +24,32 @@ class QRProcessor {
         
         let context = CIContext()
         guard let cgImage = context.createCGImage(scaledImage, from: scaledImage.extent) else { return nil }
-        return UIImage(cgImage: cgImage)
+        let qrCodeImage = UIImage(cgImage: cgImage)
+        
+        guard let clearedQRCode = clearCenterOfQRCode(qrCode: qrCodeImage, clearRatio: clearRatio) else { return nil }
+        
+        if let dotImage = dotImage {
+            return overlayDotImageOnClearedQRCode(qrCode: clearedQRCode, dotImage: dotImage, clearRatio: clearRatio, dotRatio: 0.6)
+        }
+        
+        return clearedQRCode
     }
     
-    // wifi QR코드 생성
+    // QR 데이터 타입 변환
+    private func convertToQRDataString(from type: QRCodeType) -> String? {
+        switch type {
+        case .url(let urlString):
+            return urlString
+        case .wifi(let ssid, let password, let security, let hidden):
+            return "WIFI:S:\(ssid);T:\(security);P:\(password);H:\(hidden ? "true" : "false");;"
+        case .phone(let phoneNumber):
+            return "tel:\(phoneNumber)"
+        case .text(let text):
+            return text
+        }
+    }
     
-    
-    
-    // text QR코드 생성
-    
-    // QR 코드 중앙 비우기
+    // 중앙 비우기
     func clearCenterOfQRCode(qrCode: UIImage, clearRatio: CGFloat) -> UIImage? {
         guard let cgImage = qrCode.cgImage else { return nil }
         
@@ -52,26 +69,18 @@ class QRProcessor {
         return clearedQRCode
     }
     
-    // 도트 이미지 처리
-    func processImageToDots(image: UIImage, gridSize: Int, cellSize: Int) -> UIImage? {
-        guard let binaryDots = convertImageToBinaryDotsEnhanced(image: image, gridSize: gridSize) else { return nil }
-        return binaryDotsToImage(binaryDots: binaryDots, cellSize: cellSize)
-    }
-    
-    // QR 코드와 도트 이미지 통합
+    // 도트 이미지 합성
     func overlayDotImageOnClearedQRCode(qrCode: UIImage, dotImage: UIImage, clearRatio: CGFloat, dotRatio: CGFloat) -> UIImage? {
         guard let clearedQRCode = clearCenterOfQRCode(qrCode: qrCode, clearRatio: clearRatio) else { return nil }
         
         let qrSize = clearedQRCode.size
         let clearSize = CGSize(width: qrSize.width * clearRatio, height: qrSize.height * clearRatio)
-        let dotSize = CGSize(width: clearSize.width * dotRatio, height: clearSize.height * dotRatio) // 도트 이미지를 더 작게 설정
+        let dotSize = CGSize(width: clearSize.width * dotRatio, height: clearSize.height * dotRatio)
         
         UIGraphicsBeginImageContextWithOptions(qrSize, false, 0.0)
         
-        // QR 코드 그리기
         clearedQRCode.draw(in: CGRect(origin: .zero, size: qrSize))
         
-        // 중앙에 도트 이미지 삽입
         let dotOrigin = CGPoint(
             x: (qrSize.width - dotSize.width) / 2,
             y: (qrSize.height - dotSize.height) / 2
@@ -84,6 +93,12 @@ class QRProcessor {
         return combinedImage
     }
     
+    // 이미지를 도트화
+    func processImageToDots(image: UIImage, gridSize: Int, cellSize: Int) -> UIImage? {
+        guard let binaryDots = convertImageToBinaryDotsEnhanced(image: image, gridSize: gridSize) else { return nil }
+        return binaryDotsToImage(binaryDots: binaryDots, cellSize: cellSize)
+    }
+
     // Binary Dots 생성
     private func convertImageToBinaryDotsEnhanced(image: UIImage, gridSize: Int) -> [[Int]]? {
         guard let inputCGImage = image.cgImage else { return nil }
@@ -129,7 +144,7 @@ class QRProcessor {
         }
         return binaryDots
     }
-    
+
     // Binary Dots -> UIImage 변환
     private func binaryDotsToImage(binaryDots: [[Int]], cellSize: Int) -> UIImage? {
         let rows = binaryDots.count
@@ -159,4 +174,6 @@ class QRProcessor {
         UIGraphicsEndImageContext()
         return image
     }
+    
+    
 }

@@ -14,13 +14,19 @@ class MainViewController: UIViewController {
     let cellName = "MainCollectionViewCell"
     let cellReuseIdentifier = "MainCollectionViewCell"
     
-    let categoryList: [(String, String)] =  [("wifi", "wifi를 QR코드로 생성"), ("url", "url을 QR코드로 생성"), ("text", "텍스트를 QR코드로 생성")]
+    let categoryList: [(String, String)] =  [("wifi", "wifi를 QR코드로 생성"), ("url", "url을 QR코드로 생성"), ("text", "텍스트를 QR코드로 생성"), ("phone", "전화번호를 QR코드로 생성")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         mainView.mainViewUISetting()
         registerXib()
+        
+        mainView.mainCollectionView.layoutIfNeeded()
+        
+        if let layout = mainView.mainCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+             layout.estimatedItemSize = .zero
+         }
     }
     
     private func registerXib() {
@@ -29,6 +35,7 @@ class MainViewController: UIViewController {
         
         mainView.mainCollectionView.delegate = self
         mainView.mainCollectionView.dataSource = self
+    
     }
 
     
@@ -54,25 +61,44 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let destination = categoryList[indexPath.row].0
+        
+        if destination == "wifi" {
+            guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MakeWifiViewController") as? MakeWifiViewController else { return }
+            
+            //nextVC.categoryCase = destination
+            self.navigationController?.pushViewController(nextVC, animated: true)
+
+        } else {
+            guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MakeQRViewController") as? MakeQRViewController else { return }
+            
+            nextVC.categoryCase = destination
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+        /*
         guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MakeQRViewController") as? MakeQRViewController else { return }
         let target = categoryList[indexPath.row].0
         
         nextVC.categoryCase = target
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        self.navigationController?.pushViewController(nextVC, animated: true)*/
     }
-    
-    
-    
-    
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 300, height: 80)
+        let totalSpacing: CGFloat = 0 // Safe Area 여백 (20 + 20)
+        let width = collectionView.safeAreaLayoutGuide.layoutFrame.width - totalSpacing
+        let height: CGFloat = 60 // 셀 높이 (원하는 대로 설정)
+        
+        return CGSize(width: width, height: height)
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 20
     }
+    
+
     
     
     

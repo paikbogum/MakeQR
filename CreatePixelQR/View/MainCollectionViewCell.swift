@@ -9,7 +9,7 @@ import UIKit
 
 class MainCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var containerView: UIView!
+   // @IBOutlet weak var containerView: UIView!
     
     @IBOutlet weak var categoryImageView: UIImageView!
     @IBOutlet weak var categoryExplainText: UILabel!
@@ -17,9 +17,9 @@ class MainCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        containerView.clipsToBounds = true
-        containerView.layer.cornerRadius = 4
-        containerView.backgroundColor = .white
+        contentView.clipsToBounds = true
+        contentView.layer.cornerRadius = 4
+        contentView.backgroundColor = .white
             
         categoryExplainText.font = UIFont.boldSystemFont(ofSize: 15)
         categoryExplainText.textColor = .black

@@ -1,44 +1,53 @@
 //
-//  MakeQRView.swift
+//  MakeWifiView.swift
 //  CreatePixelQR
 //
-//  Created by 백현진 on 11/24/24.
+//  Created by 백현진 on 12/5/24.
 //
 
 import UIKit
-import Lottie
-import SnapKit
 
-
-class MakeQRView: UIView {
+class MakeWifiView: UIView {
     
     @IBOutlet weak var makeQRContainerView: UIView!
     
-    @IBOutlet weak var firstUIView: UIView!
     
-    @IBOutlet weak var firstStepLabel: UILabel!
+    @IBOutlet weak var wifiNameLabel: UILabel!
+    
+    @IBOutlet weak var wifiPasswordLabel: UILabel!
+    @IBOutlet weak var wifiSecurityLabel: UILabel!
+    
+    @IBOutlet weak var wifiHiddenLabel: UILabel!
+    
+    @IBOutlet weak var wifiNameTF: UITextField!
+    
+    @IBOutlet weak var wifiPasswordTF: UITextField!
+    
+    @IBOutlet weak var wifiSecurityTypeTF: UITextField!
+    
+    @IBOutlet weak var wifiHiddenTF: UITextField!
+    
+    @IBOutlet weak var firstUIView: UIView!
     
     @IBOutlet weak var firstStepButton: UIButton!
     
-    @IBOutlet weak var secondUIView: UIView!
+    @IBOutlet weak var firstStepLabel: UILabel!
     
-    @IBOutlet weak var secondStepLabel: UILabel!
+    @IBOutlet weak var secondUIView: UIView!
     
     @IBOutlet weak var secondStepButton: UIButton!
     
-    @IBOutlet weak var qrPreviewImageView: UIImageView!
+    @IBOutlet weak var secondStepLabel: UILabel!
     
-    @IBOutlet weak var seletedImageView: UIImageView!
+    @IBOutlet weak var qrPreviewImageView: UIImageView!
     
     @IBOutlet weak var selectImageButton: UIButton!
     
-    @IBOutlet weak var urlTF: UITextField!
+    @IBOutlet weak var selectedImageView: UIImageView!
     
-    @IBOutlet weak var createButton: UIButton!
+    
     @IBOutlet weak var plusButton: UIButton!
-    
-    var animationView: LottieAnimationView?
-    var loadingLabel: UILabel?
+    @IBOutlet weak var createButton: UIButton!
     
     func MakeQRViewUISetting() {
         self.backgroundColor = CustomColor.darkModeBackgroundColor.color
@@ -80,12 +89,13 @@ class MakeQRView: UIView {
         selectImageButton.clipsToBounds = true
         selectImageButton.backgroundColor = .lightGray
         
+        /*
         urlTF.font = UIFont.boldSystemFont(ofSize: 15)
         urlTF.textColor = .darkGray
         urlTF.backgroundColor = .white
         urlTF.layer.cornerRadius = 4
         urlTF.layer.borderColor = UIColor.gray.cgColor
-        urlTF.layer.borderWidth = 0.5
+        urlTF.layer.borderWidth = 0.5*/
         
         createButton.setTitle("STEP 1", for: .normal)
         createButton.tintColor = .white
@@ -98,39 +108,20 @@ class MakeQRView: UIView {
         plusButton.isUserInteractionEnabled = false
         
         secondUIView.isHidden = true
+        
+        
+        wifiNameLabel.font = UIFont.boldSystemFont(ofSize: 12)
+        wifiNameLabel.textColor = .gray
+        
+        wifiPasswordLabel.font = UIFont.boldSystemFont(ofSize: 12)
+        wifiPasswordLabel.textColor = .gray
+        
+        wifiSecurityLabel.font = UIFont.boldSystemFont(ofSize: 12)
+        wifiSecurityLabel.textColor = .gray
+        
+        wifiHiddenLabel.font = UIFont.boldSystemFont(ofSize: 12)
+        wifiHiddenLabel.textColor = .gray
     }
     
-
-    func showLottieAnimationWithLabel(text: String) {
-        // Lottie 애니메이션 뷰 생성
-        let animationView = LottieAnimationView(name: "LoadingQR")
-        animationView.loopMode = .loop
-        animationView.animationSpeed = 1.0
-        makeQRContainerView.addSubview(animationView)
-        self.animationView = animationView
-        
-        // UILabel 생성
-        let label = UILabel()
-        label.text = text
-        label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 17)
-        label.textColor = .darkGray
-        makeQRContainerView.addSubview(label)
-        self.loadingLabel = label
-        
-        // SnapKit 레이아웃 설정
-        animationView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(-20) // 살짝 위로 올려서 레이블 공간 확보
-            make.width.height.equalTo(150) // 원하는 크기로 설정
-        }
-        
-        label.snp.makeConstraints { make in
-            make.top.equalTo(animationView.snp.bottom).offset(8) // 애니메이션 바로 아래에 배치
-            make.centerX.equalToSuperview()
-        }
-        
-        // 애니메이션 실행
-        animationView.play()
-    }
+    
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import KakaoSDKCommon
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = navigationController
         
         self.window?.makeKeyAndVisible()
+        
+        KakaoSDK.initSDK(appKey: "01687814a44533474df65ffe2e42686c")
+        
         
         return true
     }

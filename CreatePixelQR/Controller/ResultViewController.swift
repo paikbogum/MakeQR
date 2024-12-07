@@ -12,7 +12,9 @@ class ResultViewController: UIViewController {
     @IBOutlet var resultView: ResultView!
     
     var receiveCroppedImage: UIImage?
-    var receiveUrl: String?
+   // var receiveUrl: String?
+    
+    var qrType: QRCodeType = .url("https://default.com")
     
     private var qrProcessor = QRProcessor()
     
@@ -45,9 +47,23 @@ class ResultViewController: UIViewController {
             return
         }
         
-        if let qrCode = qrProcessor.generateQRCode(from: receiveUrl!, clearRatio: 0.3),
+        // QR 코드 타입에 따라 QR 코드 생성
+        switch qrType {
+        case .url(let urlString):
+            print("Generating URL QR Code with URL: \(urlString)")
+        case .wifi(let ssid, let password, let security, let hidden):
+            print("Generating Wi-Fi QR Code with SSID: \(ssid), Password: \(password), Security: \(security), Hidden: \(hidden)")
+        case .phone(let phoneNumber):
+            print("Generating Phone QR Code with Number: \(phoneNumber)")
+        case .text(let text):
+            print("Generating Text QR Code with Text: \(text)")
+        }
+
+        if let qrCode = qrProcessor.generateQRCode(from: qrType, clearRatio: 0.3, dotImage: nil),
            let dotImage = qrProcessor.processImageToDots(image: croppedImage, gridSize: 50, cellSize: 50),
            let finalQRCode = qrProcessor.overlayDotImageOnClearedQRCode(qrCode: qrCode, dotImage: dotImage, clearRatio: 0.3, dotRatio: 0.95) {
+            
+            // 결과를 이미지 뷰에 표시
             resultView.resultImageView.image = finalQRCode
         } else {
             print("Failed to generate QR code with dot overlay.")
