@@ -27,6 +27,10 @@
 		B7C7741F2CFC81A600BEE6EC /* QRCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C7741E2CFC81A600BEE6EC /* QRCase.swift */; };
 		B7C774212D01B10C00BEE6EC /* MakeWifiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C774202D01B10C00BEE6EC /* MakeWifiViewController.swift */; };
 		B7C774232D01B11A00BEE6EC /* MakeWifiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C774222D01B11A00BEE6EC /* MakeWifiView.swift */; };
+		B7C774282D04774900BEE6EC /* KakaoImageShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C774272D04774900BEE6EC /* KakaoImageShareManager.swift */; };
+		B7C7742B2D0477DC00BEE6EC /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = B7C7742A2D0477DC00BEE6EC /* KakaoSDK */; };
+		B7C7742D2D0477DC00BEE6EC /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = B7C7742C2D0477DC00BEE6EC /* KakaoSDKCommon */; };
+		B7C7742F2D0477DC00BEE6EC /* KakaoSDKTemplate in Frameworks */ = {isa = PBXBuildFile; productRef = B7C7742E2D0477DC00BEE6EC /* KakaoSDKTemplate */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +56,7 @@
 		B7C7741E2CFC81A600BEE6EC /* QRCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCase.swift; sourceTree = "<group>"; };
 		B7C774202D01B10C00BEE6EC /* MakeWifiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeWifiViewController.swift; sourceTree = "<group>"; };
 		B7C774222D01B11A00BEE6EC /* MakeWifiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeWifiView.swift; sourceTree = "<group>"; };
+		B7C774272D04774900BEE6EC /* KakaoImageShareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoImageShareManager.swift; sourceTree = "<group>"; };
 		DD725FF5B3CC8559AB7C90C3 /* Pods-CreatePixelQR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CreatePixelQR.release.xcconfig"; path = "Target Support Files/Pods-CreatePixelQR/Pods-CreatePixelQR.release.xcconfig"; sourceTree = "<group>"; };
 		DF1DEF68069B85814361CD16 /* Pods-CreatePixelQR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CreatePixelQR.debug.xcconfig"; path = "Target Support Files/Pods-CreatePixelQR/Pods-CreatePixelQR.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,6 +67,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6B370535DFA5E9497D97FAD /* Pods_CreatePixelQR.framework in Frameworks */,
+				B7C7742F2D0477DC00BEE6EC /* KakaoSDKTemplate in Frameworks */,
+				B7C7742D2D0477DC00BEE6EC /* KakaoSDKCommon in Frameworks */,
+				B7C7742B2D0477DC00BEE6EC /* KakaoSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +125,7 @@
 				B7C7741A2CF5CABB00BEE6EC /* QRProcessor.swift */,
 				B7C7741C2CFC7DFD00BEE6EC /* CustomColor.swift */,
 				B7C7741E2CFC81A600BEE6EC /* QRCase.swift */,
+				B7C774272D04774900BEE6EC /* KakaoImageShareManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -172,6 +181,11 @@
 			dependencies = (
 			);
 			name = CreatePixelQR;
+			packageProductDependencies = (
+				B7C7742A2D0477DC00BEE6EC /* KakaoSDK */,
+				B7C7742C2D0477DC00BEE6EC /* KakaoSDKCommon */,
+				B7C7742E2D0477DC00BEE6EC /* KakaoSDKTemplate */,
+			);
 			productName = CreatePixelQR;
 			productReference = B770DE8F2CEF387D005D9EC1 /* CreatePixelQR.app */;
 			productType = "com.apple.product-type.application";
@@ -200,6 +214,9 @@
 				Base,
 			);
 			mainGroup = B770DE862CEF387D005D9EC1;
+			packageReferences = (
+				B7C774292D0477DC00BEE6EC /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+			);
 			productRefGroup = B770DE902CEF387D005D9EC1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -280,6 +297,7 @@
 				B770DE952CEF387D005D9EC1 /* SceneDelegate.swift in Sources */,
 				B7C7741F2CFC81A600BEE6EC /* QRCase.swift in Sources */,
 				B7C774082CF2445900BEE6EC /* MainView.swift in Sources */,
+				B7C774282D04774900BEE6EC /* KakaoImageShareManager.swift in Sources */,
 				B7C774062CF2443700BEE6EC /* MainViewController.swift in Sources */,
 				B7C7740E2CF34F7900BEE6EC /* MakeQRViewController.swift in Sources */,
 				B7C774232D01B11A00BEE6EC /* MakeWifiView.swift in Sources */,
@@ -515,6 +533,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B7C774292D0477DC00BEE6EC /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B7C7742A2D0477DC00BEE6EC /* KakaoSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B7C774292D0477DC00BEE6EC /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDK;
+		};
+		B7C7742C2D0477DC00BEE6EC /* KakaoSDKCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B7C774292D0477DC00BEE6EC /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKCommon;
+		};
+		B7C7742E2D0477DC00BEE6EC /* KakaoSDKTemplate */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B7C774292D0477DC00BEE6EC /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKTemplate;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B770DE872CEF387D005D9EC1 /* Project object */;
 }

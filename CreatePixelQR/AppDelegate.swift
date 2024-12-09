@@ -15,14 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        KakaoSDK.initSDK(appKey: "01687814a44533474df65ffe2e42686c")
     
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let navigationController = UINavigationController(rootViewController: MainViewController())
         self.window?.rootViewController = navigationController
         
         self.window?.makeKeyAndVisible()
-        
-        KakaoSDK.initSDK(appKey: "01687814a44533474df65ffe2e42686c")
         
         
         return true

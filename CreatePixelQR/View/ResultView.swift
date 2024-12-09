@@ -15,7 +15,7 @@ class ResultView: UIView {
     @IBOutlet weak var randomMent: UILabel!
     @IBOutlet weak var downLoadButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
-    
+    @IBOutlet weak var kakaoButton: UIButton!
     
     var animationView: LottieAnimationView?
     var loadingLabel: UILabel?
@@ -28,19 +28,23 @@ class ResultView: UIView {
         randomMent.textColor = .lightGray
         randomMent.font = UIFont.boldSystemFont(ofSize: 15)
         
-        downLoadButton.setTitle("갤러리에 저장", for: .normal)
         downLoadButton.layer.cornerRadius = 4
         downLoadButton.clipsToBounds = true
-        downLoadButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         downLoadButton.tintColor = .white
         downLoadButton.backgroundColor = .systemGreen
         
-        shareButton.setTitle("공유하기", for: .normal)
         shareButton.layer.cornerRadius = 4
         shareButton.clipsToBounds = true
-        shareButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         shareButton.tintColor = .white
         shareButton.backgroundColor = .systemGreen
+        
+
+        kakaoButton.layer.cornerRadius = 4
+        kakaoButton.clipsToBounds = true
+        kakaoButton.tintColor = .black
+        kakaoButton.backgroundColor = .systemYellow
+        
+        
         
         randomMent.isHidden = true
         downLoadButton.isHidden = true

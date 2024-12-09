@@ -9,7 +9,6 @@ import UIKit
 
 class MainView: UIView {
     
-    @IBOutlet weak var mainContainerView: UIView!
     
     @IBOutlet weak var topContainerView: UIView!
     
@@ -17,14 +16,19 @@ class MainView: UIView {
     
     @IBOutlet weak var mainCollectionView: UICollectionView!
     
-    @IBOutlet weak var topContainerImageView: UIImageView!
+    @IBOutlet weak var nextButton: UIButton!
+    
+    @IBOutlet weak var mainLabelTopConstraint: NSLayoutConstraint!
     
     func mainViewUISetting() {
+        
+        nextButton.layer.cornerRadius = 4
+        nextButton.tintColor = .white
+        nextButton.backgroundColor = .blue
+        
         topContainerView.layer.cornerRadius = 8
         topContainerView.clipsToBounds = true
         
-        mainContainerView.layer.cornerRadius = 8
-        mainContainerView.clipsToBounds = true
         mainCollectionView.backgroundColor = CustomColor.darkModeBackgroundColor.color
         
         self.backgroundColor = CustomColor.darkModeBackgroundColor.color
@@ -36,7 +40,8 @@ class MainView: UIView {
         
         topContainerLabel.text = "나만의 QR코드를 만들어보세요!"
         
-        topContainerImageView.image = UIImage(named: "download")
+        mainCollectionView.isHidden = true
+        mainCollectionView.alpha = 0
         
     }
 }

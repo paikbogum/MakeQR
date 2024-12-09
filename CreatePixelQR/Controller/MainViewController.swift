@@ -25,8 +25,8 @@ class MainViewController: UIViewController {
         mainView.mainCollectionView.layoutIfNeeded()
         
         if let layout = mainView.mainCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-             layout.estimatedItemSize = .zero
-         }
+            layout.estimatedItemSize = .zero
+        }
     }
     
     private func registerXib() {
@@ -35,11 +35,26 @@ class MainViewController: UIViewController {
         
         mainView.mainCollectionView.delegate = self
         mainView.mainCollectionView.dataSource = self
-    
     }
-
+    
+    @IBAction func nextButtonTapped(_ sender: UIButton) {
+        mainView.nextButton.isHidden = true
+        // UILabel 애니메이션
+        UIView.animate(withDuration: 0.5, animations: {
+            self.mainView.mainLabelTopConstraint.constant = 20 // Top Constraint 변경
+            self.view.layoutIfNeeded() // 레이아웃 갱신
+        }, completion: { _ in
+            // UILabel 애니메이션 완료 후 UICollectionView 애니메이션 실행
+            self.mainView.mainCollectionView.isHidden = false // CollectionView 표시
+            UIView.animate(withDuration: 0.5) {
+                self.mainView.mainCollectionView.alpha = 1 // alpha 값을 서서히 증가
+            }
+        })
+    }
     
 }
+
+
 
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -56,7 +71,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let target = categoryList[indexPath.row]
         cell.categoryImageView.image = UIImage(named: target.0)
         cell.categoryExplainText.text = target.1
-
+        
         return cell
     }
     
@@ -69,7 +84,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             //nextVC.categoryCase = destination
             self.navigationController?.pushViewController(nextVC, animated: true)
-
+            
         } else {
             guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MakeQRViewController") as? MakeQRViewController else { return }
             
@@ -77,18 +92,17 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
         /*
-        guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MakeQRViewController") as? MakeQRViewController else { return }
-        let target = categoryList[indexPath.row].0
-        
-        nextVC.categoryCase = target
-        self.navigationController?.pushViewController(nextVC, animated: true)*/
+         guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MakeQRViewController") as? MakeQRViewController else { return }
+         let target = categoryList[indexPath.row].0
+         
+         nextVC.categoryCase = target
+         self.navigationController?.pushViewController(nextVC, animated: true)*/
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let totalSpacing: CGFloat = 0 // Safe Area 여백 (20 + 20)
+        let totalSpacing: CGFloat = 20 // Safe Area 여백 (20 + 20)
         let width = collectionView.safeAreaLayoutGuide.layoutFrame.width - totalSpacing
-        let height: CGFloat = 60 // 셀 높이 (원하는 대로 설정)
+        let height: CGFloat = 40 // 셀 높이 (원하는 대로 설정)
         
         return CGSize(width: width, height: height)
     }
@@ -97,10 +111,4 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 20
     }
-    
-
-    
-    
-    
-    
 }

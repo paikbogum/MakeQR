@@ -18,26 +18,26 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TlR-iH-7Ih">
-                        <rect key="frame" x="80" y="10" width="315" height="63"/>
+                        <rect key="frame" x="83" y="10" width="312" height="63"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b2S-Qx-Vhz">
-                        <rect key="frame" x="30" y="21.666666666666671" width="40" height="40"/>
+                        <rect key="frame" x="10" y="10" width="63" height="63"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="b2S-Qx-Vhz" secondAttribute="height" multiplier="1:1" id="Rte-3A-w0s"/>
-                            <constraint firstAttribute="width" constant="40" id="UJG-7c-U7h"/>
                         </constraints>
                     </imageView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="b2S-Qx-Vhz" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="6my-Am-wVM"/>
+                <constraint firstItem="b2S-Qx-Vhz" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="FWC-dX-AfO"/>
+                <constraint firstItem="b2S-Qx-Vhz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="I3z-AI-SQU"/>
                 <constraint firstItem="TlR-iH-7Ih" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="WYz-aD-whg"/>
                 <constraint firstAttribute="bottom" secondItem="TlR-iH-7Ih" secondAttribute="bottom" constant="10" id="eU0-le-A9g"/>
-                <constraint firstItem="b2S-Qx-Vhz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="30" id="tXa-hh-UBO"/>
+                <constraint firstAttribute="bottom" secondItem="b2S-Qx-Vhz" secondAttribute="bottom" constant="10" id="npO-YV-QD2"/>
                 <constraint firstAttribute="trailing" secondItem="TlR-iH-7Ih" secondAttribute="trailing" constant="10" id="ups-kK-mJA"/>
                 <constraint firstItem="TlR-iH-7Ih" firstAttribute="leading" secondItem="b2S-Qx-Vhz" secondAttribute="trailing" constant="10" id="zdB-mk-Idi"/>
             </constraints>
@@ -46,7 +46,7 @@
                 <outlet property="categoryExplainText" destination="TlR-iH-7Ih" id="45C-yG-ygE"/>
                 <outlet property="categoryImageView" destination="b2S-Qx-Vhz" id="gZl-xT-kAb"/>
             </connections>
-            <point key="canvasLocation" x="260" y="24"/>
+            <point key="canvasLocation" x="258.77862595419845" y="23.591549295774648"/>
         </collectionViewCell>
     </objects>
 </document>

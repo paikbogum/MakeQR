@@ -1,89 +1,74 @@
 //
-//  KakaoImageManager.swift
+//  KakaoImageShareManager.swift
 //  CreatePixelQR
 //
 //  Created by 백현진 on 12/7/24.
 //
 
-import Foundation
+import UIKit
 import KakaoSDKCommon
-import KakaoSDKTemplate
 import KakaoSDKShare
+import KakaoSDKTemplate
+
 
 class KakaoImageShareManager {
-    
     static let shared = KakaoImageShareManager()
     
-    // 카카오 서버에 이미지 업로드
-    func uploadImageToKakaoServer(image: UIImage, completion: @escaping (String?) -> Void) {
-        ShareApi.shared.imageUpload(image: image) { (imageUploadResult, error) in
+    // 이미지 업로드
+    func uploadImageToKakaoServer(inPutImage: UIImage, completion: @escaping (String?) -> Void) {
+        ShareApi.shared.imageUpload(image: inPutImage) { (imageUploadResult, error) in
             if let error = error {
                 print("Image upload failed: \(error.localizedDescription)")
                 completion(nil)
             } else if let imageUploadResult = imageUploadResult {
                 print("imageUpload() success.")
-                
-                // 업로드된 이미지 URL 가져오기
-                if let imageUrl = imageUploadResult.infos.original.url {
-                    print("Uploaded Image URL: \(imageUrl)")
-                    completion(imageUrl)
-                } else {
-                    print("Failed to fetch uploaded image URL.")
-                    completion(nil)
-                }
+                // 업로드된 이미지 URL을 completion으로 전달
+                let uploadedImageUrl = imageUploadResult.infos.original.url.absoluteString
+                print("Uploaded Image URL: \(uploadedImageUrl)")
+                completion(uploadedImageUrl)
             }
         }
     }
     
-    // 이미지 URL을 카카오톡으로 공유
-    func shareImageViaKakao(imageUrl: String) {
-        let template = FeedTemplate(
-            content: Content(
-                title: "공유된 이미지",
-                imageUrl: URL(string: imageUrl)!, description: "카카오톡으로 공유된 이미지입니다.",
-                link: Link(
-                    webUrl: URL(string: imageUrl),
-                    mobileWebUrl: URL(string: imageUrl)
-                )
-            ),
-            buttons: [
-                Button(
-                    title: "자세히 보기",
-                    link: Link(
-                        webUrl: URL(string: imageUrl),
-                        mobileWebUrl: URL(string: imageUrl)
-                    )
-                )
-            ]
+    func shareImageViaKakao(imageUrl: URL) {
+        let link = Link(webUrl: URL(string:"https://developers.kakao.com")!,
+                        mobileWebUrl: URL(string:"https://developers.kakao.com")!)
+        
+        let appLink = Link(iosExecutionParams: ["key": "value"])
+        
+        let button = Button(title: "앱에서 보기", link: appLink)
+        let button2 = Button(title: "웹으로 보기", link: link)
+        
+        let content = Content(
+            title: "나만의 QR코드를 만들어보세요!",
+            imageUrl: imageUrl,
+            description: "#QR속 선태 #김선태 주무관 아님",
+            link: link
         )
         
-        // 카카오톡 링크를 통해 메시지 공유
-        if LinkApi.isKakaoLinkAvailable() {
-            LinkApi.shared.defaultLink(template: template) { (linkResult, error) in
-                if let error = error {
-                    print("Failed to share via KakaoTalk: \(error.localizedDescription)")
+        let template = FeedTemplate(content: content, buttons: [button, button2])
+        
+        // 메시지 템플릿 encode
+        if let templateJsonData = (try? SdkJSONEncoder.custom.encode(template)) {
+            // 생성한 메시지 템플릿 객체를 jsonObject로 변환
+            if let templateJsonObject = SdkUtils.toJsonObject(templateJsonData) {
+                // 카카오톡 앱이 있는지 체크합니다.
+                if ShareApi.isKakaoTalkSharingAvailable() {
+                    ShareApi.shared.shareDefault(templateObject:templateJsonObject) {(linkResult, error) in
+                        if let error = error {
+                            print("error : \(error)")
+                        }
+                        else {
+                            print("defaultLink(templateObject:templateJsonObject) success.")
+                            guard let linkResult = linkResult else { return }
+                            UIApplication.shared.open(linkResult.url, options: [:], completionHandler: nil)
+                        }
+                    }
                 } else {
-                    print("Successfully shared via KakaoTalk.")
+                    // 없을 경우 카카오톡 앱스토어로 이동합니다. (이거 하려면 URL Scheme에 itms-apps 추가 해야함)
+                   print("오류오루오류")
                 }
-            }
-        } else {
-            // 카카오톡 미설치 시 웹으로 공유
-            if let url = LinkApi.shared.makeSharerUrlforDefaultLink(template: template) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            }
-        }
-    }
-    
-    // 카카오톡 이미지 공유를 위한 전체 흐름
-    func shareImage(image: UIImage) {
-        uploadImageToKakaoServer(image: image) { [weak self] imageUrl in
-            guard let self = self else { return }
-            if let imageUrl = imageUrl {
-                self.shareImageViaKakao(imageUrl: imageUrl)
-            } else {
-                print("Failed to upload image to Kakao server.")
             }
         }
     }
 }
-

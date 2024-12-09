@@ -8,6 +8,7 @@
 import UIKit
 import Photos
 
+
 class ResultViewController: UIViewController {
     @IBOutlet var resultView: ResultView!
     
@@ -94,6 +95,29 @@ class ResultViewController: UIViewController {
         }
     }
     
+    @IBAction func kakaoShareButtonTapped(_ sender: Any) {
+        // resultView.resultImageView.image가 nil인지 확인
+        guard let imageToShare = resultView.resultImageView.image else {
+            print("No image found in resultView")
+            return
+        }
+        
+        // 카카오 서버에 이미지 업로드
+        KakaoImageShareManager.shared.uploadImageToKakaoServer(inPutImage: imageToShare) { [weak self] imageUrlString in
+            guard let self = self else { return }
+            
+            print("Image upload completion called")
+            
+            // 업로드 성공 여부 확인
+            if let imageUrlString = imageUrlString, let imageUrl = URL(string: imageUrlString) {
+                // 업로드된 URL을 통해 카카오톡 공유
+                print("Calling shareImageViaKakao with URL: \(imageUrl)")
+                KakaoImageShareManager.shared.shareImageViaKakao(imageUrl: imageUrl)
+            } else {
+                print("Failed to upload image or invalid URL")
+            }
+        }
+    }
     
     @IBAction func shareButtonTapped(_ sender: UIButton) {
         // 공유할 텍스트와 이미지 설정
