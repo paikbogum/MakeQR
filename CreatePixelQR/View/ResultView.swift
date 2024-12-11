@@ -49,6 +49,7 @@ class ResultView: UIView {
         randomMent.isHidden = true
         downLoadButton.isHidden = true
         shareButton.isHidden = true
+        kakaoButton.isHidden = true
         resultImageView.isHidden = true
         
     }

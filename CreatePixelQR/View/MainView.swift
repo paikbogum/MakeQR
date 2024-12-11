@@ -29,7 +29,7 @@ class MainView: UIView {
         topContainerView.layer.cornerRadius = 8
         topContainerView.clipsToBounds = true
         
-        mainCollectionView.backgroundColor = CustomColor.darkModeBackgroundColor.color
+        mainCollectionView.backgroundColor = .white
         
         self.backgroundColor = CustomColor.darkModeBackgroundColor.color
         

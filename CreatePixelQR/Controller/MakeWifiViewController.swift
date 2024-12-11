@@ -18,7 +18,7 @@ class MakeWifiViewController: UIViewController,UITextFieldDelegate, UINavigation
     @IBOutlet weak var textContainerBottomConstraint: NSLayoutConstraint!
     
     let securityTypes = ["WPA/WPA2", "WEP", "None"]
-    let hiddenOptions = ["Visible", "Hidden"]
+    let hiddenOptions = ["공개", "숨김"]
     
     var selectedImageBool: Bool = false
     var urlTFBool: Bool = false
@@ -42,7 +42,7 @@ class MakeWifiViewController: UIViewController,UITextFieldDelegate, UINavigation
     
     private func changeCreateButtonState() {
         if makeWifiView.createButton.isEnabled {
-            makeWifiView.createButton.backgroundColor = .systemGreen
+            makeWifiView.createButton.backgroundColor = CustomColor.caldendarFontColor.color
         } else {
             makeWifiView.createButton.backgroundColor = .systemGray
         }
@@ -57,10 +57,10 @@ class MakeWifiViewController: UIViewController,UITextFieldDelegate, UINavigation
      
     private func changeStateOfTF() {
         if urlTFBool {
-            makeWifiView.secondUIView.layer.borderColor = UIColor.green.cgColor
+            makeWifiView.secondUIView.layer.borderColor = CustomColor.caldendarFontColor.color.cgColor
             makeWifiView.secondStepButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
-            makeWifiView.secondStepButton.tintColor = .green
-            makeWifiView.secondStepLabel.textColor = .green
+            makeWifiView.secondStepButton.tintColor = CustomColor.caldendarFontColor.color
+            makeWifiView.secondStepLabel.textColor = CustomColor.caldendarFontColor.color
             makeWifiView.createButton.setTitle("Next", for: .normal)
             makeWifiView.createButton.isEnabled = true
             
@@ -87,10 +87,10 @@ class MakeWifiViewController: UIViewController,UITextFieldDelegate, UINavigation
     private func changeStateOfImage() {
         if selectedImageBool {
             makeWifiView.selectImageButton.alpha = 0
-            makeWifiView.firstUIView.layer.borderColor = UIColor.green.cgColor
+            makeWifiView.firstUIView.layer.borderColor = CustomColor.caldendarFontColor.color.cgColor
             makeWifiView.firstStepButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
-            makeWifiView.firstStepButton.tintColor = .green
-            makeWifiView.firstStepLabel.textColor = .green
+            makeWifiView.firstStepButton.tintColor = CustomColor.caldendarFontColor.color
+            makeWifiView.firstStepLabel.textColor = CustomColor.caldendarFontColor.color
 
             makeWifiView.createButton.setTitle("Make QR!", for: .normal)
             makeWifiView.createButton.isEnabled = true
@@ -266,10 +266,10 @@ extension MakeWifiViewController: UIPickerViewDelegate, UIPickerViewDataSource {
               makeWifiView.wifiHiddenTF.text = selectedHiddenOption
               
               // visible과 hidden에 따라 wifiHiddenBool 설정
-              if selectedHiddenOption == "Visible" {
+              if selectedHiddenOption == "공개" {
                   wifiHiddenBool = false
 
-              } else if selectedHiddenOption == "Hidden" {
+              } else if selectedHiddenOption == "숨김" {
                   wifiHiddenBool = true
               }
           }

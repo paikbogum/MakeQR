@@ -80,7 +80,7 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
                 makeQRView.firstUIView.isHidden = false
                 textContainerBottomConstraint.constant = 330
                 makeQRView.urlTF.isUserInteractionEnabled = false
-                makeQRView.urlTF.textColor = .green
+                makeQRView.urlTF.textColor = CustomColor.caldendarFontColor.color
                 makeQRView.qrPreviewImageView.image = qrCode
                 
                 urlTFBool = true
@@ -110,7 +110,7 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
             makeQRView.firstUIView.isHidden = false
             textContainerBottomConstraint.constant = 330
             makeQRView.urlTF.isUserInteractionEnabled = false
-            makeQRView.urlTF.textColor = .green
+            makeQRView.urlTF.textColor = CustomColor.caldendarFontColor.color
             makeQRView.qrPreviewImageView.image = qrCode
             
             urlTFBool = true
@@ -140,7 +140,7 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
             makeQRView.firstUIView.isHidden = false
             textContainerBottomConstraint.constant = 330
             makeQRView.urlTF.isUserInteractionEnabled = false
-            makeQRView.urlTF.textColor = .green
+            makeQRView.urlTF.textColor = CustomColor.caldendarFontColor.color
             makeQRView.qrPreviewImageView.image = qrCode
             
             urlTFBool = true
@@ -176,7 +176,7 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
     
     private func changeCreateButtonState() {
         if makeQRView.createButton.isEnabled {
-            makeQRView.createButton.backgroundColor = .systemGreen
+            makeQRView.createButton.backgroundColor = CustomColor.caldendarFontColor.color
         } else {
             makeQRView.createButton.backgroundColor = .systemGray
         }
@@ -192,10 +192,10 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
     private func changeStateOfImage() {
         if selectedImageBool {
             makeQRView.selectImageButton.alpha = 0
-            makeQRView.firstUIView.layer.borderColor = UIColor.green.cgColor
+            makeQRView.firstUIView.layer.borderColor = CustomColor.caldendarFontColor.color.cgColor
             makeQRView.firstStepButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
-            makeQRView.firstStepButton.tintColor = .green
-            makeQRView.firstStepLabel.textColor = .green
+            makeQRView.firstStepButton.tintColor = CustomColor.caldendarFontColor.color
+            makeQRView.firstStepLabel.textColor = CustomColor.caldendarFontColor.color
             
             makeQRView.createButton.setTitle("Make QR!", for: .normal)
             makeQRView.createButton.isEnabled = true
@@ -216,10 +216,10 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
     
     private func changeStateOfTF() {
         if urlTFBool {
-            makeQRView.secondUIView.layer.borderColor = UIColor.green.cgColor
+            makeQRView.secondUIView.layer.borderColor = CustomColor.caldendarFontColor.color.cgColor
             makeQRView.secondStepButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
-            makeQRView.secondStepButton.tintColor = .green
-            makeQRView.secondStepLabel.textColor = .green
+            makeQRView.secondStepButton.tintColor = CustomColor.caldendarFontColor.color
+            makeQRView.secondStepLabel.textColor = CustomColor.caldendarFontColor.color
             makeQRView.createButton.setTitle("Next", for: .normal)
             makeQRView.createButton.isEnabled = true
             

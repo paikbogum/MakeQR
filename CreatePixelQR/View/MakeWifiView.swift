@@ -45,7 +45,6 @@ class MakeWifiView: UIView {
     
     @IBOutlet weak var selectedImageView: UIImageView!
     
-    
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var createButton: UIButton!
     
@@ -54,14 +53,14 @@ class MakeWifiView: UIView {
         
         makeQRContainerView.layer.cornerRadius = 8
         makeQRContainerView.clipsToBounds = true
-        makeQRContainerView.backgroundColor = .lightGray
+        makeQRContainerView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
         
         firstUIView.backgroundColor = .white
         firstUIView.layer.cornerRadius = 8
         firstUIView.clipsToBounds = true
         firstUIView.layer.borderWidth = 2.0
         firstUIView.layer.borderColor = UIColor.green.cgColor
-        
+
         firstStepLabel.text = "QR코드에 합성할 이미지를 선택하세요"
         firstStepLabel.font = UIFont.boldSystemFont(ofSize: 15)
         firstStepLabel.textColor = .gray
@@ -78,7 +77,6 @@ class MakeWifiView: UIView {
         secondStepLabel.text = "생성할 QR코드의 URL주소를 입력해주세요"
         secondStepLabel.font = UIFont.boldSystemFont(ofSize: 15)
         secondStepLabel.textColor = .gray
-        
         secondStepButton.tintColor = .gray
         secondStepButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
         
@@ -108,20 +106,18 @@ class MakeWifiView: UIView {
         plusButton.isUserInteractionEnabled = false
         
         secondUIView.isHidden = true
-        
-        
+    
         wifiNameLabel.font = UIFont.boldSystemFont(ofSize: 12)
         wifiNameLabel.textColor = .gray
         
         wifiPasswordLabel.font = UIFont.boldSystemFont(ofSize: 12)
         wifiPasswordLabel.textColor = .gray
-        
+         
         wifiSecurityLabel.font = UIFont.boldSystemFont(ofSize: 12)
         wifiSecurityLabel.textColor = .gray
         
         wifiHiddenLabel.font = UIFont.boldSystemFont(ofSize: 12)
         wifiHiddenLabel.textColor = .gray
+        wifiHiddenTF.text = "공개"
     }
-    
-    
 }

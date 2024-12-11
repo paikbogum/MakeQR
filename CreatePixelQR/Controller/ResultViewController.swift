@@ -33,6 +33,7 @@ class ResultViewController: UIViewController {
             self.resultView.randomMent.isHidden = false
             self.resultView.downLoadButton.isHidden = false
             self.resultView.shareButton.isHidden = false
+            self.resultView.kakaoButton.isHidden = false
             self.randomMent(ments: ["걸작입니다!", "재밌는 결과물인데요?", "Cool!", "갤러리에 전시해도 되겠어요."])
         }
     }

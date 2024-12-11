@@ -41,7 +41,7 @@ class MainViewController: UIViewController {
         mainView.nextButton.isHidden = true
         // UILabel 애니메이션
         UIView.animate(withDuration: 0.5, animations: {
-            self.mainView.mainLabelTopConstraint.constant = 20 // Top Constraint 변경
+            self.mainView.mainLabelTopConstraint.constant = 60 // Top Constraint 변경
             self.view.layoutIfNeeded() // 레이아웃 갱신
         }, completion: { _ in
             // UILabel 애니메이션 완료 후 UICollectionView 애니메이션 실행

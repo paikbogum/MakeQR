@@ -20,6 +20,7 @@ class MainCollectionViewCell: UICollectionViewCell {
         contentView.clipsToBounds = true
         contentView.layer.cornerRadius = 4
         contentView.backgroundColor = .white
+        contentView.backgroundColor = CustomColor.backgroundColor.color
             
         categoryExplainText.font = UIFont.boldSystemFont(ofSize: 15)
         categoryExplainText.textColor = .black

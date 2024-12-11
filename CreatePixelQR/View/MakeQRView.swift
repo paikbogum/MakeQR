@@ -45,7 +45,7 @@ class MakeQRView: UIView {
         
         makeQRContainerView.layer.cornerRadius = 8
         makeQRContainerView.clipsToBounds = true
-        makeQRContainerView.backgroundColor = .lightGray
+        makeQRContainerView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
         
         firstUIView.backgroundColor = .white
         firstUIView.layer.cornerRadius = 8
