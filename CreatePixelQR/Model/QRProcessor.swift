@@ -12,8 +12,18 @@ class QRProcessor {
     // QR 코드 생성
     func generateQRCode(from type: QRCodeType, clearRatio: CGFloat, dotImage: UIImage?) -> UIImage? {
         guard let qrDataString = convertToQRDataString(from: type),
-              let data = qrDataString.data(using: .ascii),
               let filter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
+        
+        // 데이터 인코딩 (텍스트는 UTF-8, 나머지는 ASCII)
+          let data: Data?
+          switch type {
+          case .text:
+              data = qrDataString.data(using: .utf8) // .text인 경우 UTF-8
+              print("UTF-8 인코딩 시도")
+          default:
+              data = qrDataString.data(using: .ascii) // 나머지 경우 ASCII
+              print("ASCII 인코딩 시도")
+          }
         
         filter.setValue(data, forKey: "inputMessage")
         filter.setValue("H", forKey: "inputCorrectionLevel")

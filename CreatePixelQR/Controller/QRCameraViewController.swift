@@ -13,7 +13,6 @@ class QRCameraViewController: UIViewController {
     @IBOutlet var qrCameraView: QRCameraView!
     let halfSizeTransitioningDelegate = HalfSizeTransitioningDelegate()
     
-    
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     var qrCodeFrameView: UIView! // QR 코드 영역 표시
@@ -56,7 +55,6 @@ class QRCameraViewController: UIViewController {
             captureSession.stopRunning()
         }
     }
-    
 }
 
 extension QRCameraViewController: AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate  {
@@ -70,7 +68,6 @@ extension QRCameraViewController: AVCaptureMetadataOutputObjectsDelegate, AVCapt
             print("카메라를 사용할 수 없습니다.")
             return
         }
-        
         do {
             let videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
             if captureSession.canAddInput(videoInput) {
@@ -98,7 +95,7 @@ extension QRCameraViewController: AVCaptureMetadataOutputObjectsDelegate, AVCapt
         
         // 카메라 프리뷰 레이어 추가
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = view.layer.bounds
+        previewLayer.frame = qrCameraView.cameraView.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
         qrCameraView.cameraView.layer.addSublayer(previewLayer)
         

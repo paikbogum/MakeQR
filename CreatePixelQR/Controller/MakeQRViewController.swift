@@ -108,6 +108,8 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
         } else {
             let qrCode = qrProcessor.generateQRCode(from: .text(makeQRView.urlTF.text!), clearRatio: 0.0, dotImage: nil)
             
+            print("QR 코드 생성 결과:", qrCode)
+            
             makeQRView.firstUIView.isHidden = false
             textContainerBottomConstraint.constant = 330
             makeQRView.urlTF.isUserInteractionEnabled = false
@@ -128,7 +130,6 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
             if let nextVC = storyboard?.instantiateViewController(withIdentifier: "ResultViewController") as? ResultViewController {
                 
                 nextVC.receiveCroppedImage = makeQRView.seletedImageView.image
-                
                 
                 nextVC.qrType = .phone(makeQRView.urlTF.text!)
                 //nextVC.receiveUrl = makeQRView.urlTF.text!

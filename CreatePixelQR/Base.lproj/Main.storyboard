@@ -513,7 +513,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Qd-Lk-M2T">
-                                <rect key="frame" x="175.66666666666666" y="658" width="42" height="21"/>
+                                <rect key="frame" x="175.66666666666666" y="678" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -527,7 +527,7 @@
                             <constraint firstItem="3Qd-Lk-M2T" firstAttribute="centerX" secondItem="xyc-7j-7XH" secondAttribute="centerX" id="5Od-2h-E7w"/>
                             <constraint firstItem="buD-yw-f08" firstAttribute="bottom" secondItem="jlt-oc-UTE" secondAttribute="bottom" constant="200" id="LUa-rW-pYO"/>
                             <constraint firstItem="jlt-oc-UTE" firstAttribute="leading" secondItem="buD-yw-f08" secondAttribute="leading" id="hfc-bB-Dun"/>
-                            <constraint firstItem="3Qd-Lk-M2T" firstAttribute="top" secondItem="jlt-oc-UTE" secondAttribute="bottom" constant="40" id="tqs-WS-CPH"/>
+                            <constraint firstItem="3Qd-Lk-M2T" firstAttribute="top" secondItem="jlt-oc-UTE" secondAttribute="bottom" constant="60" id="tqs-WS-CPH"/>
                         </constraints>
                         <connections>
                             <outlet property="cameraView" destination="jlt-oc-UTE" id="DvS-B8-rkw"/>
