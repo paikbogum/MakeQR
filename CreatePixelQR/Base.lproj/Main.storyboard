@@ -194,15 +194,29 @@
                                             <action selector="nextButtonTapped:" destination="zoT-Q0-TrB" eventType="touchUpInside" id="Ke5-hP-jUT"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gYh-LS-Ulr">
+                                        <rect key="frame" x="60" y="340" width="253" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="FfG-h8-2GK"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="QR 카메라"/>
+                                        <connections>
+                                            <action selector="qrCameraButtonTapped:" destination="zoT-Q0-TrB" eventType="touchUpInside" id="lg7-U1-NgA"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="ZOg-fe-Kgf" secondAttribute="trailing" constant="20" id="3uO-7n-yrL"/>
+                                    <constraint firstAttribute="trailing" secondItem="gYh-LS-Ulr" secondAttribute="trailing" constant="60" id="9Hm-Bu-qs1"/>
                                     <constraint firstItem="iUo-zD-aox" firstAttribute="leading" secondItem="ebr-an-SPa" secondAttribute="leading" constant="10" id="J0c-ku-9is"/>
+                                    <constraint firstItem="gYh-LS-Ulr" firstAttribute="top" secondItem="jnt-aU-QGt" secondAttribute="bottom" constant="20" id="Mrc-SD-s2X"/>
                                     <constraint firstItem="jnt-aU-QGt" firstAttribute="top" secondItem="iUo-zD-aox" secondAttribute="bottom" constant="30" id="SNo-Ah-Pdm"/>
                                     <constraint firstItem="ZOg-fe-Kgf" firstAttribute="leading" secondItem="ebr-an-SPa" secondAttribute="leading" constant="20" id="UX3-0r-OpA"/>
                                     <constraint firstAttribute="trailing" secondItem="iUo-zD-aox" secondAttribute="trailing" constant="10" id="WHA-sk-DaS"/>
                                     <constraint firstItem="jnt-aU-QGt" firstAttribute="leading" secondItem="ebr-an-SPa" secondAttribute="leading" constant="60" id="Yba-ef-HAu"/>
+                                    <constraint firstItem="gYh-LS-Ulr" firstAttribute="leading" secondItem="ebr-an-SPa" secondAttribute="leading" constant="60" id="da7-ZG-A1K"/>
                                     <constraint firstItem="ZOg-fe-Kgf" firstAttribute="top" secondItem="iUo-zD-aox" secondAttribute="bottom" constant="30" id="rYl-aa-j1J"/>
                                     <constraint firstAttribute="trailing" secondItem="jnt-aU-QGt" secondAttribute="trailing" constant="60" id="uvA-Cc-vE1"/>
                                     <constraint firstItem="iUo-zD-aox" firstAttribute="top" secondItem="ebr-an-SPa" secondAttribute="top" constant="200" id="wY8-v2-Tja"/>
@@ -222,12 +236,14 @@
                             <outlet property="mainCollectionView" destination="ZOg-fe-Kgf" id="XIm-Pf-IPO"/>
                             <outlet property="mainLabelTopConstraint" destination="wY8-v2-Tja" id="KFJ-8m-8qb"/>
                             <outlet property="nextButton" destination="jnt-aU-QGt" id="eVV-wh-oH4"/>
+                            <outlet property="qrCameraButton" destination="gYh-LS-Ulr" id="uDw-08-Brc"/>
                             <outlet property="topContainerLabel" destination="iUo-zD-aox" id="Wa5-db-YSs"/>
                             <outlet property="topContainerView" destination="ebr-an-SPa" id="sGr-OL-SKE"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="l8H-ie-t1z"/>
                     <connections>
+                        <outlet property="cameraButtonTopConstraint" destination="Mrc-SD-s2X" id="hlx-y6-1jq"/>
                         <outlet property="mainView" destination="x5x-FE-tPi" id="gdd-iv-utn"/>
                     </connections>
                 </viewController>
@@ -423,6 +439,108 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lUV-uL-k92" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1462" y="-51"/>
+        </scene>
+        <!--Pop View Controller-->
+        <scene sceneID="nR5-wI-lWC">
+            <objects>
+                <viewController storyboardIdentifier="QRPopViewController" id="2MT-T5-z0B" customClass="QRPopViewController" customModule="CreatePixelQR" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4Z2-lT-phG" customClass="QRPopView" customModule="CreatePixelQR" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kW1-7a-7C7">
+                                <rect key="frame" x="20" y="79" width="353" height="200"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RGz-vO-ANC">
+                                        <rect key="frame" x="10" y="41" width="333" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="MTP-Hf-jVy"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="검색된 결과:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e50-j3-9GM">
+                                        <rect key="frame" x="10" y="10" width="82.666666666666671" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="RGz-vO-ANC" firstAttribute="centerX" secondItem="kW1-7a-7C7" secondAttribute="centerX" id="4X0-vp-4gM"/>
+                                    <constraint firstItem="RGz-vO-ANC" firstAttribute="top" secondItem="e50-j3-9GM" secondAttribute="bottom" constant="10" id="dxA-iY-Gwr"/>
+                                    <constraint firstAttribute="trailing" secondItem="RGz-vO-ANC" secondAttribute="trailing" constant="10" id="hTy-EQ-UHh"/>
+                                    <constraint firstItem="RGz-vO-ANC" firstAttribute="leading" secondItem="kW1-7a-7C7" secondAttribute="leading" constant="10" id="jVf-0c-4om"/>
+                                    <constraint firstItem="e50-j3-9GM" firstAttribute="leading" secondItem="kW1-7a-7C7" secondAttribute="leading" constant="10" id="keO-5K-Par"/>
+                                    <constraint firstItem="e50-j3-9GM" firstAttribute="top" secondItem="kW1-7a-7C7" secondAttribute="top" constant="10" id="mWh-pb-ZG2"/>
+                                    <constraint firstAttribute="height" constant="200" id="nYn-k3-D4m"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="2an-FF-tGD"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="kW1-7a-7C7" firstAttribute="top" secondItem="2an-FF-tGD" secondAttribute="top" constant="20" id="0n7-Ct-erh"/>
+                            <constraint firstItem="kW1-7a-7C7" firstAttribute="leading" secondItem="2an-FF-tGD" secondAttribute="leading" constant="20" id="HK9-yE-Q3W"/>
+                            <constraint firstItem="2an-FF-tGD" firstAttribute="trailing" secondItem="kW1-7a-7C7" secondAttribute="trailing" constant="20" id="K7e-Xz-h1y"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="containerView" destination="kW1-7a-7C7" id="Yje-cq-6iU"/>
+                            <outlet property="resultLabel" destination="RGz-vO-ANC" id="uQn-07-JkS"/>
+                            <outlet property="resultTypeLabel" destination="e50-j3-9GM" id="Mj8-d1-t2h"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="qrPopView" destination="4Z2-lT-phG" id="K2d-2W-PQR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gbp-6X-JM7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-77.099236641221367" y="642.25352112676057"/>
+        </scene>
+        <!--Camera View Controller-->
+        <scene sceneID="nBU-Se-Ht6">
+            <objects>
+                <viewController storyboardIdentifier="QRCameraViewController" id="c4F-Cm-jK7" customClass="QRCameraViewController" customModule="CreatePixelQR" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xyc-7j-7XH" customClass="QRCameraView" customModule="CreatePixelQR" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jlt-oc-UTE">
+                                <rect key="frame" x="0.0" y="79" width="393" height="539"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Qd-Lk-M2T">
+                                <rect key="frame" x="175.66666666666666" y="658" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="buD-yw-f08"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="buD-yw-f08" firstAttribute="trailing" secondItem="jlt-oc-UTE" secondAttribute="trailing" id="46a-Gs-wWe"/>
+                            <constraint firstItem="jlt-oc-UTE" firstAttribute="top" secondItem="buD-yw-f08" secondAttribute="top" constant="20" id="4Rd-Bu-Go5"/>
+                            <constraint firstItem="3Qd-Lk-M2T" firstAttribute="centerX" secondItem="xyc-7j-7XH" secondAttribute="centerX" id="5Od-2h-E7w"/>
+                            <constraint firstItem="buD-yw-f08" firstAttribute="bottom" secondItem="jlt-oc-UTE" secondAttribute="bottom" constant="200" id="LUa-rW-pYO"/>
+                            <constraint firstItem="jlt-oc-UTE" firstAttribute="leading" secondItem="buD-yw-f08" secondAttribute="leading" id="hfc-bB-Dun"/>
+                            <constraint firstItem="3Qd-Lk-M2T" firstAttribute="top" secondItem="jlt-oc-UTE" secondAttribute="bottom" constant="40" id="tqs-WS-CPH"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="cameraView" destination="jlt-oc-UTE" id="DvS-B8-rkw"/>
+                            <outlet property="infoLabel" destination="3Qd-Lk-M2T" id="5ru-FV-PBF"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="qrCameraView" destination="xyc-7j-7XH" id="09w-k5-Bzv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bye-CX-fwa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="629.7709923664122" y="617.6056338028169"/>
         </scene>
         <!--Make Wifi View Controller-->
         <scene sceneID="tRy-87-h52">

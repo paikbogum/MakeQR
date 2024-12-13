@@ -9,6 +9,8 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    @IBOutlet weak var cameraButtonTopConstraint: NSLayoutConstraint!
+    
     @IBOutlet var mainView: MainView!
     
     let cellName = "MainCollectionViewCell"
@@ -39,9 +41,11 @@ class MainViewController: UIViewController {
     
     @IBAction func nextButtonTapped(_ sender: UIButton) {
         mainView.nextButton.isHidden = true
+        mainView.qrCameraButton.isHidden = false
         // UILabel 애니메이션
         UIView.animate(withDuration: 0.5, animations: {
             self.mainView.mainLabelTopConstraint.constant = 60 // Top Constraint 변경
+            self.cameraButtonTopConstraint.constant = 300
             self.view.layoutIfNeeded() // 레이아웃 갱신
         }, completion: { _ in
             // UILabel 애니메이션 완료 후 UICollectionView 애니메이션 실행
@@ -52,10 +56,14 @@ class MainViewController: UIViewController {
         })
     }
     
+    @IBAction func qrCameraButtonTapped(_ sender: UIButton) {
+        guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "QRCameraViewController") as? QRCameraViewController else { return }
+        
+        //nextVC.categoryCase = destination
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
 }
-
-
-
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

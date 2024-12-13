@@ -31,6 +31,11 @@
 		B7C7742B2D0477DC00BEE6EC /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = B7C7742A2D0477DC00BEE6EC /* KakaoSDK */; };
 		B7C7742D2D0477DC00BEE6EC /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = B7C7742C2D0477DC00BEE6EC /* KakaoSDKCommon */; };
 		B7C7742F2D0477DC00BEE6EC /* KakaoSDKTemplate in Frameworks */ = {isa = PBXBuildFile; productRef = B7C7742E2D0477DC00BEE6EC /* KakaoSDKTemplate */; };
+		B7C774312D0C290000BEE6EC /* QRCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C774302D0C290000BEE6EC /* QRCameraView.swift */; };
+		B7C774332D0C292800BEE6EC /* QRCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C774322D0C292800BEE6EC /* QRCameraViewController.swift */; };
+		B7C774352D0C2F2200BEE6EC /* QRPopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C774342D0C2F2200BEE6EC /* QRPopViewController.swift */; };
+		B7C774372D0C2F2E00BEE6EC /* QRPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C774362D0C2F2E00BEE6EC /* QRPopView.swift */; };
+		B7C774392D0C353F00BEE6EC /* HalfSizePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C774382D0C353F00BEE6EC /* HalfSizePresentationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +62,11 @@
 		B7C774202D01B10C00BEE6EC /* MakeWifiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeWifiViewController.swift; sourceTree = "<group>"; };
 		B7C774222D01B11A00BEE6EC /* MakeWifiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeWifiView.swift; sourceTree = "<group>"; };
 		B7C774272D04774900BEE6EC /* KakaoImageShareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoImageShareManager.swift; sourceTree = "<group>"; };
+		B7C774302D0C290000BEE6EC /* QRCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCameraView.swift; sourceTree = "<group>"; };
+		B7C774322D0C292800BEE6EC /* QRCameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCameraViewController.swift; sourceTree = "<group>"; };
+		B7C774342D0C2F2200BEE6EC /* QRPopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRPopViewController.swift; sourceTree = "<group>"; };
+		B7C774362D0C2F2E00BEE6EC /* QRPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRPopView.swift; sourceTree = "<group>"; };
+		B7C774382D0C353F00BEE6EC /* HalfSizePresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfSizePresentationController.swift; sourceTree = "<group>"; };
 		DD725FF5B3CC8559AB7C90C3 /* Pods-CreatePixelQR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CreatePixelQR.release.xcconfig"; path = "Target Support Files/Pods-CreatePixelQR/Pods-CreatePixelQR.release.xcconfig"; sourceTree = "<group>"; };
 		DF1DEF68069B85814361CD16 /* Pods-CreatePixelQR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CreatePixelQR.debug.xcconfig"; path = "Target Support Files/Pods-CreatePixelQR/Pods-CreatePixelQR.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +147,8 @@
 				B7C774092CF3485C00BEE6EC /* MainCollectionViewCell.swift */,
 				B7C7740A2CF3485C00BEE6EC /* MainCollectionViewCell.xib */,
 				B7C7740F2CF34F9D00BEE6EC /* MakeQRView.swift */,
+				B7C774302D0C290000BEE6EC /* QRCameraView.swift */,
+				B7C774362D0C2F2E00BEE6EC /* QRPopView.swift */,
 				B7C774222D01B11A00BEE6EC /* MakeWifiView.swift */,
 				B7C774182CF5C76400BEE6EC /* ResultView.swift */,
 			);
@@ -147,6 +159,9 @@
 			isa = PBXGroup;
 			children = (
 				B7C774052CF2443700BEE6EC /* MainViewController.swift */,
+				B7C774382D0C353F00BEE6EC /* HalfSizePresentationController.swift */,
+				B7C774322D0C292800BEE6EC /* QRCameraViewController.swift */,
+				B7C774342D0C2F2200BEE6EC /* QRPopViewController.swift */,
 				B7C7740D2CF34F7900BEE6EC /* MakeQRViewController.swift */,
 				B7C774202D01B10C00BEE6EC /* MakeWifiViewController.swift */,
 				B770DE962CEF387D005D9EC1 /* ResultViewController.swift */,
@@ -292,15 +307,20 @@
 				B7C7740C2CF3485C00BEE6EC /* MainCollectionViewCell.swift in Sources */,
 				B7C774212D01B10C00BEE6EC /* MakeWifiViewController.swift in Sources */,
 				B7C7741D2CFC7DFD00BEE6EC /* CustomColor.swift in Sources */,
+				B7C774312D0C290000BEE6EC /* QRCameraView.swift in Sources */,
+				B7C774332D0C292800BEE6EC /* QRCameraViewController.swift in Sources */,
 				B7C774192CF5C76500BEE6EC /* ResultView.swift in Sources */,
 				B770DE932CEF387D005D9EC1 /* AppDelegate.swift in Sources */,
 				B770DE952CEF387D005D9EC1 /* SceneDelegate.swift in Sources */,
+				B7C774352D0C2F2200BEE6EC /* QRPopViewController.swift in Sources */,
 				B7C7741F2CFC81A600BEE6EC /* QRCase.swift in Sources */,
 				B7C774082CF2445900BEE6EC /* MainView.swift in Sources */,
 				B7C774282D04774900BEE6EC /* KakaoImageShareManager.swift in Sources */,
 				B7C774062CF2443700BEE6EC /* MainViewController.swift in Sources */,
+				B7C774372D0C2F2E00BEE6EC /* QRPopView.swift in Sources */,
 				B7C7740E2CF34F7900BEE6EC /* MakeQRViewController.swift in Sources */,
 				B7C774232D01B11A00BEE6EC /* MakeWifiView.swift in Sources */,
+				B7C774392D0C353F00BEE6EC /* HalfSizePresentationController.swift in Sources */,
 				B7C774102CF34F9D00BEE6EC /* MakeQRView.swift in Sources */,
 				B7C7741B2CF5CABB00BEE6EC /* QRProcessor.swift in Sources */,
 			);

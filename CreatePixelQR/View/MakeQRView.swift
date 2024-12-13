@@ -86,6 +86,7 @@ class MakeQRView: UIView {
         urlTF.layer.cornerRadius = 4
         urlTF.layer.borderColor = UIColor.gray.cgColor
         urlTF.layer.borderWidth = 0.5
+        urlTF.returnKeyType = .done
         
         createButton.setTitle("STEP 1", for: .normal)
         createButton.tintColor = .white

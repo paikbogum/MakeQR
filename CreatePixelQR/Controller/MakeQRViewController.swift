@@ -40,6 +40,7 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
         case "url":
             makeQRView.secondStepLabel.text = "생성할 QR코드의 URL주소를 입력해주세요"
             makeQRView.urlTF.placeholder = "ex) http://"
+            makeQRView.urlTF.keyboardType = .URL
         case "wifi":
             makeQRView.secondStepLabel.text = "생성할 QR코드의 wifi 이름을 입력해주세요"
             makeQRView.urlTF.placeholder = "ex) iptime"
@@ -213,6 +214,7 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
         
         changeCreateButtonState()
     }
+
     
     private func changeStateOfTF() {
         if urlTFBool {
@@ -250,13 +252,9 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
         makeQRView.urlTF.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
     }
     
-    // Return 키를 눌렀을 때 호출되는 메서드
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n" { // Return 키가 눌렸을 때
-            textView.resignFirstResponder() // 키보드 내리기
-            return false // 줄바꿈을 막기 위해 false 반환
-        }
-        
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        makeQRView.urlTF.resignFirstResponder()
         return true
     }
     
