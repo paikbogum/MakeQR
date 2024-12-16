@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
     let cellName = "MainCollectionViewCell"
     let cellReuseIdentifier = "MainCollectionViewCell"
     
-    let categoryList: [(String, String)] =  [("wifi", "wifi를 QR코드로 생성"), ("url", "url을 QR코드로 생성"), ("text", "텍스트를 QR코드로 생성"), ("phone", "전화번호를 QR코드로 생성")]
+    let categoryList: [(String, String)] =  [("wifi", "WIFI를 QR코드로 생성"), ("url", "URL을 QR코드로 생성"), ("text", "텍스트를 QR코드로 생성"), ("phone", "전화번호를 QR코드로 생성")]
     
     override func viewDidLoad() {
         super.viewDidLoad()

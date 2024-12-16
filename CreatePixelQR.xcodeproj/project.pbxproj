@@ -67,6 +67,7 @@
 		B7C774342D0C2F2200BEE6EC /* QRPopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRPopViewController.swift; sourceTree = "<group>"; };
 		B7C774362D0C2F2E00BEE6EC /* QRPopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRPopView.swift; sourceTree = "<group>"; };
 		B7C774382D0C353F00BEE6EC /* HalfSizePresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfSizePresentationController.swift; sourceTree = "<group>"; };
+		B7C7743A2D1043E800BEE6EC /* CreatePixelQR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CreatePixelQR.entitlements; sourceTree = "<group>"; };
 		DD725FF5B3CC8559AB7C90C3 /* Pods-CreatePixelQR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CreatePixelQR.release.xcconfig"; path = "Target Support Files/Pods-CreatePixelQR/Pods-CreatePixelQR.release.xcconfig"; sourceTree = "<group>"; };
 		DF1DEF68069B85814361CD16 /* Pods-CreatePixelQR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CreatePixelQR.debug.xcconfig"; path = "Target Support Files/Pods-CreatePixelQR/Pods-CreatePixelQR.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,6 +116,7 @@
 		B770DE912CEF387D005D9EC1 /* CreatePixelQR */ = {
 			isa = PBXGroup;
 			children = (
+				B7C7743A2D1043E800BEE6EC /* CreatePixelQR.entitlements */,
 				B7C774162CF4622800BEE6EC /* LoadingQR.json */,
 				B7C774002CF243C800BEE6EC /* Model */,
 				B7C774022CF243E400BEE6EC /* View */,
@@ -473,6 +475,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CreatePixelQR/CreatePixelQR.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7HK4Z95VZD;
@@ -505,6 +508,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CreatePixelQR/CreatePixelQR.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7HK4Z95VZD;

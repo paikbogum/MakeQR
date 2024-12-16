@@ -4,6 +4,11 @@
 <dict>
     <key>NSCameraUsageDescription</key>
     <string>QR 코드를 스캔하기 위해 카메라 접근 권한이 필요합니다.</string>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

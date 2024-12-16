@@ -16,14 +16,17 @@ class QRCameraViewController: UIViewController {
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     var qrCodeFrameView: UIView! // QR 코드 영역 표시
-    var currentFrame: UIImage? // 현재 카메라 프레임 저장
+    var currentQRCodeImage: UIImage? // 캡처한 QR 이미지 저장
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         qrCameraView.setUI()
         setupCamera()
         setupQRCodeFrame()
+    }
+    
+    deinit {
+        stopSession()
     }
     
     
@@ -43,17 +46,32 @@ class QRCameraViewController: UIViewController {
     }
     
     func updateView() {
-        if captureSession?.isRunning == false {
-            setupCamera()
-            setupQRCodeFrame()
+        // 백그라운드 스레드에서 세션 재시작
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let self = self else { return }
+            
+            if self.captureSession?.isRunning == false {
+                self.captureSession?.startRunning()
+            }
+            
+            // UI와 관련된 작업은 메인 스레드에서 실행
+            DispatchQueue.main.async {
+                self.qrCodeFrameView.isHidden = true
+            }
         }
     }
     
+    /*
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if captureSession?.isRunning == true {
             captureSession.stopRunning()
         }
+    }*/
+    
+    func stopSession() {
+        captureSession?.stopRunning()
+        captureSession = nil
     }
 }
 
@@ -131,7 +149,10 @@ extension QRCameraViewController: AVCaptureMetadataOutputObjectsDelegate, AVCapt
                 
                 print("QR 코드 감지: \(stringValue)")
                 captureSession.stopRunning()
-                qrCodeDetected(stringValue)
+                // QR 이미지 추출
+                
+                self.qrCodeDetected(stringValue)
+                
             }
         } else {
             // QR 코드가 감지되지 않으면 숨김

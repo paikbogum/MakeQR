@@ -18,16 +18,16 @@ enum QRCase {
     var categoryCase: String {
         switch self {
         case .url:
-            return "url"
+            return "URL"
             
         case .wifi:
-            return "wifi"
+            return "WIFI"
             
         case .text:
-            return "text"
+            return "TEXT"
         
         case .phone:
-            return "phone"
+            return "PHONE"
             
         }
     }

@@ -42,14 +42,14 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
             makeQRView.urlTF.placeholder = "ex) http://"
             makeQRView.urlTF.keyboardType = .URL
         case "wifi":
-            makeQRView.secondStepLabel.text = "생성할 QR코드의 wifi 이름을 입력해주세요"
+            makeQRView.secondStepLabel.text = "생성할 QR코드의 WIFI 이름을 입력해주세요"
             makeQRView.urlTF.placeholder = "ex) iptime"
         case "text":
             makeQRView.secondStepLabel.text = "생성할 QR코드의 텍스트를 입력해주세요"
-            makeQRView.urlTF.placeholder = "ex) 안녕!"
+            makeQRView.urlTF.placeholder = "ex) 안녕하세요!"
         case "phone":
             makeQRView.secondStepLabel.text = "생성할 QR코드의 전화번호를 입력해주세요"
-            makeQRView.urlTF.placeholder = "ex) 010-9988-3942"
+            makeQRView.urlTF.placeholder = "ex) 010xxxxxxxx"
         default:
             break
         }

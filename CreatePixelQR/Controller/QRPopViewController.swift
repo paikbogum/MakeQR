@@ -6,13 +6,17 @@
 //
 
 import UIKit
+import NetworkExtension
+import SystemConfiguration.CaptiveNetwork
 
 class QRPopViewController: UIViewController {
     
     @IBOutlet var qrPopView: QRPopView!
     
+    let qrProcessor = QRProcessor()
     var receiveData: String?
     var qrCodeType: QRCase?
+    var qrImage: UIImage?
     
     var updateParentView: (() -> Void)?
     
@@ -78,13 +82,71 @@ class QRPopViewController: UIViewController {
     func setupUI(with data: String, type: QRCase?) {
         qrPopView.resultTypeLabel.text = "QR 코드 타입: \(type?.categoryCase ?? "알 수 없음")"
         
-        qrPopView.resultLabel.text = data
-        
+        //qrPopView.resultLabel.text = data
+        qrPopView.applyUnderline(to: qrPopView.resultLabel, text: data)
         qrPopView.containerView.isUserInteractionEnabled = true
         // UIView에 터치 제스처 추가
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        qrPopView.addGestureRecognizer(tapGesture)
+        qrPopView.containerView.addGestureRecognizer(tapGesture)
         
+        switch type {
+        case .url:
+            if let qrcode = qrProcessor.generateQRCode(from: .url(data), clearRatio: 0.0, dotImage: nil) {
+                qrPopView.qrImageView.image = qrcode
+            }
+            
+        case .wifi:
+            if let wifiInfo = parseWiFiData(data) {
+                if let qrCode = qrProcessor.generateQRCode(
+                    from: .wifi(ssid: wifiInfo.ssid, password: wifiInfo.password, security: wifiInfo.security, hidden: wifiInfo.hidden),
+                    clearRatio: 0.0,
+                    dotImage: nil
+                ) {
+                    qrPopView.qrImageView.image = qrCode
+                }
+            } else {
+                print("Wi-Fi 데이터 파싱 실패")
+            }
+        case .phone:
+            if let qrCode = qrProcessor.generateQRCode(from: .phone(data), clearRatio: 0.0, dotImage: nil) {
+                qrPopView.qrImageView.image = qrCode
+            }
+            
+        case .text:
+            if let qrCode = qrProcessor.generateQRCode(from: .text(data), clearRatio: 0.0, dotImage: nil) {
+                qrPopView.qrImageView.image = qrCode
+            }
+        default:
+            break
+            
+        }
+    }
+    
+    func parseWiFiData(_ data: String) -> (ssid: String, password: String, security: String, hidden: Bool)? {
+        guard data.hasPrefix("WIFI:") else { return nil }
+
+        let components = data
+            .replacingOccurrences(of: "WIFI:", with: "")
+            .components(separatedBy: ";")
+
+        var ssid = ""
+        var password = ""
+        var security = "WPA" // 기본값
+        var hidden = false
+
+        for component in components {
+            if component.hasPrefix("S:") {
+                ssid = component.replacingOccurrences(of: "S:", with: "")
+            } else if component.hasPrefix("P:") {
+                password = component.replacingOccurrences(of: "P:", with: "")
+            } else if component.hasPrefix("T:") {
+                security = component.replacingOccurrences(of: "T:", with: "")
+            } else if component.hasPrefix("H:") {
+                hidden = component.replacingOccurrences(of: "H:", with: "") == "true"
+            }
+        }
+
+        return (ssid, password, security, hidden)
     }
     
     @objc func handleTap() {
@@ -122,7 +184,22 @@ class QRPopViewController: UIViewController {
     func showWiFiInfo(_ wifiData: String) {
         if let wifiInfo = parseWiFiData(wifiData) {
             let message = "SSID: \(wifiInfo.ssid)\nPassword: \(wifiInfo.password)"
-            showAlert(title: "Wi-Fi 정보", message: message)
+            
+            // Alert 생성
+            let alert = UIAlertController(title: "Wi-Fi 정보", message: message, preferredStyle: .alert)
+            
+            // "취소" 버튼 추가
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            alert.addAction(cancelAction)
+            
+            // "연결" 버튼 추가
+            let connectAction = UIAlertAction(title: "연결", style: .default) { _ in
+                self.connectToWiFi(ssid: wifiInfo.ssid, password: wifiInfo.password, security: wifiInfo.security, isHidden: wifiInfo.hidden)
+            }
+            alert.addAction(connectAction)
+            
+            // Alert 표시
+            present(alert, animated: true, completion: nil)
         } else {
             showAlert(title: "Wi-Fi 정보", message: "Wi-Fi 데이터를 읽을 수 없습니다.")
         }
@@ -133,27 +210,6 @@ class QRPopViewController: UIViewController {
         showAlert(title: "텍스트", message: text)
     }
     
-    // Wi-Fi 데이터 파싱
-    func parseWiFiData(_ data: String) -> (ssid: String, password: String)? {
-        guard data.hasPrefix("WIFI:") else { return nil }
-
-        let components = data
-            .replacingOccurrences(of: "WIFI:", with: "")
-            .components(separatedBy: ";")
-
-        var ssid = ""
-        var password = ""
-
-        for component in components {
-            if component.hasPrefix("S:") {
-                ssid = component.replacingOccurrences(of: "S:", with: "")
-            } else if component.hasPrefix("P:") {
-                password = component.replacingOccurrences(of: "P:", with: "")
-            }
-        }
-
-        return (ssid, password)
-    }
 
     // 공통 알림 표시
     func showAlert(title: String, message: String) {
@@ -162,6 +218,49 @@ class QRPopViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    
+    func connectToWiFi(ssid: String, password: String, security: String, isHidden: Bool) {
+        let hotspotConfiguration: NEHotspotConfiguration
+        if security.uppercased() == "WPA" || security.uppercased() == "WPA2" {
+            hotspotConfiguration = NEHotspotConfiguration(ssid: ssid, passphrase: password, isWEP: false)
+        } else if security.uppercased() == "WEP" {
+            hotspotConfiguration = NEHotspotConfiguration(ssid: ssid, passphrase: password, isWEP: true)
+        } else {
+            hotspotConfiguration = NEHotspotConfiguration(ssid: ssid) // Open network
+        }
+
+        hotspotConfiguration.joinOnce = false
+
+        // 기존 설정 제거
+        NEHotspotConfigurationManager.shared.removeConfiguration(forSSID: ssid)
+
+        // 연결 시도
+        NEHotspotConfigurationManager.shared.apply(hotspotConfiguration) { error in
+            if let error = error {
+                print("Wi-Fi 연결 실패: \(error.localizedDescription)")
+                self.showAlert(title: "Wi-Fi 연결 실패", message: error.localizedDescription)
+            } else {
+                if let currentSSID = self.getConnectedWiFiSSID(), currentSSID == ssid {
+                    print("Wi-Fi 연결 성공: \(currentSSID)")
+                    self.showAlert(title: "Wi-Fi 연결 성공", message: "Wi-Fi에 성공적으로 연결되었습니다.")
+                } else {
+                    print("Wi-Fi 연결 실패: 네트워크에 연결되지 않았습니다.")
+                    self.showAlert(title: "Wi-Fi 연결 실패", message: "네트워크에 연결되지 않았습니다.")
+                }
+            }
+        }
+    }
+
+    func getConnectedWiFiSSID() -> String? {
+        if let interfaces = CNCopySupportedInterfaces() as? [String],
+           let interfaceName = interfaces.first as CFString?,
+           let unsafeInterfaceData = CNCopyCurrentNetworkInfo(interfaceName) as? [String: AnyObject],
+           let ssid = unsafeInterfaceData["SSID"] as? String {
+            return ssid
+        }
+        return nil
+    }
+
     
 }
 
