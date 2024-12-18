@@ -119,5 +119,38 @@ class MakeWifiView: UIView {
         wifiHiddenLabel.font = UIFont.boldSystemFont(ofSize: 12)
         wifiHiddenLabel.textColor = .gray
         wifiHiddenTF.text = "공개"
+        
+        
+        wifiNameTF.font = UIFont.boldSystemFont(ofSize: 15)
+        wifiNameTF.textColor = .darkGray
+        wifiNameTF.backgroundColor = .white
+        wifiNameTF.layer.cornerRadius = 4
+        wifiNameTF.layer.borderColor = UIColor.gray.cgColor
+        wifiNameTF.layer.borderWidth = 0.5
+        wifiNameTF.returnKeyType = .done
+        
+        wifiSecurityTypeTF.font = UIFont.boldSystemFont(ofSize: 15)
+        wifiSecurityTypeTF.textColor = .darkGray
+        wifiSecurityTypeTF.backgroundColor = .white
+        wifiSecurityTypeTF.layer.cornerRadius = 4
+        wifiSecurityTypeTF.layer.borderColor = UIColor.gray.cgColor
+        wifiSecurityTypeTF.layer.borderWidth = 0.5
+        wifiSecurityTypeTF.returnKeyType = .done
+        
+        wifiPasswordTF.font = UIFont.boldSystemFont(ofSize: 15)
+        wifiPasswordTF.textColor = .darkGray
+        wifiPasswordTF.backgroundColor = .white
+        wifiPasswordTF.layer.cornerRadius = 4
+        wifiPasswordTF.layer.borderColor = UIColor.gray.cgColor
+        wifiPasswordTF.layer.borderWidth = 0.5
+        wifiPasswordTF.returnKeyType = .done
+        
+        wifiHiddenTF.font = UIFont.boldSystemFont(ofSize: 15)
+        wifiHiddenTF.textColor = .darkGray
+        wifiHiddenTF.backgroundColor = .white
+        wifiHiddenTF.layer.cornerRadius = 4
+        wifiHiddenTF.layer.borderColor = UIColor.gray.cgColor
+        wifiHiddenTF.layer.borderWidth = 0.5
+        wifiHiddenTF.returnKeyType = .done
     }
 }

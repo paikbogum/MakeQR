@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class MainViewController: UIViewController {
     
     @IBOutlet weak var cameraButtonTopConstraint: NSLayoutConstraint!
@@ -16,11 +17,11 @@ class MainViewController: UIViewController {
     let cellName = "MainCollectionViewCell"
     let cellReuseIdentifier = "MainCollectionViewCell"
     
-    let categoryList: [(String, String)] =  [("wifi", "WIFI를 QR코드로 생성"), ("url", "URL을 QR코드로 생성"), ("text", "텍스트를 QR코드로 생성"), ("phone", "전화번호를 QR코드로 생성")]
+    let categoryList: [(String, String)] =  [("wifi", "WiFi를 QR코드로 생성"), ("url", "URL을 QR코드로 생성"), ("text", "텍스트를 QR코드로 생성"), ("phone", "전화번호를 QR코드로 생성")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         mainView.mainViewUISetting()
         registerXib()
         
@@ -65,6 +66,8 @@ class MainViewController: UIViewController {
     
 }
 
+
+
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categoryList.count
@@ -99,12 +102,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             nextVC.categoryCase = destination
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
-        /*
-         guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MakeQRViewController") as? MakeQRViewController else { return }
-         let target = categoryList[indexPath.row].0
-         
-         nextVC.categoryCase = target
-         self.navigationController?.pushViewController(nextVC, animated: true)*/
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

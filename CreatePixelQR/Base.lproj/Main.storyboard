@@ -512,6 +512,49 @@
             </objects>
             <point key="canvasLocation" x="-77.099236641221367" y="642.25352112676057"/>
         </scene>
+        <!--History View Controller-->
+        <scene sceneID="OFS-pY-8qk">
+            <objects>
+                <viewController storyboardIdentifier="HistoryViewController" id="Qb8-3j-nci" customClass="HistoryViewController" customModule="CreatePixelQR" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9uk-U0-C5u" customClass="HistoryView" customModule="CreatePixelQR" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eBo-Ru-lXZ">
+                                <rect key="frame" x="10" y="159" width="373" height="649"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="L3u-ka-WzZ">
+                                        <rect key="frame" x="0.0" y="50" width="373" height="44.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L3u-ka-WzZ" id="ChN-ke-fg1">
+                                            <rect key="frame" x="0.0" y="0.0" width="373" height="44.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="iJk-fh-PcP"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="iJk-fh-PcP" firstAttribute="bottom" secondItem="eBo-Ru-lXZ" secondAttribute="bottom" constant="10" id="G1v-ti-5By"/>
+                            <constraint firstItem="eBo-Ru-lXZ" firstAttribute="leading" secondItem="iJk-fh-PcP" secondAttribute="leading" constant="10" id="KGf-tV-V1P"/>
+                            <constraint firstItem="iJk-fh-PcP" firstAttribute="trailing" secondItem="eBo-Ru-lXZ" secondAttribute="trailing" constant="10" id="WI2-bm-a8N"/>
+                            <constraint firstItem="eBo-Ru-lXZ" firstAttribute="top" secondItem="iJk-fh-PcP" secondAttribute="top" constant="100" id="oSg-SW-xTQ"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="historyTableView" destination="eBo-Ru-lXZ" id="foG-M1-AMB"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="historyView" destination="9uk-U0-C5u" id="WTW-zQ-dfP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wuW-bo-gcl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="680" y="629"/>
+        </scene>
         <!--Camera View Controller-->
         <scene sceneID="nBU-Se-Ht6">
             <objects>
@@ -552,7 +595,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bye-CX-fwa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="629.7709923664122" y="617.6056338028169"/>
+            <point key="canvasLocation" x="630" y="-699"/>
         </scene>
         <!--Make Wifi View Controller-->
         <scene sceneID="tRy-87-h52">

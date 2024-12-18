@@ -195,6 +195,8 @@ class QRPopViewController: UIViewController {
             // "연결" 버튼 추가
             let connectAction = UIAlertAction(title: "연결", style: .default) { _ in
                 self.connectToWiFi(ssid: wifiInfo.ssid, password: wifiInfo.password, security: wifiInfo.security, isHidden: wifiInfo.hidden)
+                
+              
             }
             alert.addAction(connectAction)
             
@@ -220,16 +222,29 @@ class QRPopViewController: UIViewController {
     
     
     func connectToWiFi(ssid: String, password: String, security: String, isHidden: Bool) {
+        print("입력 값: SSID=\(ssid), Password=\(password), Security=\(security), isHidden=\(isHidden)")
+
         let hotspotConfiguration: NEHotspotConfiguration
-        if security.uppercased() == "WPA" || security.uppercased() == "WPA2" {
+
+        // 보안 방식에 따라 hotspotConfiguration 생성
+        if security.contains("WPA") {
+            print("WPA/WPA2 보안 방식으로 설정")
             hotspotConfiguration = NEHotspotConfiguration(ssid: ssid, passphrase: password, isWEP: false)
-        } else if security.uppercased() == "WEP" {
+        } else if security.contains("WEP") {
+            print("WEP 보안 방식으로 설정")
             hotspotConfiguration = NEHotspotConfiguration(ssid: ssid, passphrase: password, isWEP: true)
+        } else if security.contains("OPEN") {
+            print("Open Network로 설정")
+            hotspotConfiguration = NEHotspotConfiguration(ssid: ssid)
         } else {
-            hotspotConfiguration = NEHotspotConfiguration(ssid: ssid) // Open network
+            print("알 수 없는 보안 방식: \(security)")
+            self.showAlert(title: "Wi-Fi 연결 실패", message: "지원되지 않는 보안 방식입니다: \(security)")
+            return
         }
 
-        hotspotConfiguration.joinOnce = false
+        // 숨겨진 네트워크 처리
+        hotspotConfiguration.hidden = isHidden
+        hotspotConfiguration.joinOnce = false // 지속적인 연결 유지
 
         // 기존 설정 제거
         NEHotspotConfigurationManager.shared.removeConfiguration(forSSID: ssid)
@@ -240,25 +255,10 @@ class QRPopViewController: UIViewController {
                 print("Wi-Fi 연결 실패: \(error.localizedDescription)")
                 self.showAlert(title: "Wi-Fi 연결 실패", message: error.localizedDescription)
             } else {
-                if let currentSSID = self.getConnectedWiFiSSID(), currentSSID == ssid {
-                    print("Wi-Fi 연결 성공: \(currentSSID)")
-                    self.showAlert(title: "Wi-Fi 연결 성공", message: "Wi-Fi에 성공적으로 연결되었습니다.")
-                } else {
-                    print("Wi-Fi 연결 실패: 네트워크에 연결되지 않았습니다.")
-                    self.showAlert(title: "Wi-Fi 연결 실패", message: "네트워크에 연결되지 않았습니다.")
-                }
+                print("Wi-Fi 연결 성공!")
+                self.showAlert(title: "Wi-Fi 연결 성공", message: "네트워크에 성공적으로 연결되었습니다.")
             }
         }
-    }
-
-    func getConnectedWiFiSSID() -> String? {
-        if let interfaces = CNCopySupportedInterfaces() as? [String],
-           let interfaceName = interfaces.first as CFString?,
-           let unsafeInterfaceData = CNCopyCurrentNetworkInfo(interfaceName) as? [String: AnyObject],
-           let ssid = unsafeInterfaceData["SSID"] as? String {
-            return ssid
-        }
-        return nil
     }
 
     

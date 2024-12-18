@@ -39,17 +39,37 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
         switch categoryCase {
         case "url":
             makeQRView.secondStepLabel.text = "생성할 QR코드의 URL주소를 입력해주세요"
-            makeQRView.urlTF.placeholder = "ex) http://"
+            makeQRView.urlTF.attributedPlaceholder = NSAttributedString(
+                string: "ex) http://", // placeholder 텍스트
+                attributes: [
+                    .foregroundColor: UIColor.lightGray  // 원하는 색상 지정
+                ]
+            )
             makeQRView.urlTF.keyboardType = .URL
         case "wifi":
             makeQRView.secondStepLabel.text = "생성할 QR코드의 WIFI 이름을 입력해주세요"
-            makeQRView.urlTF.placeholder = "ex) iptime"
+            makeQRView.urlTF.attributedPlaceholder = NSAttributedString(
+                string: "ex) iptime", // placeholder 텍스트
+                attributes: [
+                    .foregroundColor: UIColor.lightGray  // 원하는 색상 지정
+                ]
+            )
         case "text":
             makeQRView.secondStepLabel.text = "생성할 QR코드의 텍스트를 입력해주세요"
-            makeQRView.urlTF.placeholder = "ex) 안녕하세요!"
+            makeQRView.urlTF.attributedPlaceholder = NSAttributedString(
+                string: "ex) 안녕하세요!", // placeholder 텍스트
+                attributes: [
+                    .foregroundColor: UIColor.lightGray  // 원하는 색상 지정
+                ]
+            )
         case "phone":
             makeQRView.secondStepLabel.text = "생성할 QR코드의 전화번호를 입력해주세요"
-            makeQRView.urlTF.placeholder = "ex) 010xxxxxxxx"
+            makeQRView.urlTF.attributedPlaceholder = NSAttributedString(
+                string: "ex) 010xxxxxxxx", // placeholder 텍스트
+                attributes: [
+                    .foregroundColor: UIColor.lightGray // 원하는 색상 지정
+                ]
+            )
         default:
             break
         }
