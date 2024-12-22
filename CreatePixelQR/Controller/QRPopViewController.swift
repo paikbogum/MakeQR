@@ -118,7 +118,6 @@ class QRPopViewController: UIViewController {
             }
         default:
             break
-            
         }
     }
     

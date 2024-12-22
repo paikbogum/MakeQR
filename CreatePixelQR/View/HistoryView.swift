@@ -9,6 +9,15 @@ import UIKit
 
 class HistoryView: UIView {
     
+    @IBOutlet weak var caseSegmentControl: UISegmentedControl!
+    
     @IBOutlet weak var historyTableView: UITableView!
+    
+    
+    func historySetting() {
+        historyTableView.backgroundColor = .clear
+    
+    }
+    
     
 }

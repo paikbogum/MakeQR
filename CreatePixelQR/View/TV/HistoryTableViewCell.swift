@@ -20,6 +20,22 @@ class HistoryTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        settingCells()
     }
     
+    private func settingCells() {
+        
+        contentView.backgroundColor = .white
+        
+        typeLabel.textColor = .black
+        mainLabel.textColor = .black
+        dateLabel.textColor = .black
+        
+        
+        typeLabel.font = UIFont.boldSystemFont(ofSize: 12)
+        mainLabel.font = UIFont.boldSystemFont(ofSize: 12)
+        dateLabel.font = UIFont.boldSystemFont(ofSize: 10)
+        
+        mainLabel.numberOfLines = 0
+    }
 }

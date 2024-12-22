@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 class QRHistoryManager {
     static let shared = QRHistoryManager()
     private let historyKey = "QRHistory"
@@ -46,5 +45,133 @@ class QRHistoryManager {
     // 히스토리 전체 삭제
     func clearHistory() {
         UserDefaults.standard.removeObject(forKey: historyKey)
+    }
+}
+
+extension QRHistoryManager {
+    // URL 저장
+    func saveURLHistory(url: String) {
+        let newHistory = QRHistory(
+            id: UUID(),
+            type: .url,
+            content: url,
+            action: .generated,
+            date: Date()
+        )
+        saveHistory(item: newHistory)
+        print("URL 히스토리가 저장되었습니다: \(url)")
+    }
+
+    // 텍스트 저장
+    func saveTextHistory(text: String) {
+        let newHistory = QRHistory(
+            id: UUID(),
+            type: .text,
+            content: text,
+            action: .generated,
+            date: Date()
+        )
+        saveHistory(item: newHistory)
+        print("텍스트 히스토리가 저장되었습니다: \(text)")
+    }
+
+    // Wi-Fi 저장
+    func saveWiFiHistory(ssid: String, password: String, security: String, isHidden: Bool) {
+        let hiddenValue = isHidden ? "1" : "0"
+        let wifiContent = "WIFI:S:\(ssid);T:\(security);P:\(password);H:\(hiddenValue);;"
+
+        let newHistory = QRHistory(
+            id: UUID(),
+            type: .wifi,
+            content: wifiContent,
+            action: .generated,
+            date: Date()
+        )
+        saveHistory(item: newHistory)
+        print("Wi-Fi 히스토리가 저장되었습니다: \(wifiContent)")
+    }
+
+    // 전화번호 저장
+    func savePhoneHistory(phoneNumber: String) {
+        let newHistory = QRHistory(
+            id: UUID(),
+            type: .phone,
+            content: phoneNumber,
+            action: .generated,
+            date: Date()
+        )
+        saveHistory(item: newHistory)
+        print("전화번호 히스토리가 저장되었습니다: \(phoneNumber)")
+    }
+}
+
+extension QRHistoryManager {
+    // URL 히스토리 로드
+    func loadURLHistory() -> [QRHistory] {
+        return loadHistory().filter { $0.type == .url }
+    }
+
+    // 텍스트 히스토리 로드
+    func loadTextHistory() -> [QRHistory] {
+        return loadHistory().filter { $0.type == .text }
+    }
+
+    // Wi-Fi 히스토리 로드
+    func loadWiFiHistory() -> [QRHistory] {
+        return loadHistory().filter { $0.type == .wifi }
+    }
+
+    // 전화번호 히스토리 로드
+    func loadPhoneHistory() -> [QRHistory] {
+        return loadHistory().filter { $0.type == .phone }
+    }
+}
+
+
+extension QRHistoryManager {
+    // 특정 URL 히스토리 삭제
+    func deleteURLHistory(at index: Int) {
+        let urlHistory = loadURLHistory()
+        guard index >= 0 && index < urlHistory.count else { return }
+
+        let targetItem = urlHistory[index]
+        deleteSpecificHistory(by: targetItem.id)
+    }
+
+    // 특정 텍스트 히스토리 삭제
+    func deleteTextHistory(at index: Int) {
+        let textHistory = loadTextHistory()
+        guard index >= 0 && index < textHistory.count else { return }
+
+        let targetItem = textHistory[index]
+        deleteSpecificHistory(by: targetItem.id)
+    }
+
+    // 특정 Wi-Fi 히스토리 삭제
+    func deleteWiFiHistory(at index: Int) {
+        let wifiHistory = loadWiFiHistory()
+        guard index >= 0 && index < wifiHistory.count else { return }
+
+        let targetItem = wifiHistory[index]
+        deleteSpecificHistory(by: targetItem.id)
+    }
+
+    // 특정 전화번호 히스토리 삭제
+    func deletePhoneHistory(at index: Int) {
+        let phoneHistory = loadPhoneHistory()
+        guard index >= 0 && index < phoneHistory.count else { return }
+
+        let targetItem = phoneHistory[index]
+        deleteSpecificHistory(by: targetItem.id)
+    }
+
+    // 특정 히스토리 삭제 (ID 기반)
+    func deleteSpecificHistory(by id: UUID) {
+        var allHistory = loadHistory()
+        allHistory.removeAll { $0.id == id }
+
+        if let encodedData = try? JSONEncoder().encode(allHistory) {
+            UserDefaults.standard.set(encodedData, forKey: historyKey)
+        }
     }
 }

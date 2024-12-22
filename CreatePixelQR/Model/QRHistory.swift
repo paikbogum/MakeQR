@@ -26,3 +26,4 @@ enum QRAction: String, Codable {
     case generated = "Generated" // QR 생성
     case scanned = "Scanned" // QR 스캔
 }
+

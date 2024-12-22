@@ -205,9 +205,22 @@
                                             <action selector="qrCameraButtonTapped:" destination="zoT-Q0-TrB" eventType="touchUpInside" id="lg7-U1-NgA"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eUs-1J-eGK">
+                                        <rect key="frame" x="323" y="10" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="aZV-mk-yUB"/>
+                                            <constraint firstAttribute="height" constant="40" id="eOa-Uq-U6J"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="gearshape.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="settingButtonTapped:" destination="zoT-Q0-TrB" eventType="touchUpInside" id="JgE-f6-6fH"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="eUs-1J-eGK" firstAttribute="top" secondItem="ebr-an-SPa" secondAttribute="top" constant="10" id="3jR-zL-YNa"/>
                                     <constraint firstAttribute="trailing" secondItem="ZOg-fe-Kgf" secondAttribute="trailing" constant="20" id="3uO-7n-yrL"/>
                                     <constraint firstAttribute="trailing" secondItem="gYh-LS-Ulr" secondAttribute="trailing" constant="60" id="9Hm-Bu-qs1"/>
                                     <constraint firstItem="iUo-zD-aox" firstAttribute="leading" secondItem="ebr-an-SPa" secondAttribute="leading" constant="10" id="J0c-ku-9is"/>
@@ -216,6 +229,7 @@
                                     <constraint firstItem="ZOg-fe-Kgf" firstAttribute="leading" secondItem="ebr-an-SPa" secondAttribute="leading" constant="20" id="UX3-0r-OpA"/>
                                     <constraint firstAttribute="trailing" secondItem="iUo-zD-aox" secondAttribute="trailing" constant="10" id="WHA-sk-DaS"/>
                                     <constraint firstItem="jnt-aU-QGt" firstAttribute="leading" secondItem="ebr-an-SPa" secondAttribute="leading" constant="60" id="Yba-ef-HAu"/>
+                                    <constraint firstAttribute="trailing" secondItem="eUs-1J-eGK" secondAttribute="trailing" constant="10" id="crb-L9-WEp"/>
                                     <constraint firstItem="gYh-LS-Ulr" firstAttribute="leading" secondItem="ebr-an-SPa" secondAttribute="leading" constant="60" id="da7-ZG-A1K"/>
                                     <constraint firstItem="ZOg-fe-Kgf" firstAttribute="top" secondItem="iUo-zD-aox" secondAttribute="bottom" constant="30" id="rYl-aa-j1J"/>
                                     <constraint firstAttribute="trailing" secondItem="jnt-aU-QGt" secondAttribute="trailing" constant="60" id="uvA-Cc-vE1"/>
@@ -521,7 +535,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eBo-Ru-lXZ">
-                                <rect key="frame" x="10" y="159" width="373" height="649"/>
+                                <rect key="frame" x="10" y="170" width="373" height="638"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="L3u-ka-WzZ">
@@ -534,16 +548,33 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="GnX-bm-ryx">
+                                <rect key="frame" x="40" y="99" width="313" height="32"/>
+                                <segments>
+                                    <segment title="Entire"/>
+                                    <segment title="Wi-Fi"/>
+                                    <segment title="URL"/>
+                                    <segment title="Phone"/>
+                                    <segment title="Text"/>
+                                </segments>
+                                <connections>
+                                    <action selector="caseSegmentControlTapped:" destination="Qb8-3j-nci" eventType="valueChanged" id="u2Q-cv-uTw"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="iJk-fh-PcP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="eBo-Ru-lXZ" firstAttribute="top" secondItem="GnX-bm-ryx" secondAttribute="bottom" constant="40" id="D5A-fs-xLs"/>
                             <constraint firstItem="iJk-fh-PcP" firstAttribute="bottom" secondItem="eBo-Ru-lXZ" secondAttribute="bottom" constant="10" id="G1v-ti-5By"/>
                             <constraint firstItem="eBo-Ru-lXZ" firstAttribute="leading" secondItem="iJk-fh-PcP" secondAttribute="leading" constant="10" id="KGf-tV-V1P"/>
                             <constraint firstItem="iJk-fh-PcP" firstAttribute="trailing" secondItem="eBo-Ru-lXZ" secondAttribute="trailing" constant="10" id="WI2-bm-a8N"/>
-                            <constraint firstItem="eBo-Ru-lXZ" firstAttribute="top" secondItem="iJk-fh-PcP" secondAttribute="top" constant="100" id="oSg-SW-xTQ"/>
+                            <constraint firstItem="GnX-bm-ryx" firstAttribute="leading" secondItem="iJk-fh-PcP" secondAttribute="leading" constant="40" id="dAL-ED-YWT"/>
+                            <constraint firstItem="GnX-bm-ryx" firstAttribute="top" secondItem="iJk-fh-PcP" secondAttribute="top" constant="40" id="jTW-hZ-TIr"/>
+                            <constraint firstItem="iJk-fh-PcP" firstAttribute="trailing" secondItem="GnX-bm-ryx" secondAttribute="trailing" constant="40" id="pJa-Cs-k0j"/>
                         </constraints>
                         <connections>
+                            <outlet property="caseSegmentControl" destination="GnX-bm-ryx" id="XMT-Fj-A80"/>
                             <outlet property="historyTableView" destination="eBo-Ru-lXZ" id="foG-M1-AMB"/>
                         </connections>
                     </view>
@@ -873,6 +904,7 @@
     <resources>
         <image name="arrowshape.turn.up.right.fill" catalog="system" width="128" height="104"/>
         <image name="checkmark.circle" catalog="system" width="128" height="123"/>
+        <image name="gearshape.fill" catalog="system" width="128" height="123"/>
         <image name="message.fill" catalog="system" width="128" height="114"/>
         <image name="photo.badge.plus.fill" catalog="system" width="128" height="97"/>
         <image name="plus.square.dashed" catalog="system" width="128" height="114"/>

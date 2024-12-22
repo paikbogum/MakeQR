@@ -13,8 +13,8 @@ class HistoryViewController: UIViewController {
     let cellName = "HistoryTableViewCell"
     let cellReuseIdentifier = "HistoryTableViewCell"
     
-    
     var historyItems: [QRHistory] = []
+    var filteredItems: [QRHistory] = []
     
     @IBOutlet var historyView: HistoryView!
     
@@ -22,6 +22,13 @@ class HistoryViewController: UIViewController {
         super.viewDidLoad()
         
         registerXib()
+        historyView.historySetting()
+        self.historyItems = QRHistoryManager.shared.loadHistory()
+        
+        filterData(for: 0)
+        
+        
+        print(historyItems.count)
     }
     
     func registerXib() {
@@ -32,19 +39,151 @@ class HistoryViewController: UIViewController {
         historyView.historyTableView.dataSource = self
     }
     
+    func formatDateWithAmPm(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "yyyy-MM-dd a hh:mm"
+        return dateFormatter.string(from: date)
+    }
     
+    // 데이터 필터링
+    func filterData(for category: Int) {
+        switch category {
+        case 0:
+            filteredItems = historyItems
+        case 1:
+            filteredItems = historyItems.filter { $0.type == .wifi }
+        case 2:
+            filteredItems = historyItems.filter { $0.type == .url }
+        case 3:
+            filteredItems = historyItems.filter { $0.type == .phone }
+        case 4:
+            filteredItems = historyItems.filter { $0.type == .text }
+        default:
+            filteredItems = []
+        }
+        
+        // 날짜 순 정렬 (최신 항목이 상단)
+        filteredItems.sort { $0.date > $1.date }
+        
+        historyView.historyTableView.reloadData()
+    }
+    
+    func parseWiFiData(_ data: String) -> (ssid: String, password: String, security: String, hidden: Bool)? {
+        guard data.hasPrefix("WIFI:") else { return nil }
 
+        let components = data
+            .replacingOccurrences(of: "WIFI:", with: "")
+            .components(separatedBy: ";")
+
+        var ssid = ""
+        var password = ""
+        var security = "WPA" // 기본값
+        var hidden = false
+
+        for component in components {
+            if component.hasPrefix("S:") {
+                ssid = component.replacingOccurrences(of: "S:", with: "")
+            } else if component.hasPrefix("P:") {
+                password = component.replacingOccurrences(of: "P:", with: "")
+            } else if component.hasPrefix("T:") {
+                security = component.replacingOccurrences(of: "T:", with: "")
+            } else if component.hasPrefix("H:") {
+                hidden = component.replacingOccurrences(of: "H:", with: "") == "true"
+            }
+        }
+
+        return (ssid, password, security, hidden)
+    }
+    
+    @IBAction func caseSegmentControlTapped(_ sender: UISegmentedControl) {
+        filterData(for: sender.selectedSegmentIndex)
+    }
+    
+    
+    
+    
+    
+    // MARK: 액션 메서드
+     func showDetails(for index: Int) {
+         let target = filteredItems[index]
+         let alertController = UIAlertController(
+             title: "자세히 보기",
+             message: """
+             타입: \(target.type.rawValue)
+             내용: \(target.content)
+             날짜: \(formatDateWithAmPm(date: target.date))
+             """,
+             preferredStyle: .alert
+         )
+         alertController.addAction(UIAlertAction(title: "닫기", style: .cancel))
+         present(alertController, animated: true)
+     }
+
+     func deleteItem(at index: Int) {
+         // 데이터 삭제
+         let target = filteredItems[index]
+         QRHistoryManager.shared.deleteSpecificHistory(by: target.id)
+         filteredItems.remove(at: index)
+
+         // TableView 갱신
+         historyView.historyTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+     }
+    
     
 }
 
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        return filteredItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell", for: indexPath) as! HistoryTableViewCell
+        let target = filteredItems[indexPath.row]
+
+        let stringTarget = String(describing: target.type)
+        
+        //cell.mainLabel.text = target.content
+        cell.typeLabel.text = target.type.rawValue
+        cell.dateLabel.text = "생성 날짜: \(formatDateWithAmPm(date: target.date))"
+        cell.typeImageView.image = UIImage(named: stringTarget + "32px")
+        
+        if target.type == .wifi, let wifiInfo = parseWiFiData(target.content) {
+            cell.mainLabel.text = """
+        SSID: \(wifiInfo.ssid)
+        비밀번호: \(wifiInfo.password)
+        암호화: \(wifiInfo.security)
+        """
+        } else {
+            cell.mainLabel.text = target.content
+        }
+
+        return cell
     }
     
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let detailAction = UIContextualAction(style: .normal, title: "자세히 보기") { [weak self] _, _, completionHandler in
+            guard let self = self else { return }
+            self.showDetails(for: indexPath.row)
+            completionHandler(true) // 액션 완료 표시
+        }
+        detailAction.backgroundColor = .systemBlue
+
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { [weak self] _, _, completionHandler in
+            guard let self = self else { return }
+            self.deleteItem(at: indexPath.row)
+            completionHandler(true) // 액션 완료 표시
+        }
+
+        return UISwipeActionsConfiguration(actions: [deleteAction, detailAction])
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80.0
+    }
+    
+
     
 }
