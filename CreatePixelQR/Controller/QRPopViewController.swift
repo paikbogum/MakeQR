@@ -18,6 +18,8 @@ class QRPopViewController: UIViewController {
     var qrCodeType: QRCase?
     var qrImage: UIImage?
     
+    let qrManager = QRHistoryManager.shared
+    
     var updateParentView: (() -> Void)?
     
     override func viewDidLoad() {
@@ -95,8 +97,16 @@ class QRPopViewController: UIViewController {
                 qrPopView.qrImageView.image = qrcode
             }
             
+            qrManager.saveURLHistory(url: data, act: .scanned)
+            qrPopView.linkButton.setTitle("웹사이트 열기", for: .normal)
+            qrPopView.copyButton.setTitle("주소 복사하기", for: .normal)
+            
         case .wifi:
+            qrPopView.linkButton.setTitle("Wi-Fi 연결하기", for: .normal)
+            qrPopView.copyButton.setTitle("비밀번호 복사하기", for: .normal)
+            
             if let wifiInfo = parseWiFiData(data) {
+                
                 if let qrCode = qrProcessor.generateQRCode(
                     from: .wifi(ssid: wifiInfo.ssid, password: wifiInfo.password, security: wifiInfo.security, hidden: wifiInfo.hidden),
                     clearRatio: 0.0,
@@ -104,18 +114,29 @@ class QRPopViewController: UIViewController {
                 ) {
                     qrPopView.qrImageView.image = qrCode
                 }
+                
+                qrManager.saveWiFiHistory(ssid: wifiInfo.ssid, password: wifiInfo.password, security: wifiInfo.security, isHidden: wifiInfo.hidden, act: .scanned)
             } else {
                 print("Wi-Fi 데이터 파싱 실패")
             }
+            
         case .phone:
             if let qrCode = qrProcessor.generateQRCode(from: .phone(data), clearRatio: 0.0, dotImage: nil) {
                 qrPopView.qrImageView.image = qrCode
             }
             
+            qrManager.savePhoneHistory(phoneNumber: data, act: .scanned)
+            qrPopView.linkButton.setTitle("정보 확인하기", for: .normal)
+            qrPopView.copyButton.setTitle("주소 복사하기", for: .normal)
+            
         case .text:
             if let qrCode = qrProcessor.generateQRCode(from: .text(data), clearRatio: 0.0, dotImage: nil) {
                 qrPopView.qrImageView.image = qrCode
             }
+            
+            qrManager.saveTextHistory(text: data, act: .scanned)
+            qrPopView.linkButton.setTitle("정보 확인하기", for: .normal)
+            qrPopView.copyButton.setTitle("주소 복사하기", for: .normal)
         default:
             break
         }
@@ -259,7 +280,82 @@ class QRPopViewController: UIViewController {
             }
         }
     }
+    
+    
+    @IBAction func linkButtonTapped(_ sender: UIButton) {
+        guard let data = receiveData else { return }
 
+        switch qrCodeType {
+        case .url:
+            openURL(data)
+        case .phone:
+            callPhoneNumber(data)
+        case .wifi:
+            if let wifiInfo = parseWiFiData(data) {
+                self.connectToWiFi(ssid: wifiInfo.ssid, password: wifiInfo.password, security: wifiInfo.security, isHidden: wifiInfo.hidden)
+            } else {
+                print("와이파이 연결 실패")
+            }
+        case .text:
+            showTextAlert(data)
+        default:
+            print("지원되지 않는 타입")
+        }
+    }
+    
+    func copyTextToClipboard(from label: String) {
+        UIPasteboard.general.string = label // 클립보드에 텍스트 복사
+        showToast(message: "텍스트가 복사되었습니다.")
+    }
+    
+
+    @IBAction func copyButtonTapped(_ sender: UIButton) {
+        guard let data = receiveData else { return }
+
+        switch qrCodeType {
+        case .url:
+            copyTextToClipboard(from: data)
+        case .phone:
+            copyTextToClipboard(from: data)
+        case .wifi:
+            if let wifiInfo = parseWiFiData(data) {
+                copyTextToClipboard(from: wifiInfo.password)
+            } else {
+                print("비밀번호 복사 실패")
+            }
+        case .text:
+            copyTextToClipboard(from: data)
+        default:
+            print("지원되지 않는 타입")
+        }
+    }
+    
+    
+    func showToast(message: String, duration: TimeInterval = 2.0) {
+        let toastLabel = UILabel()
+        toastLabel.text = message
+        toastLabel.textAlignment = .center
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        toastLabel.textColor = .white
+        toastLabel.font = UIFont.systemFont(ofSize: 14)
+        toastLabel.layer.cornerRadius = 10
+        toastLabel.clipsToBounds = true
+
+        let toastWidth: CGFloat = 200
+        let toastHeight: CGFloat = 50
+        toastLabel.frame = CGRect(x: (UIScreen.main.bounds.width - toastWidth) / 2,
+                                  y: UIScreen.main.bounds.height - 100,
+                                  width: toastWidth,
+                                  height: toastHeight)
+
+        UIApplication.shared.windows.first?.addSubview(toastLabel)
+
+        UIView.animate(withDuration: 0.5, delay: duration, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: { _ in
+            toastLabel.removeFromSuperview()
+        })
+    }
     
 }
 

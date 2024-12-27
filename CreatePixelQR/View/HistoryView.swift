@@ -15,8 +15,9 @@ class HistoryView: UIView {
     
     
     func historySetting() {
-        historyTableView.backgroundColor = .clear
-    
+        self.backgroundColor = CustomColor.darkModeBackgroundColor.color
+        
+        historyTableView.backgroundColor = CustomColor.backgroundColor.color
     }
     
     

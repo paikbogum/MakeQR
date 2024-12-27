@@ -92,16 +92,12 @@ class HistoryViewController: UIViewController {
                 hidden = component.replacingOccurrences(of: "H:", with: "") == "true"
             }
         }
-
         return (ssid, password, security, hidden)
     }
     
     @IBAction func caseSegmentControlTapped(_ sender: UISegmentedControl) {
         filterData(for: sender.selectedSegmentIndex)
     }
-    
-    
-    
     
     
     // MARK: 액션 메서드
@@ -146,7 +142,14 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         
         //cell.mainLabel.text = target.content
         cell.typeLabel.text = target.type.rawValue
-        cell.dateLabel.text = "생성 날짜: \(formatDateWithAmPm(date: target.date))"
+        
+        if target.action == .generated {
+            cell.dateLabel.text = "생성 날짜: \(formatDateWithAmPm(date: target.date))"
+        } else {
+            cell.dateLabel.text = "탐지 날짜: \(formatDateWithAmPm(date: target.date))"
+            cell.dateLabel.textColor = .blue
+        }
+
         cell.typeImageView.image = UIImage(named: stringTarget + "32px")
         
         if target.type == .wifi, let wifiInfo = parseWiFiData(target.content) {

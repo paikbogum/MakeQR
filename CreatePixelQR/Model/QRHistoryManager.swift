@@ -50,12 +50,12 @@ class QRHistoryManager {
 
 extension QRHistoryManager {
     // URL 저장
-    func saveURLHistory(url: String) {
+    func saveURLHistory(url: String, act: QRAction) {
         let newHistory = QRHistory(
             id: UUID(),
             type: .url,
             content: url,
-            action: .generated,
+            action: act,
             date: Date()
         )
         saveHistory(item: newHistory)
@@ -63,12 +63,12 @@ extension QRHistoryManager {
     }
 
     // 텍스트 저장
-    func saveTextHistory(text: String) {
+    func saveTextHistory(text: String, act: QRAction) {
         let newHistory = QRHistory(
             id: UUID(),
             type: .text,
             content: text,
-            action: .generated,
+            action: act,
             date: Date()
         )
         saveHistory(item: newHistory)
@@ -76,7 +76,7 @@ extension QRHistoryManager {
     }
 
     // Wi-Fi 저장
-    func saveWiFiHistory(ssid: String, password: String, security: String, isHidden: Bool) {
+    func saveWiFiHistory(ssid: String, password: String, security: String, isHidden: Bool, act: QRAction) {
         let hiddenValue = isHidden ? "1" : "0"
         let wifiContent = "WIFI:S:\(ssid);T:\(security);P:\(password);H:\(hiddenValue);;"
 
@@ -84,7 +84,7 @@ extension QRHistoryManager {
             id: UUID(),
             type: .wifi,
             content: wifiContent,
-            action: .generated,
+            action: act,
             date: Date()
         )
         saveHistory(item: newHistory)
@@ -92,12 +92,12 @@ extension QRHistoryManager {
     }
 
     // 전화번호 저장
-    func savePhoneHistory(phoneNumber: String) {
+    func savePhoneHistory(phoneNumber: String, act: QRAction) {
         let newHistory = QRHistory(
             id: UUID(),
             type: .phone,
             content: phoneNumber,
-            action: .generated,
+            action: act,
             date: Date()
         )
         saveHistory(item: newHistory)

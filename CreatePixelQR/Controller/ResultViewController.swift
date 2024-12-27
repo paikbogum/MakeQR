@@ -55,16 +55,16 @@ class ResultViewController: UIViewController {
         switch qrType {
         case .url(let urlString):
             print("Generating URL QR Code with URL: \(urlString)")
-            qrManager.saveURLHistory(url: urlString)
+            qrManager.saveURLHistory(url: urlString, act: .generated)
         case .wifi(let ssid, let password, let security, let hidden):
             print("Generating Wi-Fi QR Code with SSID: \(ssid), Password: \(password), Security: \(security), Hidden: \(hidden)")
-            qrManager.saveWiFiHistory(ssid: ssid, password: password, security: security, isHidden: hidden)
+            qrManager.saveWiFiHistory(ssid: ssid, password: password, security: security, isHidden: hidden, act: .generated)
         case .phone(let phoneNumber):
             print("Generating Phone QR Code with Number: \(phoneNumber)")
-            qrManager.savePhoneHistory(phoneNumber: phoneNumber)
+            qrManager.savePhoneHistory(phoneNumber: phoneNumber, act: .generated)
         case .text(let text):
             print("Generating Text QR Code with Text: \(text)")
-            qrManager.saveTextHistory(text: text)
+            qrManager.saveTextHistory(text: text, act: .generated)
         }
 
         if let qrCode = qrProcessor.generateQRCode(from: qrType, clearRatio: 0.3, dotImage: nil),

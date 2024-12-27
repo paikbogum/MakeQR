@@ -13,6 +13,8 @@ class QRCameraViewController: UIViewController {
     @IBOutlet var qrCameraView: QRCameraView!
     let halfSizeTransitioningDelegate = HalfSizeTransitioningDelegate()
     
+    
+    
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     var qrCodeFrameView: UIView! // QR 코드 영역 표시
