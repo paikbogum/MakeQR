@@ -10,9 +10,9 @@ import AVFoundation
 
 class QRCameraViewController: UIViewController {
     
+    
     @IBOutlet var qrCameraView: QRCameraView!
     let halfSizeTransitioningDelegate = HalfSizeTransitioningDelegate()
-    
     
     
     var captureSession: AVCaptureSession!
@@ -63,13 +63,17 @@ class QRCameraViewController: UIViewController {
         }
     }
     
-    /*
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if captureSession?.isRunning == true {
-            captureSession.stopRunning()
-        }
-    }*/
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        stopSession() // 탭 이탈 시 세션 정지
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupCamera()
+        setupQRCodeFrame()
+    }
     
     func stopSession() {
         captureSession?.stopRunning()

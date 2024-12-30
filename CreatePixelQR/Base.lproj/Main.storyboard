@@ -122,7 +122,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2354.9618320610684" y="-51.408450704225352"/>
+            <point key="canvasLocation" x="2700" y="-111"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Eza-pR-ksp">
@@ -133,14 +133,35 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="zoT-Q0-TrB" kind="relationship" relationship="rootViewController" id="k4r-rI-rer"/>
+                        <segue destination="SkN-J8-quW" kind="relationship" relationship="rootViewController" id="IwA-FH-nJO"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F5V-EH-ncK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-132" y="-51"/>
+            <point key="canvasLocation" x="-1711" y="-22"/>
         </scene>
-        <!--Main View Controller-->
+        <!--Tab Bar Controller-->
+        <scene sceneID="2Xm-KD-iYY">
+            <objects>
+                <tabBarController id="SkN-J8-quW" customClass="TabBarController" customModule="CreatePixelQR" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="zQA-6o-Ci9"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Dkq-JL-t51">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="c4F-Cm-jK7" kind="relationship" relationship="viewControllers" id="P1S-eA-t3F"/>
+                        <segue destination="zoT-Q0-TrB" kind="relationship" relationship="viewControllers" id="YzL-bw-w6h"/>
+                        <segue destination="Qb8-3j-nci" kind="relationship" relationship="viewControllers" id="1X8-L9-fJC"/>
+                        <segue destination="5at-vF-yYi" kind="relationship" relationship="viewControllers" id="9ph-9g-isR"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xzk-I9-CuA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-779" y="-23"/>
+        </scene>
+        <!--QR 만들기-->
         <scene sceneID="P7Q-28-k3c">
             <objects>
                 <viewController storyboardIdentifier="MainViewController" id="zoT-Q0-TrB" customClass="MainViewController" customModule="CreatePixelQR" customModuleProvider="target" sceneMemberID="viewController">
@@ -149,7 +170,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ebr-an-SPa">
-                                <rect key="frame" x="10" y="103" width="373" height="695"/>
+                                <rect key="frame" x="10" y="103" width="373" height="646"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iUo-zD-aox">
                                         <rect key="frame" x="10" y="200" width="353" height="40"/>
@@ -183,58 +204,15 @@
                                             </collectionViewCell>
                                         </cells>
                                     </collectionView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jnt-aU-QGt">
-                                        <rect key="frame" x="60" y="270" width="253" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="eML-r8-pwn"/>
-                                        </constraints>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="바로 만들기"/>
-                                        <connections>
-                                            <action selector="nextButtonTapped:" destination="zoT-Q0-TrB" eventType="touchUpInside" id="Ke5-hP-jUT"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gYh-LS-Ulr">
-                                        <rect key="frame" x="60" y="340" width="253" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="FfG-h8-2GK"/>
-                                        </constraints>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="QR 카메라"/>
-                                        <connections>
-                                            <action selector="qrCameraButtonTapped:" destination="zoT-Q0-TrB" eventType="touchUpInside" id="lg7-U1-NgA"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eUs-1J-eGK">
-                                        <rect key="frame" x="323" y="10" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="aZV-mk-yUB"/>
-                                            <constraint firstAttribute="height" constant="40" id="eOa-Uq-U6J"/>
-                                        </constraints>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="gearshape.fill" catalog="system"/>
-                                        <connections>
-                                            <action selector="settingButtonTapped:" destination="zoT-Q0-TrB" eventType="touchUpInside" id="JgE-f6-6fH"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="eUs-1J-eGK" firstAttribute="top" secondItem="ebr-an-SPa" secondAttribute="top" constant="10" id="3jR-zL-YNa"/>
                                     <constraint firstAttribute="trailing" secondItem="ZOg-fe-Kgf" secondAttribute="trailing" constant="20" id="3uO-7n-yrL"/>
-                                    <constraint firstAttribute="trailing" secondItem="gYh-LS-Ulr" secondAttribute="trailing" constant="60" id="9Hm-Bu-qs1"/>
                                     <constraint firstItem="iUo-zD-aox" firstAttribute="leading" secondItem="ebr-an-SPa" secondAttribute="leading" constant="10" id="J0c-ku-9is"/>
-                                    <constraint firstItem="gYh-LS-Ulr" firstAttribute="top" secondItem="jnt-aU-QGt" secondAttribute="bottom" constant="20" id="Mrc-SD-s2X"/>
-                                    <constraint firstItem="jnt-aU-QGt" firstAttribute="top" secondItem="iUo-zD-aox" secondAttribute="bottom" constant="30" id="SNo-Ah-Pdm"/>
                                     <constraint firstItem="ZOg-fe-Kgf" firstAttribute="leading" secondItem="ebr-an-SPa" secondAttribute="leading" constant="20" id="UX3-0r-OpA"/>
                                     <constraint firstAttribute="trailing" secondItem="iUo-zD-aox" secondAttribute="trailing" constant="10" id="WHA-sk-DaS"/>
-                                    <constraint firstItem="jnt-aU-QGt" firstAttribute="leading" secondItem="ebr-an-SPa" secondAttribute="leading" constant="60" id="Yba-ef-HAu"/>
-                                    <constraint firstAttribute="trailing" secondItem="eUs-1J-eGK" secondAttribute="trailing" constant="10" id="crb-L9-WEp"/>
-                                    <constraint firstItem="gYh-LS-Ulr" firstAttribute="leading" secondItem="ebr-an-SPa" secondAttribute="leading" constant="60" id="da7-ZG-A1K"/>
                                     <constraint firstItem="ZOg-fe-Kgf" firstAttribute="top" secondItem="iUo-zD-aox" secondAttribute="bottom" constant="30" id="rYl-aa-j1J"/>
-                                    <constraint firstAttribute="trailing" secondItem="jnt-aU-QGt" secondAttribute="trailing" constant="60" id="uvA-Cc-vE1"/>
                                     <constraint firstItem="iUo-zD-aox" firstAttribute="top" secondItem="ebr-an-SPa" secondAttribute="top" constant="200" id="wY8-v2-Tja"/>
-                                    <constraint firstItem="jnt-aU-QGt" firstAttribute="centerX" secondItem="ebr-an-SPa" secondAttribute="centerX" id="zuq-hI-Kzh"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -249,21 +227,21 @@
                         <connections>
                             <outlet property="mainCollectionView" destination="ZOg-fe-Kgf" id="XIm-Pf-IPO"/>
                             <outlet property="mainLabelTopConstraint" destination="wY8-v2-Tja" id="KFJ-8m-8qb"/>
-                            <outlet property="nextButton" destination="jnt-aU-QGt" id="eVV-wh-oH4"/>
-                            <outlet property="qrCameraButton" destination="gYh-LS-Ulr" id="uDw-08-Brc"/>
                             <outlet property="topContainerLabel" destination="iUo-zD-aox" id="Wa5-db-YSs"/>
                             <outlet property="topContainerView" destination="ebr-an-SPa" id="sGr-OL-SKE"/>
                         </connections>
                     </view>
+                    <tabBarItem key="tabBarItem" title="QR 만들기" id="D2v-62-0GO">
+                        <imageReference key="image" image="qrcode" catalog="system" symbolScale="medium"/>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" id="l8H-ie-t1z"/>
                     <connections>
-                        <outlet property="cameraButtonTopConstraint" destination="Mrc-SD-s2X" id="hlx-y6-1jq"/>
                         <outlet property="mainView" destination="x5x-FE-tPi" id="gdd-iv-utn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lea-Eu-9LF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="629.7709923664122" y="-51.408450704225352"/>
+            <point key="canvasLocation" x="-1529" y="802"/>
         </scene>
         <!--MakeQR View Controller-->
         <scene sceneID="BgT-FI-uue">
@@ -452,7 +430,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lUV-uL-k92" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1462" y="-51"/>
+            <point key="canvasLocation" x="459" y="-110"/>
         </scene>
         <!--Pop View Controller-->
         <scene sceneID="nR5-wI-lWC">
@@ -566,9 +544,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gbp-6X-JM7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-77.099236641221367" y="642.25352112676057"/>
+            <point key="canvasLocation" x="1938" y="-111"/>
         </scene>
-        <!--History View Controller-->
+        <!--기록-->
         <scene sceneID="OFS-pY-8qk">
             <objects>
                 <viewController storyboardIdentifier="HistoryViewController" id="Qb8-3j-nci" customClass="HistoryViewController" customModule="CreatePixelQR" customModuleProvider="target" sceneMemberID="viewController">
@@ -577,7 +555,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eBo-Ru-lXZ">
-                                <rect key="frame" x="0.0" y="170" width="393" height="638"/>
+                                <rect key="frame" x="0.0" y="214" width="393" height="545"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HistoryTableViewCell" id="L3u-ka-WzZ">
@@ -591,7 +569,7 @@
                                 </prototypes>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="GnX-bm-ryx">
-                                <rect key="frame" x="40" y="99" width="313" height="32"/>
+                                <rect key="frame" x="40" y="143" width="313" height="32"/>
                                 <segments>
                                     <segment title="Entire"/>
                                     <segment title="Wi-Fi"/>
@@ -620,15 +598,36 @@
                             <outlet property="historyTableView" destination="eBo-Ru-lXZ" id="foG-M1-AMB"/>
                         </connections>
                     </view>
+                    <tabBarItem key="tabBarItem" title="기록" id="60c-JS-d7i">
+                        <imageReference key="image" image="clock" catalog="system" symbolScale="medium"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="historyView" destination="9uk-U0-C5u" id="WTW-zQ-dfP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wuW-bo-gcl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="680" y="629"/>
+            <point key="canvasLocation" x="127" y="787"/>
         </scene>
-        <!--Camera View Controller-->
+        <!--환경설정-->
+        <scene sceneID="q1a-b0-rsQ">
+            <objects>
+                <viewController id="5at-vF-yYi" customClass="SettingViewController" customModule="CreatePixelQR" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uwI-vn-O5i">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Fml-aO-GRx"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="환경설정" id="z3b-Me-5Cd">
+                        <imageReference key="image" image="gearshape" catalog="system" symbolScale="medium"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E3E-PT-RQg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="915" y="786"/>
+        </scene>
+        <!--QR 스캐너-->
         <scene sceneID="nBU-Se-Ht6">
             <objects>
                 <viewController storyboardIdentifier="QRCameraViewController" id="c4F-Cm-jK7" customClass="QRCameraViewController" customModule="CreatePixelQR" customModuleProvider="target" sceneMemberID="viewController">
@@ -636,16 +635,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jlt-oc-UTE">
-                                <rect key="frame" x="0.0" y="79" width="393" height="539"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Qd-Lk-M2T">
-                                <rect key="frame" x="175.66666666666666" y="678" width="42" height="21"/>
+                                <rect key="frame" x="175.66666666666666" y="629" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jlt-oc-UTE">
+                                <rect key="frame" x="0.0" y="123" width="393" height="446"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="buD-yw-f08"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -662,13 +661,16 @@
                             <outlet property="infoLabel" destination="3Qd-Lk-M2T" id="5ru-FV-PBF"/>
                         </connections>
                     </view>
+                    <tabBarItem key="tabBarItem" title="QR 스캐너" id="WE9-Na-GDZ">
+                        <imageReference key="image" image="qrcode.viewfinder" catalog="system" symbolScale="medium"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="qrCameraView" destination="xyc-7j-7XH" id="09w-k5-Bzv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bye-CX-fwa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="630" y="-699"/>
+            <point key="canvasLocation" x="-695" y="801"/>
         </scene>
         <!--Make Wifi View Controller-->
         <scene sceneID="tRy-87-h52">
@@ -940,16 +942,19 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HvX-Wr-Qpv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1474.0458015267175" y="597.18309859154931"/>
+            <point key="canvasLocation" x="1205" y="-111"/>
         </scene>
     </scenes>
     <resources>
         <image name="arrowshape.turn.up.right.fill" catalog="system" width="128" height="104"/>
         <image name="checkmark.circle" catalog="system" width="128" height="123"/>
-        <image name="gearshape.fill" catalog="system" width="128" height="123"/>
+        <image name="clock" catalog="system" width="128" height="123"/>
+        <image name="gearshape" catalog="system" width="128" height="123"/>
         <image name="message.fill" catalog="system" width="128" height="114"/>
         <image name="photo.badge.plus.fill" catalog="system" width="128" height="97"/>
         <image name="plus.square.dashed" catalog="system" width="128" height="114"/>
+        <image name="qrcode" catalog="system" width="128" height="114"/>
+        <image name="qrcode.viewfinder" catalog="system" width="128" height="115"/>
         <image name="square.and.arrow.down" catalog="system" width="112" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -14,6 +14,7 @@
 		B770DE9A2CEF387D005D9EC1 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B770DE992CEF387D005D9EC1 /* Base */; };
 		B770DE9C2CEF3880005D9EC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B770DE9B2CEF3880005D9EC1 /* Assets.xcassets */; };
 		B770DE9F2CEF3880005D9EC1 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B770DE9E2CEF3880005D9EC1 /* Base */; };
+		B7ADAFFC2D22867C005D18B7 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ADAFFB2D22867C005D18B7 /* SettingViewController.swift */; };
 		B7C774062CF2443700BEE6EC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C774052CF2443700BEE6EC /* MainViewController.swift */; };
 		B7C774082CF2445900BEE6EC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C774072CF2445900BEE6EC /* MainView.swift */; };
 		B7C7740B2CF3485C00BEE6EC /* MainCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7C7740A2CF3485C00BEE6EC /* MainCollectionViewCell.xib */; };
@@ -42,6 +43,7 @@
 		B7C774462D12F1C900BEE6EC /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C774442D12F1C900BEE6EC /* HistoryTableViewCell.swift */; };
 		B7C774472D12F1C900BEE6EC /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7C774452D12F1C900BEE6EC /* HistoryTableViewCell.xib */; };
 		B7C774492D12F63C00BEE6EC /* QRHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C774482D12F63C00BEE6EC /* QRHistoryManager.swift */; };
+		B7C7744B2D22802B00BEE6EC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C7744A2D22802B00BEE6EC /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,7 @@
 		B770DE9B2CEF3880005D9EC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B770DE9E2CEF3880005D9EC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B770DEA02CEF3880005D9EC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B7ADAFFB2D22867C005D18B7 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		B7C774052CF2443700BEE6EC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B7C774072CF2445900BEE6EC /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		B7C774092CF3485C00BEE6EC /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -80,6 +83,7 @@
 		B7C774442D12F1C900BEE6EC /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		B7C774452D12F1C900BEE6EC /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
 		B7C774482D12F63C00BEE6EC /* QRHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRHistoryManager.swift; sourceTree = "<group>"; };
+		B7C7744A2D22802B00BEE6EC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		DD725FF5B3CC8559AB7C90C3 /* Pods-CreatePixelQR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CreatePixelQR.release.xcconfig"; path = "Target Support Files/Pods-CreatePixelQR/Pods-CreatePixelQR.release.xcconfig"; sourceTree = "<group>"; };
 		DF1DEF68069B85814361CD16 /* Pods-CreatePixelQR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CreatePixelQR.debug.xcconfig"; path = "Target Support Files/Pods-CreatePixelQR/Pods-CreatePixelQR.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -175,6 +179,7 @@
 		B7C774042CF243F200BEE6EC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B7C7744A2D22802B00BEE6EC /* TabBarController.swift */,
 				B7C774052CF2443700BEE6EC /* MainViewController.swift */,
 				B7C774382D0C353F00BEE6EC /* HalfSizePresentationController.swift */,
 				B7C774322D0C292800BEE6EC /* QRCameraViewController.swift */,
@@ -183,6 +188,7 @@
 				B7C774202D01B10C00BEE6EC /* MakeWifiViewController.swift */,
 				B770DE962CEF387D005D9EC1 /* ResultViewController.swift */,
 				B7C7743D2D12F11F00BEE6EC /* HistoryViewController.swift */,
+				B7ADAFFB2D22867C005D18B7 /* SettingViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -341,6 +347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B770DE972CEF387D005D9EC1 /* ResultViewController.swift in Sources */,
+				B7C7744B2D22802B00BEE6EC /* TabBarController.swift in Sources */,
 				B7C7740C2CF3485C00BEE6EC /* MainCollectionViewCell.swift in Sources */,
 				B7C774212D01B10C00BEE6EC /* MakeWifiViewController.swift in Sources */,
 				B7C7741D2CFC7DFD00BEE6EC /* CustomColor.swift in Sources */,
@@ -362,6 +369,7 @@
 				B7C774232D01B11A00BEE6EC /* MakeWifiView.swift in Sources */,
 				B7C774392D0C353F00BEE6EC /* HalfSizePresentationController.swift in Sources */,
 				B7C7743C2D12F02600BEE6EC /* QRHistory.swift in Sources */,
+				B7ADAFFC2D22867C005D18B7 /* SettingViewController.swift in Sources */,
 				B7C774492D12F63C00BEE6EC /* QRHistoryManager.swift in Sources */,
 				B7C774102CF34F9D00BEE6EC /* MakeQRView.swift in Sources */,
 				B7C7741B2CF5CABB00BEE6EC /* QRProcessor.swift in Sources */,

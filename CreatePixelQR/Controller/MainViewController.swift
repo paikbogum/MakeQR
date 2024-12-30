@@ -17,7 +17,7 @@ class MainViewController: UIViewController {
     let cellName = "MainCollectionViewCell"
     let cellReuseIdentifier = "MainCollectionViewCell"
     
-    let categoryList: [(String, String)] =  [("wifi", "Wi-Fi를 QR코드로 생성"), ("url", "URL을 QR코드로 생성"), ("text", "텍스트를 QR코드로 생성"), ("phone", "전화번호를 QR코드로 생성")]
+    let categoryList: [(String, String)] =  [("wifi", "Wi-Fi로 QR코드 만들기"), ("url", "URL로 QR코드 만들기"), ("text", "텍스트로 QR코드 만들기"), ("phone", "전화번호로 QR코드 만들기")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,9 +40,9 @@ class MainViewController: UIViewController {
         mainView.mainCollectionView.dataSource = self
     }
     
+    /*
     @IBAction func nextButtonTapped(_ sender: UIButton) {
         mainView.nextButton.isHidden = true
-        mainView.qrCameraButton.isHidden = false
         // UILabel 애니메이션
         UIView.animate(withDuration: 0.5, animations: {
             self.mainView.mainLabelTopConstraint.constant = 60 // Top Constraint 변경
@@ -57,20 +57,13 @@ class MainViewController: UIViewController {
         })
     }
     
-    @IBAction func qrCameraButtonTapped(_ sender: UIButton) {
-        guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "QRCameraViewController") as? QRCameraViewController else { return }
-        
-        //nextVC.categoryCase = destination
-        self.navigationController?.pushViewController(nextVC, animated: true)
-    }
-    
     @IBAction func settingButtonTapped(_ sender: UIButton) {
         guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "HistoryViewController") as? HistoryViewController else { return }
         
         //nextVC.categoryCase = destination
         self.navigationController?.pushViewController(nextVC, animated: true)
         
-    }
+    }*/
     
     
 }

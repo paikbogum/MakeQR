@@ -215,8 +215,6 @@ class QRPopViewController: UIViewController {
             // "연결" 버튼 추가
             let connectAction = UIAlertAction(title: "연결", style: .default) { _ in
                 self.connectToWiFi(ssid: wifiInfo.ssid, password: wifiInfo.password, security: wifiInfo.security, isHidden: wifiInfo.hidden)
-                
-              
             }
             alert.addAction(connectAction)
             
