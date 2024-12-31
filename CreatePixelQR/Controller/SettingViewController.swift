@@ -9,7 +9,11 @@ import UIKit
 
 class SettingViewController: UIViewController {
     
+    @IBOutlet var settingView: SettingView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        settingView.setUI()
     }
 }

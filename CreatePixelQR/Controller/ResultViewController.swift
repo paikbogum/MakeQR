@@ -27,7 +27,7 @@ class ResultViewController: UIViewController {
         resultView.setUI()
         makeQRResult()
         resultView.showLottieAnimationWithLabel(text: "QR코드를 생성 중입니다...")
-        
+    
         // 5초 후 애니메이션과 레이블 제거
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             self.resultView.removeLottieAnimationAndLabel()

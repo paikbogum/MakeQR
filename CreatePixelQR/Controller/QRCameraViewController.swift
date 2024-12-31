@@ -31,7 +31,6 @@ class QRCameraViewController: UIViewController {
         stopSession()
     }
     
-    
     func qrCodeDetected(_ code: String) {
         print("QR 코드 감지: \(code)")
         
@@ -73,6 +72,7 @@ class QRCameraViewController: UIViewController {
         
         setupCamera()
         setupQRCodeFrame()
+        showToast(message: "QR코드를 화면 중앙에 맞춰주세요!")
     }
     
     func stopSession() {
@@ -165,5 +165,34 @@ extension QRCameraViewController: AVCaptureMetadataOutputObjectsDelegate, AVCapt
             qrCodeFrameView.isHidden = true
         }
     }
+    
+    func showToast(message: String, duration: TimeInterval = 2.0) {
+        let toastLabel = UILabel()
+        toastLabel.text = message
+        toastLabel.textAlignment = .center
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        toastLabel.textColor = .white
+        toastLabel.font = UIFont.systemFont(ofSize: 14)
+        toastLabel.layer.cornerRadius = 10
+        toastLabel.clipsToBounds = true
+
+        let toastWidth: CGFloat = UIScreen.main.bounds.width * 0.8
+        let toastHeight: CGFloat = 50
+        toastLabel.frame = CGRect(
+            x: (UIScreen.main.bounds.width - toastWidth) / 2,
+            y: UIScreen.main.bounds.height - toastHeight - 150,
+            width: toastWidth,
+            height: toastHeight
+        )
+
+        UIApplication.shared.windows.first?.addSubview(toastLabel)
+
+        UIView.animate(withDuration: 1.0, delay: duration, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: { _ in
+            toastLabel.removeFromSuperview()
+        })
+    }
+    
     
 }

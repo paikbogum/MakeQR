@@ -10,14 +10,12 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    @IBOutlet weak var cameraButtonTopConstraint: NSLayoutConstraint!
-    
     @IBOutlet var mainView: MainView!
     
     let cellName = "MainCollectionViewCell"
     let cellReuseIdentifier = "MainCollectionViewCell"
     
-    let categoryList: [(String, String)] =  [("wifi", "Wi-Fi로 QR코드 만들기"), ("url", "URL로 QR코드 만들기"), ("text", "텍스트로 QR코드 만들기"), ("phone", "전화번호로 QR코드 만들기")]
+    let categoryList: [(String, String)] =  [("Wi-Fi", "Wi-Fi로 QR코드 만들기"), ("URL", "URL로 QR코드 만들기"), ("Text", "텍스트로 QR코드 만들기"), ("Phone", "전화번호로 QR코드 만들기")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,10 +60,7 @@ class MainViewController: UIViewController {
         
         //nextVC.categoryCase = destination
         self.navigationController?.pushViewController(nextVC, animated: true)
-        
     }*/
-    
-    
 }
 
 
@@ -92,7 +87,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         let destination = categoryList[indexPath.row].0
         
-        if destination == "wifi" {
+        if destination == "Wi-Fi" {
             guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MakeWifiViewController") as? MakeWifiViewController else { return }
             
             //nextVC.categoryCase = destination

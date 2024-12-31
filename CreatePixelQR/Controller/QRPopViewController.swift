@@ -21,6 +21,7 @@ class QRPopViewController: UIViewController {
     let qrManager = QRHistoryManager.shared
     
     var updateParentView: (() -> Void)?
+    var isCamera: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +83,7 @@ class QRPopViewController: UIViewController {
     
     // UI 구성
     func setupUI(with data: String, type: QRCase?) {
+    
         qrPopView.resultTypeLabel.text = "QR 코드 타입: \(type?.categoryCase ?? "알 수 없음")"
         
         //qrPopView.resultLabel.text = data
@@ -97,7 +99,10 @@ class QRPopViewController: UIViewController {
                 qrPopView.qrImageView.image = qrcode
             }
             
-            qrManager.saveURLHistory(url: data, act: .scanned)
+            if isCamera {
+                qrManager.saveURLHistory(url: data, act: .scanned)
+            }
+            
             qrPopView.linkButton.setTitle("웹사이트 열기", for: .normal)
             qrPopView.copyButton.setTitle("주소 복사하기", for: .normal)
             
@@ -114,8 +119,10 @@ class QRPopViewController: UIViewController {
                 ) {
                     qrPopView.qrImageView.image = qrCode
                 }
-                
-                qrManager.saveWiFiHistory(ssid: wifiInfo.ssid, password: wifiInfo.password, security: wifiInfo.security, isHidden: wifiInfo.hidden, act: .scanned)
+                if isCamera {
+                    qrManager.saveWiFiHistory(ssid: wifiInfo.ssid, password: wifiInfo.password, security: wifiInfo.security, isHidden: wifiInfo.hidden, act: .scanned)
+                }
+
             } else {
                 print("Wi-Fi 데이터 파싱 실패")
             }
@@ -125,7 +132,10 @@ class QRPopViewController: UIViewController {
                 qrPopView.qrImageView.image = qrCode
             }
             
-            qrManager.savePhoneHistory(phoneNumber: data, act: .scanned)
+            if isCamera {
+                qrManager.savePhoneHistory(phoneNumber: data, act: .scanned)
+            }
+            
             qrPopView.linkButton.setTitle("정보 확인하기", for: .normal)
             qrPopView.copyButton.setTitle("주소 복사하기", for: .normal)
             
@@ -134,7 +144,10 @@ class QRPopViewController: UIViewController {
                 qrPopView.qrImageView.image = qrCode
             }
             
-            qrManager.saveTextHistory(text: data, act: .scanned)
+            if isCamera {
+                qrManager.saveTextHistory(text: data, act: .scanned)
+            }
+ 
             qrPopView.linkButton.setTitle("정보 확인하기", for: .normal)
             qrPopView.copyButton.setTitle("주소 복사하기", for: .normal)
         default:

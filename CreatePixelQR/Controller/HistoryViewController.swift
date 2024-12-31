@@ -10,6 +10,8 @@ import UIKit
 
 class HistoryViewController: UIViewController {
     
+    let halfSizeTransitioningDelegate = HalfSizeTransitioningDelegate()
+    
     let cellName = "HistoryTableViewCell"
     let cellReuseIdentifier = "HistoryTableViewCell"
     
@@ -125,8 +127,6 @@ class HistoryViewController: UIViewController {
          // TableView 갱신
          historyView.historyTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
      }
-    
-    
 }
 
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
@@ -147,10 +147,10 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
             cell.dateLabel.text = "생성 날짜: \(formatDateWithAmPm(date: target.date))"
         } else {
             cell.dateLabel.text = "탐지 날짜: \(formatDateWithAmPm(date: target.date))"
-            cell.dateLabel.textColor = .blue
+            cell.dateLabel.textColor = CustomColor.backgroundColor.color
         }
 
-        cell.typeImageView.image = UIImage(named: stringTarget + "32px")
+        cell.typeImageView.image = UIImage(named: stringTarget + "White32px")
         
         if target.type == .wifi, let wifiInfo = parseWiFiData(target.content) {
             cell.mainLabel.text = """
@@ -167,13 +167,28 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let detailAction = UIContextualAction(style: .normal, title: "자세히 보기") { [weak self] _, _, completionHandler in
+        let target = filteredItems[indexPath.row].type
+        let detailAction = UIContextualAction(style: .normal, title: "QR 만들기") { [weak self] _, _, completionHandler in
             guard let self = self else { return }
-            self.showDetails(for: indexPath.row)
+            //self.showDetails(for: indexPath.row)
+            
+            if target == .wifi {
+                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MakeWifiViewController") as? MakeWifiViewController else { return }
+                
+                //nextVC.categoryCase = destination
+                self.navigationController?.pushViewController(nextVC, animated: true)
+                
+            } else {
+                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MakeQRViewController") as? MakeQRViewController else { return }
+                
+                nextVC.categoryCase = target.rawValue
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+            
             completionHandler(true) // 액션 완료 표시
         }
         detailAction.backgroundColor = .systemBlue
-
+        
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { [weak self] _, _, completionHandler in
             guard let self = self else { return }
             self.deleteItem(at: indexPath.row)
@@ -181,6 +196,19 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         return UISwipeActionsConfiguration(actions: [deleteAction, detailAction])
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let target = filteredItems[indexPath.row]
+        
+        guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "QRPopViewController") as? QRPopViewController else { return }
+        
+        nextVC.receiveData = target.content
+        nextVC.isCamera = false
+        nextVC.modalPresentationStyle = .custom
+        nextVC.transitioningDelegate = halfSizeTransitioningDelegate
+        
+        self.present(nextVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

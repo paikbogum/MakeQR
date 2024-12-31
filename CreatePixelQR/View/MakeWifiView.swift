@@ -74,7 +74,7 @@ class MakeWifiView: UIView {
         secondUIView.layer.borderWidth = 2.0
         secondUIView.layer.borderColor = UIColor.white.cgColor
         
-        secondStepLabel.text = "생성할 QR코드의 URL주소를 입력해주세요"
+        secondStepLabel.text = "생성할 QR코드의 Wi-Fi정보를 입력해주세요"
         secondStepLabel.font = UIFont.boldSystemFont(ofSize: 15)
         secondStepLabel.textColor = .gray
         secondStepButton.tintColor = .gray

@@ -15,6 +15,7 @@
 		B770DE9C2CEF3880005D9EC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B770DE9B2CEF3880005D9EC1 /* Assets.xcassets */; };
 		B770DE9F2CEF3880005D9EC1 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B770DE9E2CEF3880005D9EC1 /* Base */; };
 		B7ADAFFC2D22867C005D18B7 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ADAFFB2D22867C005D18B7 /* SettingViewController.swift */; };
+		B7ADAFFE2D23C794005D18B7 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ADAFFD2D23C794005D18B7 /* SettingView.swift */; };
 		B7C774062CF2443700BEE6EC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C774052CF2443700BEE6EC /* MainViewController.swift */; };
 		B7C774082CF2445900BEE6EC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C774072CF2445900BEE6EC /* MainView.swift */; };
 		B7C7740B2CF3485C00BEE6EC /* MainCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7C7740A2CF3485C00BEE6EC /* MainCollectionViewCell.xib */; };
@@ -57,6 +58,7 @@
 		B770DE9E2CEF3880005D9EC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B770DEA02CEF3880005D9EC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7ADAFFB2D22867C005D18B7 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		B7ADAFFD2D23C794005D18B7 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		B7C774052CF2443700BEE6EC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B7C774072CF2445900BEE6EC /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		B7C774092CF3485C00BEE6EC /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				B7C774222D01B11A00BEE6EC /* MakeWifiView.swift */,
 				B7C774182CF5C76400BEE6EC /* ResultView.swift */,
 				B7C7743F2D12F13F00BEE6EC /* HistoryView.swift */,
+				B7ADAFFD2D23C794005D18B7 /* SettingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				B7C774082CF2445900BEE6EC /* MainView.swift in Sources */,
 				B7C774282D04774900BEE6EC /* KakaoImageShareManager.swift in Sources */,
 				B7C774062CF2443700BEE6EC /* MainViewController.swift in Sources */,
+				B7ADAFFE2D23C794005D18B7 /* SettingView.swift in Sources */,
 				B7C774372D0C2F2E00BEE6EC /* QRPopView.swift in Sources */,
 				B7C7740E2CF34F7900BEE6EC /* MakeQRViewController.swift in Sources */,
 				B7C774462D12F1C900BEE6EC /* HistoryTableViewCell.swift in Sources */,

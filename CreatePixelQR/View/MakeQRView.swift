@@ -45,9 +45,9 @@ class MakeQRView: UIView {
         
         makeQRContainerView.layer.cornerRadius = 8
         makeQRContainerView.clipsToBounds = true
-        makeQRContainerView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
+        makeQRContainerView.backgroundColor = CustomColor.darkModeBackgroundColor.color
         
-        firstUIView.backgroundColor = .white
+        firstUIView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
         firstUIView.layer.cornerRadius = 8
         firstUIView.clipsToBounds = true
         firstUIView.layer.borderWidth = 2.0
@@ -60,11 +60,11 @@ class MakeQRView: UIView {
         firstStepButton.tintColor = .gray
         firstStepButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
         
-        secondUIView.backgroundColor = .white
+        secondUIView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
         secondUIView.layer.cornerRadius = 8
         secondUIView.clipsToBounds = true
         secondUIView.layer.borderWidth = 2.0
-        secondUIView.layer.borderColor = UIColor.white.cgColor
+        secondUIView.layer.borderColor = CustomColor.darkModeDarkGrayColor.color.cgColor
         
         secondStepLabel.text = "생성할 QR코드의 URL주소를 입력해주세요"
         secondStepLabel.font = UIFont.boldSystemFont(ofSize: 15)
@@ -81,8 +81,8 @@ class MakeQRView: UIView {
         selectImageButton.backgroundColor = .lightGray
         
         urlTF.font = UIFont.boldSystemFont(ofSize: 15)
-        urlTF.textColor = .darkGray
-        urlTF.backgroundColor = .white
+        urlTF.textColor = .black
+        urlTF.backgroundColor = CustomColor.backgroundColor.color
         urlTF.layer.cornerRadius = 4
         urlTF.layer.borderColor = UIColor.gray.cgColor
         urlTF.layer.borderWidth = 0.5

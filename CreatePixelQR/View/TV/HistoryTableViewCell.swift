@@ -9,6 +9,7 @@ import UIKit
 
 class HistoryTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var internalView: UIView!
     @IBOutlet weak var typeImageView: UIImageView!
     
     @IBOutlet weak var typeLabel: UILabel!
@@ -25,12 +26,12 @@ class HistoryTableViewCell: UITableViewCell {
     
     private func settingCells() {
         
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
+        internalView.backgroundColor = .clear
         
-        typeLabel.textColor = .black
-        mainLabel.textColor = .black
-        dateLabel.textColor = .black
-        
+        typeLabel.textColor = CustomColor.backgroundColor.color
+        mainLabel.textColor = CustomColor.backgroundColor.color
+        dateLabel.textColor = CustomColor.backgroundColor.color
         
         typeLabel.font = UIFont.boldSystemFont(ofSize: 12)
         mainLabel.font = UIFont.boldSystemFont(ofSize: 12)
