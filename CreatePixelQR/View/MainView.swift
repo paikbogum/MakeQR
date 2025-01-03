@@ -20,6 +20,8 @@ class MainView: UIView {
     @IBOutlet weak var mainCollectionView: UICollectionView!
     @IBOutlet weak var mainLabelTopConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var makeQRButton: UIButton!
+    
     func mainViewUISetting() {
         topContainerView.layer.cornerRadius = 8
         topContainerView.clipsToBounds = true
@@ -41,5 +43,11 @@ class MainView: UIView {
         
         exQRImageView.image = UIImage(named: "QREx")
         
+        makeQRButton.setTitle("QR 만들기", for: .normal)
+        makeQRButton.backgroundColor = CustomColor.caldendarFontColor.color
+        makeQRButton.tintColor = .white
+        
+        makeQRButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        mainCollectionView.isHidden = true
     }
 }

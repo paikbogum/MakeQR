@@ -12,6 +12,8 @@ class MainViewController: UIViewController {
     
     @IBOutlet var mainView: MainView!
     
+    @IBOutlet weak var makeQRButtonTopConstraint: NSLayoutConstraint!
+    
     let cellName = "MainCollectionViewCell"
     let cellReuseIdentifier = "MainCollectionViewCell"
     
@@ -22,7 +24,6 @@ class MainViewController: UIViewController {
 
         mainView.mainViewUISetting()
         registerXib()
-        
         mainView.mainCollectionView.layoutIfNeeded()
         
         if let layout = mainView.mainCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -36,6 +37,20 @@ class MainViewController: UIViewController {
         
         mainView.mainCollectionView.delegate = self
         mainView.mainCollectionView.dataSource = self
+    }
+    
+    @IBAction func makeQRButtonTapped(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.mainView.makeQRButton.isHidden = true
+            self.view.layoutIfNeeded() // 레이아웃 갱신
+        }, completion: { _ in
+            self.makeQRButtonTopConstraint.constant = 10 // Top Constraint 변경
+            // UILabel 애니메이션 완료 후 UICollectionView 애니메이션 실행
+            self.mainView.mainCollectionView.isHidden = false // CollectionView 표시
+            UIView.animate(withDuration: 0.5) {
+                self.mainView.mainCollectionView.alpha = 1 // alpha 값을 서서히 증가
+            }
+        })
     }
     
     /*
@@ -54,6 +69,8 @@ class MainViewController: UIViewController {
             }
         })
     }
+     
+     
     
     @IBAction func settingButtonTapped(_ sender: UIButton) {
         guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "HistoryViewController") as? HistoryViewController else { return }
@@ -62,7 +79,6 @@ class MainViewController: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }*/
 }
-
 
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

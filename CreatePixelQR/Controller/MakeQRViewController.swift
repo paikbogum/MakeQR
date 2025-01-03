@@ -22,6 +22,7 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
     var buttonBool: Bool = false
     
     var categoryCase = ""
+    var receiveData: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +56,12 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
                 ]
             )
         case "Text":
+            if let data = receiveData {
+                makeQRView.urlTF.text = data
+                urlTFBool = true
+                changeStateOfTF()
+                
+            }
             makeQRView.secondStepLabel.text = "생성할 QR코드의 텍스트를 입력해주세요"
             makeQRView.urlTF.attributedPlaceholder = NSAttributedString(
                 string: "ex) 안녕하세요!", // placeholder 텍스트
@@ -174,11 +181,11 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
     
     @IBAction func createButtonTapped(_ sender: UIButton) {
         switch categoryCase {
-        case "url":
+        case "URL":
             checkUrlMethod()
-        case "text":
+        case "Text":
             checkTextMethod()
-        case "phone":
+        case "Phone":
             checkPhoneMethod()
         default:
             break
