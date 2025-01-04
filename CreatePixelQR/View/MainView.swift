@@ -17,10 +17,13 @@ class MainView: UIView {
     
     @IBOutlet weak var topContainerView: UIView!
     @IBOutlet weak var topContainerLabel: UILabel!
-    @IBOutlet weak var mainCollectionView: UICollectionView!
-    @IBOutlet weak var mainLabelTopConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var bottomContainerView: UIView!
+    @IBOutlet weak var mainCollectionView: UICollectionView!
+
     @IBOutlet weak var makeQRButton: UIButton!
+
+    @IBOutlet weak var bottomContainerViewTopSafeContraint: NSLayoutConstraint!
     
     func mainViewUISetting() {
         topContainerView.layer.cornerRadius = 8
@@ -32,6 +35,7 @@ class MainView: UIView {
         topLabel.text = "QR 만들기"
         
         mainCollectionView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
+        mainCollectionView.alpha = 0
         
         self.backgroundColor = CustomColor.darkModeBackgroundColor.color
         
@@ -46,8 +50,16 @@ class MainView: UIView {
         makeQRButton.setTitle("QR 만들기", for: .normal)
         makeQRButton.backgroundColor = CustomColor.caldendarFontColor.color
         makeQRButton.tintColor = .white
+        makeQRButton.layer.cornerRadius = 8
         
         makeQRButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         mainCollectionView.isHidden = true
+        
+        bottomContainerView.clipsToBounds = true
+        bottomContainerView.layer.cornerRadius = 8
+        bottomContainerView.backgroundColor = .clear
+        
+        bottomContainerViewTopSafeContraint.constant = 300
+        
     }
 }

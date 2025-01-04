@@ -28,6 +28,7 @@ class HistoryViewController: UIViewController {
         
         setupEmptyStateView()
         updateEmptyStateVisibility()
+    
         
         print(historyItems.count)
     }

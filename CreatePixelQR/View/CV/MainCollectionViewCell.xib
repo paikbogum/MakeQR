@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,35 +19,53 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TlR-iH-7Ih">
-                        <rect key="frame" x="106" y="10" width="282" height="86"/>
+                        <rect key="frame" x="86" y="0.0" width="236" height="106"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b2S-Qx-Vhz">
-                        <rect key="frame" x="10" y="10" width="86" height="86"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tgg-bA-m9S">
+                        <rect key="frame" x="322" y="25" width="56" height="56"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="b2S-Qx-Vhz" secondAttribute="height" multiplier="1:1" id="x3f-6Q-3Kw"/>
+                            <constraint firstAttribute="width" secondItem="Tgg-bA-m9S" secondAttribute="height" multiplier="1:1" id="bWT-Pf-KiH"/>
+                        </constraints>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal">
+                            <imageReference key="image" image="chevron.right" catalog="system" symbolScale="large"/>
+                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                        </state>
+                    </button>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6jc-d8-lIg">
+                        <rect key="frame" x="20" y="20" width="66" height="66"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="6jc-d8-lIg" secondAttribute="height" multiplier="1:1" id="yqs-3J-dsQ"/>
                         </constraints>
                     </imageView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="TlR-iH-7Ih" firstAttribute="leading" secondItem="b2S-Qx-Vhz" secondAttribute="trailing" constant="10" id="5iT-V7-fdN"/>
-                <constraint firstAttribute="bottom" secondItem="TlR-iH-7Ih" secondAttribute="bottom" constant="10" id="NrI-AH-0VK"/>
-                <constraint firstItem="b2S-Qx-Vhz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="cKS-zF-TSO"/>
-                <constraint firstAttribute="trailing" secondItem="TlR-iH-7Ih" secondAttribute="trailing" constant="10" id="kWf-sJ-i4U"/>
-                <constraint firstAttribute="bottom" secondItem="b2S-Qx-Vhz" secondAttribute="bottom" constant="10" id="sfs-vf-PAj"/>
-                <constraint firstItem="b2S-Qx-Vhz" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="skt-ZL-QUd"/>
-                <constraint firstItem="TlR-iH-7Ih" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="tXb-7f-0vW"/>
+                <constraint firstItem="Tgg-bA-m9S" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="0OR-3h-IBb"/>
+                <constraint firstItem="Tgg-bA-m9S" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="25" id="1Ct-bK-3XA"/>
+                <constraint firstItem="6jc-d8-lIg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="D0L-mQ-B1P"/>
+                <constraint firstAttribute="trailing" secondItem="Tgg-bA-m9S" secondAttribute="trailing" constant="20" id="Kow-l3-BNr"/>
+                <constraint firstAttribute="bottom" secondItem="TlR-iH-7Ih" secondAttribute="bottom" id="NrI-AH-0VK"/>
+                <constraint firstItem="6jc-d8-lIg" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="RIn-ud-bLP"/>
+                <constraint firstItem="6jc-d8-lIg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="jdz-Af-sgc"/>
+                <constraint firstItem="TlR-iH-7Ih" firstAttribute="leading" secondItem="6jc-d8-lIg" secondAttribute="trailing" id="o4N-uS-obO"/>
+                <constraint firstItem="TlR-iH-7Ih" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="tXb-7f-0vW"/>
+                <constraint firstItem="Tgg-bA-m9S" firstAttribute="leading" secondItem="TlR-iH-7Ih" secondAttribute="trailing" id="w6N-Eh-hUU"/>
             </constraints>
             <size key="customSize" width="398" height="106"/>
             <connections>
                 <outlet property="categoryExplainText" destination="TlR-iH-7Ih" id="45C-yG-ygE"/>
-                <outlet property="categoryImageView" destination="b2S-Qx-Vhz" id="gZl-xT-kAb"/>
+                <outlet property="categoryImageView" destination="6jc-d8-lIg" id="iVZ-xR-qm8"/>
             </connections>
-            <point key="canvasLocation" x="329.7709923664122" y="46.478873239436624"/>
+            <point key="canvasLocation" x="241.22137404580153" y="47.183098591549296"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="chevron.right" catalog="system" width="97" height="128"/>
+    </resources>
 </document>
