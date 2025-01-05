@@ -56,6 +56,8 @@ class QRProcessor {
             return "tel:\(phoneNumber)"
         case .text(let text):
             return text
+        case .email(let email):
+            return email
         }
     }
     

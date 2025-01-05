@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class MainViewController: UIViewController {
     
     @IBOutlet var mainView: MainView!
@@ -17,7 +16,8 @@ class MainViewController: UIViewController {
     let cellName = "MainCollectionViewCell"
     let cellReuseIdentifier = "MainCollectionViewCell"
     
-    let categoryList: [(String, String, String)] =  [("Wi-Fi", "Wi-Fi로 QR코드 만들기", "wifiWhite32px"), ("URL", "URL로 QR코드 만들기", "urlWhite32px"), ("Text", "텍스트로 QR코드 만들기", "textWhite32px"), ("Phone", "전화번호로 QR코드 만들기", "phoneWhite32px")]
+    let categoryList: [(String, String, String)] =  [("Wi-Fi", "Wi-Fi로 QR코드 만들기", "wifiWhite32px"), ("URL", "URL로 QR코드 만들기", "urlWhite32px"), ("Text", "텍스트로 QR코드 만들기", "textWhite32px"), ("Phone", "전화번호로 QR코드 만들기", "phoneWhite32px"),("Email", "이메일로 QR코드 만들기", "emailWhite32px")
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,32 +56,6 @@ class MainViewController: UIViewController {
             }
         })
     }
-    
-    /*
-    @IBAction func nextButtonTapped(_ sender: UIButton) {
-        mainView.nextButton.isHidden = true
-        // UILabel 애니메이션
-        UIView.animate(withDuration: 0.5, animations: {
-            self.mainView.mainLabelTopConstraint.constant = 60 // Top Constraint 변경
-            self.cameraButtonTopConstraint.constant = 300
-            self.view.layoutIfNeeded() // 레이아웃 갱신
-        }, completion: { _ in
-            // UILabel 애니메이션 완료 후 UICollectionView 애니메이션 실행
-            self.mainView.mainCollectionView.isHidden = false // CollectionView 표시
-            UIView.animate(withDuration: 0.5) {
-                self.mainView.mainCollectionView.alpha = 1 // alpha 값을 서서히 증가
-            }
-        })
-    }
-     
-     
-    
-    @IBAction func settingButtonTapped(_ sender: UIButton) {
-        guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "HistoryViewController") as? HistoryViewController else { return }
-        
-        //nextVC.categoryCase = destination
-        self.navigationController?.pushViewController(nextVC, animated: true)
-    }*/
 }
 
 

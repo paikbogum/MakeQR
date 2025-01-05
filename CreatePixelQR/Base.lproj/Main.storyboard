@@ -620,9 +620,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eBo-Ru-lXZ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eBo-Ru-lXZ">
                                 <rect key="frame" x="0.0" y="184" width="393" height="585"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HistoryTableViewCell" id="L3u-ka-WzZ">
                                         <rect key="frame" x="0.0" y="50" width="393" height="44.666667938232422"/>
@@ -642,6 +643,7 @@
                                     <segment title="URL"/>
                                     <segment title="Phone"/>
                                     <segment title="Text"/>
+                                    <segment title="Email"/>
                                 </segments>
                                 <connections>
                                     <action selector="caseSegmentControlTapped:" destination="Qb8-3j-nci" eventType="valueChanged" id="u2Q-cv-uTw"/>
@@ -735,14 +737,23 @@
                                     <constraint firstAttribute="height" constant="40" id="pEU-hB-rKJ"/>
                                 </constraints>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9mG-b8-Tkx">
+                                <rect key="frame" x="0.0" y="163" width="393" height="606"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Fml-aO-GRx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="9mG-b8-Tkx" firstAttribute="leading" secondItem="Fml-aO-GRx" secondAttribute="leading" id="2sp-RW-vJw"/>
+                            <constraint firstItem="9mG-b8-Tkx" firstAttribute="top" secondItem="g0s-OC-wt4" secondAttribute="bottom" constant="20" id="6z9-tN-cui"/>
                             <constraint firstItem="g0s-OC-wt4" firstAttribute="leading" secondItem="Fml-aO-GRx" secondAttribute="leading" constant="10" id="Ned-Ur-svl"/>
+                            <constraint firstItem="9mG-b8-Tkx" firstAttribute="trailing" secondItem="Fml-aO-GRx" secondAttribute="trailing" id="j1k-zx-Exb"/>
+                            <constraint firstItem="Fml-aO-GRx" firstAttribute="bottom" secondItem="9mG-b8-Tkx" secondAttribute="bottom" id="orT-ES-JXC"/>
                             <constraint firstItem="g0s-OC-wt4" firstAttribute="top" secondItem="Fml-aO-GRx" secondAttribute="top" id="sq3-cf-4Sg"/>
                         </constraints>
                         <connections>
+                            <outlet property="containerView" destination="9mG-b8-Tkx" id="a6x-Qj-zuD"/>
                             <outlet property="topButton" destination="ZUp-Tn-Gyj" id="ExZ-UX-yND"/>
                             <outlet property="topLabel" destination="yDh-R0-xc2" id="SlA-7Q-79q"/>
                         </connections>
@@ -756,7 +767,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E3E-PT-RQg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="915" y="786"/>
+            <point key="canvasLocation" x="913.74045801526711" y="785.91549295774655"/>
         </scene>
         <!--QR 스캐너-->
         <scene sceneID="nBU-Se-Ht6">

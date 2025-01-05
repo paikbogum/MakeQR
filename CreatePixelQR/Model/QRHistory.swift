@@ -20,6 +20,7 @@ enum QRType: String, Codable {
     case text = "Text"
     case wifi = "Wi-Fi"
     case phone = "Phone"
+    case email = "Email"
 }
 
 enum QRAction: String, Codable {

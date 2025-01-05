@@ -65,6 +65,9 @@ class ResultViewController: UIViewController {
         case .text(let text):
             print("Generating Text QR Code with Text: \(text)")
             qrManager.saveTextHistory(text: text, act: .generated)
+        case .email(let email):
+            print("Generating Text QR Code with email: \(email)")
+            qrManager.saveEmailHistory(email: email, act: .generated)
         }
 
         if let qrCode = qrProcessor.generateQRCode(from: qrType, clearRatio: 0.3, dotImage: nil),

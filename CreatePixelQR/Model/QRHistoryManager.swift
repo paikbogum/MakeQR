@@ -103,6 +103,19 @@ extension QRHistoryManager {
         saveHistory(item: newHistory)
         print("전화번호 히스토리가 저장되었습니다: \(phoneNumber)")
     }
+    
+    // 전화번호 저장
+    func saveEmailHistory(email: String, act: QRAction) {
+        let newHistory = QRHistory(
+            id: UUID(),
+            type: .email,
+            content: email,
+            action: act,
+            date: Date()
+        )
+        saveHistory(item: newHistory)
+        print("이메일 히스토리가 저장되었습니다: \(email)")
+    }
 }
 
 extension QRHistoryManager {
@@ -124,6 +137,10 @@ extension QRHistoryManager {
     // 전화번호 히스토리 로드
     func loadPhoneHistory() -> [QRHistory] {
         return loadHistory().filter { $0.type == .phone }
+    }
+    // 이메일 히스토리 로드
+    func loadEmailHistory() -> [QRHistory] {
+        return loadHistory().filter { $0.type == .email }
     }
 }
 

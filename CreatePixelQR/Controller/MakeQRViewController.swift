@@ -39,6 +39,12 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
     private func changeStateOfCategory() {
         switch categoryCase {
         case "URL":
+            if let data = receiveData {
+                makeQRView.urlTF.text = data
+                urlTFBool = true
+                changeStateOfTF()
+            }
+            
             makeQRView.secondStepLabel.text = "생성할 QR코드의 URL주소를 입력해주세요"
             makeQRView.urlTF.attributedPlaceholder = NSAttributedString(
                 string: "ex) http://", // placeholder 텍스트
@@ -47,14 +53,7 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
                 ]
             )
             makeQRView.urlTF.keyboardType = .URL
-        case "Wi-Fi":
-            makeQRView.secondStepLabel.text = "생성할 QR코드의 WI-FI 이름을 입력해주세요"
-            makeQRView.urlTF.attributedPlaceholder = NSAttributedString(
-                string: "ex) iptime", // placeholder 텍스트
-                attributes: [
-                    .foregroundColor: UIColor.lightGray  // 원하는 색상 지정
-                ]
-            )
+
         case "Text":
             if let data = receiveData {
                 makeQRView.urlTF.text = data
@@ -70,6 +69,12 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
                 ]
             )
         case "Phone":
+            if let data = receiveData {
+                makeQRView.urlTF.text = data
+                urlTFBool = true
+                changeStateOfTF()
+                
+            }
             makeQRView.secondStepLabel.text = "생성할 QR코드의 전화번호를 입력해주세요"
             makeQRView.urlTF.attributedPlaceholder = NSAttributedString(
                 string: "ex) 010xxxxxxxx", // placeholder 텍스트
@@ -77,6 +82,20 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
                     .foregroundColor: UIColor.lightGray // 원하는 색상 지정
                 ]
             )
+        case "Email":
+            if let data = receiveData {
+                makeQRView.urlTF.text = data
+                urlTFBool = true
+                changeStateOfTF()
+            }
+            makeQRView.secondStepLabel.text = "생성할 QR코드의 이메일을 입력해주세요"
+            makeQRView.urlTF.attributedPlaceholder =  NSAttributedString(
+                string: "ex) makeqr@google.com", // placeholder 텍스트
+                attributes: [
+                    .foregroundColor: UIColor.lightGray // 원하는 색상 지정
+                ]
+            )
+            makeQRView.urlTF.keyboardType = .emailAddress
         default:
             break
         }
@@ -178,6 +197,34 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
             }
         }
     }
+    private func checkEmailMethod() {
+        if buttonBool {
+            if let nextVC = storyboard?.instantiateViewController(withIdentifier: "ResultViewController") as? ResultViewController {
+                
+                nextVC.receiveCroppedImage = makeQRView.seletedImageView.image
+                
+                nextVC.qrType = .email(makeQRView.urlTF.text!)
+                //nextVC.receiveUrl = makeQRView.urlTF.text!
+                
+                navigationController?.pushViewController(nextVC, animated: true)
+            }
+        } else {
+            let qrCode = qrProcessor.generateQRCode(from: .email(makeQRView.urlTF.text!), clearRatio: 0.0, dotImage: nil)
+            
+            makeQRView.firstUIView.isHidden = false
+            textContainerBottomConstraint.constant = 330
+            makeQRView.urlTF.isUserInteractionEnabled = false
+            makeQRView.urlTF.textColor = CustomColor.caldendarFontColor.color
+            makeQRView.qrPreviewImageView.image = qrCode
+            
+            urlTFBool = true
+            changeStateOfImage()
+            
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
     
     @IBAction func createButtonTapped(_ sender: UIButton) {
         switch categoryCase {
@@ -187,6 +234,8 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
             checkTextMethod()
         case "Phone":
             checkPhoneMethod()
+        case "Email":
+            checkEmailMethod()
         default:
             break
         }

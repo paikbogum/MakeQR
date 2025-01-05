@@ -17,6 +17,8 @@ class MakeWifiViewController: UIViewController,UITextFieldDelegate, UINavigation
     
     @IBOutlet weak var textContainerBottomConstraint: NSLayoutConstraint!
     
+    var receiveWifiData: String?
+    
     let securityTypes = ["WPA/WPA2", "WEP", "None"]
     let hiddenOptions = ["공개", "숨김"]
     
@@ -36,8 +38,10 @@ class MakeWifiViewController: UIViewController,UITextFieldDelegate, UINavigation
         setupPickerViews()
         setTextfield()
         changeStateOfTF()
+        if let data = receiveWifiData {
+            changeStateOfCategory(data: data)
+        }
         changeCreateButtonState()
-        
     }
     
     private func changeCreateButtonState() {
@@ -52,6 +56,18 @@ class MakeWifiViewController: UIViewController,UITextFieldDelegate, UINavigation
             buttonBool = true
         } else {
             buttonBool = false
+        }
+    }
+    
+    private func changeStateOfCategory(data: String) {
+        if let wifiInfo = parseWiFiData(data) {
+            makeWifiView.wifiNameTF.text = wifiInfo.ssid
+            makeWifiView.wifiPasswordTF.text = wifiInfo.password
+            makeWifiView.wifiSecurityTypeTF.text = wifiInfo.security
+            makeWifiView.wifiHiddenTF.text = wifiInfo.hidden ? hiddenOptions[1] : hiddenOptions[0]
+            
+            urlTFBool = true
+            changeStateOfTF()
         }
     }
      
@@ -209,6 +225,33 @@ class MakeWifiViewController: UIViewController,UITextFieldDelegate, UINavigation
         // 모든 조건을 만족한 경우
         urlTFBool = true
         changeStateOfTF()
+    }
+    
+    func parseWiFiData(_ data: String) -> (ssid: String, password: String, security: String, hidden: Bool)? {
+        guard data.hasPrefix("WIFI:") else { return nil }
+
+        let components = data
+            .replacingOccurrences(of: "WIFI:", with: "")
+            .components(separatedBy: ";")
+
+        var ssid = ""
+        var password = ""
+        var security = "WPA" // 기본값
+        var hidden = false
+
+        for component in components {
+            if component.hasPrefix("S:") {
+                ssid = component.replacingOccurrences(of: "S:", with: "")
+            } else if component.hasPrefix("P:") {
+                password = component.replacingOccurrences(of: "P:", with: "")
+            } else if component.hasPrefix("T:") {
+                security = component.replacingOccurrences(of: "T:", with: "")
+            } else if component.hasPrefix("H:") {
+                hidden = component.replacingOccurrences(of: "H:", with: "") == "true"
+            }
+        }
+
+        return (ssid, password, security, hidden)
     }
 
 }

@@ -95,6 +95,8 @@ class HistoryViewController: UIViewController {
             filteredItems = historyItems.filter { $0.type == .phone }
         case 4:
             filteredItems = historyItems.filter { $0.type == .text }
+        case 5:
+            filteredItems = historyItems.filter { $0.type == .email }
         default:
             filteredItems = []
         }
@@ -209,6 +211,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
             if targetType == .wifi {
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MakeWifiViewController") as? MakeWifiViewController else { return }
                 
+                nextVC.receiveWifiData = target
                 //nextVC.categoryCase = destination
                 self.navigationController?.pushViewController(nextVC, animated: true)
             } else {

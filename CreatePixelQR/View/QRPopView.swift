@@ -27,7 +27,7 @@ class QRPopView: UIView {
         topSmallUIVIew.backgroundColor = .lightGray
         topSmallUIVIew.layer.cornerRadius = 4
         
-        self.backgroundColor = .black
+        self.backgroundColor = CustomColor.darkModeBackgroundColor.color
         
         containerView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
         

@@ -12,7 +12,6 @@ class MainCollectionViewCell: UICollectionViewCell {
    // @IBOutlet weak var containerView: UIView!
 
     @IBOutlet weak var categoryImageView: UIImageView!
-    
     @IBOutlet weak var categoryExplainText: UILabel!
     
     override func awakeFromNib() {

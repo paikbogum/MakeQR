@@ -76,6 +76,9 @@ class QRPopViewController: UIViewController {
         } else if let phoneRegex = try? NSRegularExpression(pattern: "^tel:[0-9]+$", options: []),
                   phoneRegex.firstMatch(in: data, options: [], range: NSRange(location: 0, length: data.count)) != nil {
             return .phone
+        } else if let emailRegex = try? NSRegularExpression(pattern: "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$", options: []),
+                  emailRegex.firstMatch(in: data, options: [], range: NSRange(location: 0, length: data.count)) != nil {
+            return .email
         } else {
             return .text
         }
@@ -83,7 +86,6 @@ class QRPopViewController: UIViewController {
     
     // UI 구성
     func setupUI(with data: String, type: QRCase?) {
-    
         qrPopView.resultTypeLabel.text = "QR 코드 타입: \(type?.categoryCase ?? "알 수 없음")"
         
         //qrPopView.resultLabel.text = data
@@ -150,6 +152,19 @@ class QRPopViewController: UIViewController {
  
             qrPopView.linkButton.setTitle("정보 확인하기", for: .normal)
             qrPopView.copyButton.setTitle("주소 복사하기", for: .normal)
+            
+        case .email:
+            if let qrCode = qrProcessor.generateQRCode(from: .email(data), clearRatio: 0.0, dotImage: nil) {
+                qrPopView.qrImageView.image = qrCode
+            }
+            
+            if isCamera {
+                qrManager.saveEmailHistory(email: data, act: .scanned)
+            }
+ 
+            qrPopView.linkButton.setTitle("정보 확인하기", for: .normal)
+            qrPopView.copyButton.setTitle("이메일 복사하기", for: .normal)
+            
         default:
             break
         }
@@ -194,6 +209,10 @@ class QRPopViewController: UIViewController {
              showWiFiInfo(data)
          case .text:
              showTextAlert(data)
+        
+         case .email:
+            showEmailAlert(data)
+            
          default:
              print("지원되지 않는 타입")
          }
@@ -241,6 +260,10 @@ class QRPopViewController: UIViewController {
     // 텍스트 표시
     func showTextAlert(_ text: String) {
         showAlert(title: "텍스트", message: text)
+    }
+    
+    func showEmailAlert(_ email: String) {
+        showAlert(title: "이메일", message: email)
     }
     
 
@@ -295,7 +318,6 @@ class QRPopViewController: UIViewController {
     
     @IBAction func linkButtonTapped(_ sender: UIButton) {
         guard let data = receiveData else { return }
-
         switch qrCodeType {
         case .url:
             openURL(data)
@@ -309,6 +331,10 @@ class QRPopViewController: UIViewController {
             }
         case .text:
             showTextAlert(data)
+        
+        case .email:
+            showTextAlert(data)
+        
         default:
             print("지원되지 않는 타입")
         }
@@ -316,7 +342,7 @@ class QRPopViewController: UIViewController {
     
     func copyTextToClipboard(from label: String) {
         UIPasteboard.general.string = label // 클립보드에 텍스트 복사
-        showToast(message: "텍스트가 복사되었습니다.")
+        showToast(message: "클립보드에 복사되었습니다.")
     }
     
 
@@ -335,6 +361,8 @@ class QRPopViewController: UIViewController {
                 print("비밀번호 복사 실패")
             }
         case .text:
+            copyTextToClipboard(from: data)
+        case .email:
             copyTextToClipboard(from: data)
         default:
             print("지원되지 않는 타입")

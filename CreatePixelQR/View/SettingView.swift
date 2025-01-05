@@ -13,6 +13,8 @@ class SettingView: UIView {
     
     @IBOutlet weak var topLabel: UILabel!
     
+    @IBOutlet weak var containerView: UIView!
+    
     func setUI() {
         self.backgroundColor = CustomColor.darkModeBackgroundColor.color
         
@@ -21,6 +23,7 @@ class SettingView: UIView {
         topLabel.font = UIFont.boldSystemFont(ofSize: 20)
         topLabel.text = "환경설정"
         
+        containerView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
         
     }
 }
