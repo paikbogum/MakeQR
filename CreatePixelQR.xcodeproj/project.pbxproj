@@ -16,6 +16,8 @@
 		B770DE9F2CEF3880005D9EC1 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B770DE9E2CEF3880005D9EC1 /* Base */; };
 		B7ADAFFC2D22867C005D18B7 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ADAFFB2D22867C005D18B7 /* SettingViewController.swift */; };
 		B7ADAFFE2D23C794005D18B7 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ADAFFD2D23C794005D18B7 /* SettingView.swift */; };
+		B7ADB0002D2B324E005D18B7 /* CustomizingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ADAFFF2D2B324E005D18B7 /* CustomizingViewController.swift */; };
+		B7ADB0022D2B3260005D18B7 /* CustomizingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ADB0012D2B3260005D18B7 /* CustomizingView.swift */; };
 		B7C774062CF2443700BEE6EC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C774052CF2443700BEE6EC /* MainViewController.swift */; };
 		B7C774082CF2445900BEE6EC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C774072CF2445900BEE6EC /* MainView.swift */; };
 		B7C7740B2CF3485C00BEE6EC /* MainCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7C7740A2CF3485C00BEE6EC /* MainCollectionViewCell.xib */; };
@@ -59,6 +61,8 @@
 		B770DEA02CEF3880005D9EC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7ADAFFB2D22867C005D18B7 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		B7ADAFFD2D23C794005D18B7 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		B7ADAFFF2D2B324E005D18B7 /* CustomizingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizingViewController.swift; sourceTree = "<group>"; };
+		B7ADB0012D2B3260005D18B7 /* CustomizingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizingView.swift; sourceTree = "<group>"; };
 		B7C774052CF2443700BEE6EC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B7C774072CF2445900BEE6EC /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		B7C774092CF3485C00BEE6EC /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -172,6 +176,7 @@
 				B7C774302D0C290000BEE6EC /* QRCameraView.swift */,
 				B7C774362D0C2F2E00BEE6EC /* QRPopView.swift */,
 				B7C774222D01B11A00BEE6EC /* MakeWifiView.swift */,
+				B7ADB0012D2B3260005D18B7 /* CustomizingView.swift */,
 				B7C774182CF5C76400BEE6EC /* ResultView.swift */,
 				B7C7743F2D12F13F00BEE6EC /* HistoryView.swift */,
 				B7ADAFFD2D23C794005D18B7 /* SettingView.swift */,
@@ -189,6 +194,7 @@
 				B7C774342D0C2F2200BEE6EC /* QRPopViewController.swift */,
 				B7C7740D2CF34F7900BEE6EC /* MakeQRViewController.swift */,
 				B7C774202D01B10C00BEE6EC /* MakeWifiViewController.swift */,
+				B7ADAFFF2D2B324E005D18B7 /* CustomizingViewController.swift */,
 				B770DE962CEF387D005D9EC1 /* ResultViewController.swift */,
 				B7C7743D2D12F11F00BEE6EC /* HistoryViewController.swift */,
 				B7ADAFFB2D22867C005D18B7 /* SettingViewController.swift */,
@@ -356,6 +362,7 @@
 				B7C7741D2CFC7DFD00BEE6EC /* CustomColor.swift in Sources */,
 				B7C774312D0C290000BEE6EC /* QRCameraView.swift in Sources */,
 				B7C7743E2D12F11F00BEE6EC /* HistoryViewController.swift in Sources */,
+				B7ADB0022D2B3260005D18B7 /* CustomizingView.swift in Sources */,
 				B7C774402D12F13F00BEE6EC /* HistoryView.swift in Sources */,
 				B7C774332D0C292800BEE6EC /* QRCameraViewController.swift in Sources */,
 				B7C774192CF5C76500BEE6EC /* ResultView.swift in Sources */,
@@ -373,6 +380,7 @@
 				B7C774232D01B11A00BEE6EC /* MakeWifiView.swift in Sources */,
 				B7C774392D0C353F00BEE6EC /* HalfSizePresentationController.swift in Sources */,
 				B7C7743C2D12F02600BEE6EC /* QRHistory.swift in Sources */,
+				B7ADB0002D2B324E005D18B7 /* CustomizingViewController.swift in Sources */,
 				B7ADAFFC2D22867C005D18B7 /* SettingViewController.swift in Sources */,
 				B7C774492D12F63C00BEE6EC /* QRHistoryManager.swift in Sources */,
 				B7C774102CF34F9D00BEE6EC /* MakeQRView.swift in Sources */,

@@ -136,7 +136,7 @@ class MakeWifiViewController: UIViewController,UITextFieldDelegate, UINavigation
                 navigationController?.pushViewController(nextVC, animated: true)
             }
         } else {
-            let qrCode = qrProcessor.generateQRCode(from: .wifi(ssid: makeWifiView.wifiNameTF.text!, password: makeWifiView.wifiPasswordTF.text!, security: makeWifiView.wifiSecurityTypeTF.text!, hidden: wifiHiddenBool), clearRatio: 0.0, dotImage: nil)
+            let qrCode = qrProcessor.generateQRCode(from: .wifi(ssid: makeWifiView.wifiNameTF.text!, password: makeWifiView.wifiPasswordTF.text!, security: makeWifiView.wifiSecurityTypeTF.text!, hidden: wifiHiddenBool), clearRatio: 0.0, dotImage: nil, foregroundColor: .black, backgroundColor: .white)
             
             makeWifiView.firstUIView.isHidden = false
             textContainerBottomConstraint.constant = 330

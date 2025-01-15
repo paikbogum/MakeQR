@@ -37,6 +37,9 @@ class MakeQRView: UIView {
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var plusButton: UIButton!
     
+    
+    @IBOutlet weak var customQRButton: UIButton!
+    
     var animationView: LottieAnimationView?
     var loadingLabel: UILabel?
     
@@ -97,6 +100,15 @@ class MakeQRView: UIView {
         
         plusButton.tintColor = .lightGray
         plusButton.isUserInteractionEnabled = false
+        
+        
+        customQRButton.backgroundColor = .lightGray
+        customQRButton.tintColor = .black
+        customQRButton.setTitle("QR 커스터마이징", for: .normal)
+        customQRButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        //customQRButton.setImage(UIImage(systemName: "paintbrush.pointed"), for: .normal)
+        
+        
         
         secondUIView.isHidden = true
     }

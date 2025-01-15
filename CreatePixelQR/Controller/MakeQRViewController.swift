@@ -10,7 +10,18 @@ import Lottie
 import SnapKit
 import Mantis
 
-class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
+class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, CustomizingViewControllerDelegate {
+    
+    func didSendDataBack(_ data: (qrPercent: CGFloat, dotPercent: CGFloat, foregroundCol: UIColor, backgroundCol: UIColor, logoCol: UIColor)) {
+        
+        receiveQRPercent = data.qrPercent
+        receiveDotPercent = data.dotPercent
+        receiveForegroundColor = data.foregroundCol
+        receiveBackgroundColor = data.backgroundCol
+        receiveDotColor = data.logoCol
+        
+        print(data)
+    }
     
     private var qrProcessor = QRProcessor()
     @IBOutlet var makeQRView: MakeQRView!
@@ -24,6 +35,14 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
     var categoryCase = ""
     var receiveData: String?
     
+    var receiveQRPercent: CGFloat = 0.3
+    var receiveDotPercent: CGFloat = 0.95
+    
+    var receiveForegroundColor: UIColor = .black
+    var receiveBackgroundColor: UIColor = .white
+    var receiveDotColor: UIColor = .black
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -119,10 +138,16 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
                     
                     nextVC.qrType = .url(makeQRView.urlTF.text!)
                     
+                    nextVC.receiveQRPercent = self.receiveQRPercent
+                    nextVC.receiveDotPercent = self.receiveDotPercent
+                    nextVC.receiveForegroundColor = self.receiveForegroundColor
+                    nextVC.receiveBackgroundColor = self.receiveBackgroundColor
+                    nextVC.receiveDotColor = self.receiveDotColor
+                    
                     navigationController?.pushViewController(nextVC, animated: true)
                 }
             } else {
-                let qrCode = qrProcessor.generateQRCode(from: .url(makeQRView.urlTF.text!), clearRatio: 0.0, dotImage: nil)
+                let qrCode = qrProcessor.generateQRCode(from: .url(makeQRView.urlTF.text!), clearRatio: 0.0, dotImage: nil, foregroundColor: .black, backgroundColor: .white)
                 
                 makeQRView.firstUIView.isHidden = false
                 textContainerBottomConstraint.constant = 330
@@ -149,10 +174,16 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
                 nextVC.qrType = .text(makeQRView.urlTF.text!)
                 //nextVC.receiveUrl = makeQRView.urlTF.text!
                 
+                nextVC.receiveQRPercent = self.receiveQRPercent
+                nextVC.receiveDotPercent = self.receiveDotPercent
+                nextVC.receiveForegroundColor = self.receiveForegroundColor
+                nextVC.receiveBackgroundColor = self.receiveBackgroundColor
+                nextVC.receiveDotColor = self.receiveDotColor
+                
                 navigationController?.pushViewController(nextVC, animated: true)
             }
         } else {
-            let qrCode = qrProcessor.generateQRCode(from: .text(makeQRView.urlTF.text!), clearRatio: 0.0, dotImage: nil)
+            let qrCode = qrProcessor.generateQRCode(from: .text(makeQRView.urlTF.text!), clearRatio: 0.0, dotImage: nil, foregroundColor: .black, backgroundColor: .white)
             
             makeQRView.firstUIView.isHidden = false
             textContainerBottomConstraint.constant = 330
@@ -177,11 +208,16 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
                 
                 nextVC.qrType = .phone(makeQRView.urlTF.text!)
                 //nextVC.receiveUrl = makeQRView.urlTF.text!
+                nextVC.receiveQRPercent = self.receiveQRPercent
+                nextVC.receiveDotPercent = self.receiveDotPercent
+                nextVC.receiveForegroundColor = self.receiveForegroundColor
+                nextVC.receiveBackgroundColor = self.receiveBackgroundColor
+                nextVC.receiveDotColor = self.receiveDotColor
                 
                 navigationController?.pushViewController(nextVC, animated: true)
             }
         } else {
-            let qrCode = qrProcessor.generateQRCode(from: .phone(makeQRView.urlTF.text!), clearRatio: 0.0, dotImage: nil)
+            let qrCode = qrProcessor.generateQRCode(from: .phone(makeQRView.urlTF.text!), clearRatio: 0.0, dotImage: nil, foregroundColor: .black, backgroundColor: .white)
             
             makeQRView.firstUIView.isHidden = false
             textContainerBottomConstraint.constant = 330
@@ -205,11 +241,16 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
                 
                 nextVC.qrType = .email(makeQRView.urlTF.text!)
                 //nextVC.receiveUrl = makeQRView.urlTF.text!
+                nextVC.receiveQRPercent = self.receiveQRPercent
+                nextVC.receiveDotPercent = self.receiveDotPercent
+                nextVC.receiveForegroundColor = self.receiveForegroundColor
+                nextVC.receiveBackgroundColor = self.receiveBackgroundColor
+                nextVC.receiveDotColor = self.receiveDotColor
                 
                 navigationController?.pushViewController(nextVC, animated: true)
             }
         } else {
-            let qrCode = qrProcessor.generateQRCode(from: .email(makeQRView.urlTF.text!), clearRatio: 0.0, dotImage: nil)
+            let qrCode = qrProcessor.generateQRCode(from: .email(makeQRView.urlTF.text!), clearRatio: 0.0, dotImage: nil, foregroundColor: .black, backgroundColor: .white)
             
             makeQRView.firstUIView.isHidden = false
             textContainerBottomConstraint.constant = 330
@@ -223,6 +264,15 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
             UIView.animate(withDuration: 0.3) {
                 self.view.layoutIfNeeded()
             }
+        }
+    }
+    
+    @IBAction func customQRButtonTapped(_ sender: UIButton) {
+        if let nextVC = storyboard?.instantiateViewController(withIdentifier: "CustomizingViewController") as? CustomizingViewController {
+     
+            nextVC.delegate = self
+            
+            navigationController?.pushViewController(nextVC, animated: true)
         }
     }
     
@@ -326,7 +376,6 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
         makeQRView.urlTF.delegate = self
         makeQRView.urlTF.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
     }
-    
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         makeQRView.urlTF.resignFirstResponder()

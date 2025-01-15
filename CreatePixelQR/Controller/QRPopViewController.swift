@@ -97,7 +97,7 @@ class QRPopViewController: UIViewController {
         
         switch type {
         case .url:
-            if let qrcode = qrProcessor.generateQRCode(from: .url(data), clearRatio: 0.0, dotImage: nil) {
+            if let qrcode = qrProcessor.generateQRCode(from: .url(data), clearRatio: 0.0, dotImage: nil, foregroundColor: .black, backgroundColor: .white) {
                 qrPopView.qrImageView.image = qrcode
             }
             
@@ -117,7 +117,9 @@ class QRPopViewController: UIViewController {
                 if let qrCode = qrProcessor.generateQRCode(
                     from: .wifi(ssid: wifiInfo.ssid, password: wifiInfo.password, security: wifiInfo.security, hidden: wifiInfo.hidden),
                     clearRatio: 0.0,
-                    dotImage: nil
+                    dotImage: nil,
+                    foregroundColor: .black,
+                    backgroundColor: .white
                 ) {
                     qrPopView.qrImageView.image = qrCode
                 }
@@ -130,7 +132,7 @@ class QRPopViewController: UIViewController {
             }
             
         case .phone:
-            if let qrCode = qrProcessor.generateQRCode(from: .phone(data), clearRatio: 0.0, dotImage: nil) {
+            if let qrCode = qrProcessor.generateQRCode(from: .phone(data), clearRatio: 0.0, dotImage: nil, foregroundColor: .black, backgroundColor: .white) {
                 qrPopView.qrImageView.image = qrCode
             }
             
@@ -142,7 +144,7 @@ class QRPopViewController: UIViewController {
             qrPopView.copyButton.setTitle("주소 복사하기", for: .normal)
             
         case .text:
-            if let qrCode = qrProcessor.generateQRCode(from: .text(data), clearRatio: 0.0, dotImage: nil) {
+            if let qrCode = qrProcessor.generateQRCode(from: .text(data), clearRatio: 0.0, dotImage: nil, foregroundColor: .black, backgroundColor: .white) {
                 qrPopView.qrImageView.image = qrCode
             }
             
@@ -154,7 +156,7 @@ class QRPopViewController: UIViewController {
             qrPopView.copyButton.setTitle("주소 복사하기", for: .normal)
             
         case .email:
-            if let qrCode = qrProcessor.generateQRCode(from: .email(data), clearRatio: 0.0, dotImage: nil) {
+            if let qrCode = qrProcessor.generateQRCode(from: .email(data), clearRatio: 0.0, dotImage: nil, foregroundColor: .black, backgroundColor: .white) {
                 qrPopView.qrImageView.image = qrCode
             }
             
