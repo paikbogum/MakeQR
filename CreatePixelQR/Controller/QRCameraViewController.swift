@@ -10,6 +10,7 @@ import AVFoundation
 
 class QRCameraViewController: UIViewController {
     
+    private let overlayView = QRFrameOverlayView()
     
     @IBOutlet var qrCameraView: QRCameraView!
     let halfSizeTransitioningDelegate = HalfSizeTransitioningDelegate()
@@ -78,6 +79,33 @@ class QRCameraViewController: UIViewController {
         captureSession?.stopRunning()
         captureSession = nil
     }
+    
+    private func setupQRFrameOverlay() {
+        guard let previewLayer = previewLayer else { return }
+        
+        // 중앙에 위치한 네모 프레임의 크기 설정
+        let frameWidth: CGFloat = 200
+        let frameHeight: CGFloat = 200
+        
+        // previewLayer의 중심 좌표 계산
+        let centerX = previewLayer.frame.midX
+        let centerY = previewLayer.frame.midY
+        
+        // overlayView 설정
+        overlayView.frame = CGRect(
+            x: centerX - (frameWidth / 2),
+            y: centerY - (frameHeight / 2),
+            width: frameWidth,
+            height: frameHeight
+        )
+        overlayView.backgroundColor = .clear // 배경 투명
+        
+        // 카메라 뷰 상단에 추가
+        qrCameraView.cameraView.addSubview(overlayView)
+        
+        // overlayView를 가장 위로 설정
+        qrCameraView.cameraView.bringSubviewToFront(overlayView)
+    }
 }
 
 extension QRCameraViewController: AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate  {
@@ -126,6 +154,8 @@ extension QRCameraViewController: AVCaptureMetadataOutputObjectsDelegate, AVCapt
         DispatchQueue.global(qos: .background).async {
             self.captureSession.startRunning()
         }
+        
+        setupQRFrameOverlay()
     }
     
     func setupQRCodeFrame() {

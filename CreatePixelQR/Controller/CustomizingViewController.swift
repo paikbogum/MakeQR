@@ -7,7 +7,7 @@
 import UIKit
 
 protocol CustomizingViewControllerDelegate: AnyObject {
-    func didSendDataBack(_ data: (qrPercent: CGFloat, dotPercent: CGFloat, foregroundCol: UIColor, backgroundCol: UIColor, logoCol: UIColor))
+    func didSendDataBack(_ data: (qrPercent: CGFloat, dotVal: Int, foregroundCol: UIColor, backgroundCol: UIColor, logoCol: UIColor))
 }
 
 class CustomizingViewController: UIViewController {
@@ -20,7 +20,7 @@ class CustomizingViewController: UIViewController {
     var selectedLogoColor: UIColor = .black
     
     var selectedQRPercent: CGFloat = 0.3
-    var selectedDotPercent: CGFloat = 0.95
+    var selectedDotVal: Int = 20
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,13 +65,13 @@ class CustomizingViewController: UIViewController {
     }
     
     @IBAction func submitButtonTapped(_ sender: UIButton) {
-        delegate?.didSendDataBack((selectedQRPercent, selectedDotPercent, selectedForegroundColor, selectedBackgroundColor, selectedLogoColor))
+        delegate?.didSendDataBack((selectedQRPercent, selectedDotVal, selectedForegroundColor, selectedBackgroundColor, selectedLogoColor))
         navigationController?.popViewController(animated: true)
     }
     
     @IBAction func logoDotSliderValueChanged(_ sender: UISlider) {
-        customizingView.logoDotValueLabel.text = String(Int(sender.value)) + "%"
-        selectedDotPercent = CGFloat(sender.value / 100)
+        customizingView.logoDotValueLabel.text = String(Int(sender.value)) + "X" + "  (\(String(Int(sender.value) * 50)) * \(String(Int(sender.value) * 50)) Pixel)"
+        selectedDotVal = Int(sender.value)
     }
     
     @IBAction func qrSetSliderValueChanged(_ sender: UISlider) {

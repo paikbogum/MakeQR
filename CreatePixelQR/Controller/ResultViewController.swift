@@ -22,7 +22,7 @@ class ResultViewController: UIViewController {
     private var qrProcessor = QRProcessor()
     
     var receiveQRPercent: CGFloat = 0.3
-    var receiveDotPercent: CGFloat = 0.95
+    var receiveDotVal: Int = 20
     var receiveForegroundColor: UIColor = .black
     var receiveBackgroundColor: UIColor = .white
     var receiveDotColor: UIColor = .black
@@ -34,7 +34,7 @@ class ResultViewController: UIViewController {
         makeQRResult()
         resultView.showLottieAnimationWithLabel(text: "QR코드를 생성 중입니다...")
         
-        print("qrPercent: \((receiveQRPercent * 100).rounded() / 100)", "dotPercent: \((receiveDotPercent * 100).rounded() / 100)", "foreground: \(receiveForegroundColor)", "background: \(receiveBackgroundColor)", "DotColor: \(receiveDotColor)")
+        print("qrPercent: \((receiveQRPercent * 100).rounded() / 100)", "dotVal: \(receiveDotVal)", "foreground: \(receiveForegroundColor)", "background: \(receiveBackgroundColor)", "DotColor: \(receiveDotColor)")
     
         // 5초 후 애니메이션과 레이블 제거
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
@@ -79,8 +79,8 @@ class ResultViewController: UIViewController {
         }
         
         if let qrCode = qrProcessor.generateQRCode(from: qrType, clearRatio: (receiveQRPercent * 100).rounded() / 100, dotImage: nil, foregroundColor: receiveForegroundColor, backgroundColor: receiveBackgroundColor),
-           let dotImage = qrProcessor.processImageToDots(image: croppedImage, gridSize: 50, cellSize: 50, dotFore: receiveDotColor.cgColor, dotBack: receiveBackgroundColor.cgColor),
-           let finalQRCode = qrProcessor.overlayDotImageOnClearedQRCode(qrCode: qrCode, dotImage: dotImage, clearRatio: (receiveQRPercent * 100).rounded() / 100, dotRatio: (receiveDotPercent * 100).rounded() / 100, backgroundColor: receiveBackgroundColor) {
+           let dotImage = qrProcessor.processImageToDots(image: croppedImage, gridSize: 50, cellSize: receiveDotVal, dotFore: receiveDotColor.cgColor, dotBack: receiveBackgroundColor.cgColor),
+           let finalQRCode = qrProcessor.overlayDotImageOnClearedQRCode(qrCode: qrCode, dotImage: dotImage, clearRatio: (receiveQRPercent * 100).rounded() / 100, dotRatio: CGFloat(0.95), backgroundColor: receiveBackgroundColor) {
             
             // 결과를 이미지 뷰에 표시
             resultView.resultImageView.image = finalQRCode

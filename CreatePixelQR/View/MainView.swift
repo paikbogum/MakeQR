@@ -26,7 +26,7 @@ class MainView: UIView {
     @IBOutlet weak var bottomContainerViewTopSafeContraint: NSLayoutConstraint!
     
     func mainViewUISetting() {
-        topContainerView.layer.cornerRadius = 8
+        topContainerView.layer.cornerRadius = 16
         topContainerView.clipsToBounds = true
         
         topButton.tintColor = CustomColor.backgroundColor.color
@@ -56,7 +56,7 @@ class MainView: UIView {
         mainCollectionView.isHidden = true
         
         bottomContainerView.clipsToBounds = true
-        bottomContainerView.layer.cornerRadius = 8
+        bottomContainerView.layer.cornerRadius = 16
         bottomContainerView.backgroundColor = .clear
         
         bottomContainerViewTopSafeContraint.constant = 300

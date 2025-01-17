@@ -12,10 +12,10 @@ import Mantis
 
 class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, CustomizingViewControllerDelegate {
     
-    func didSendDataBack(_ data: (qrPercent: CGFloat, dotPercent: CGFloat, foregroundCol: UIColor, backgroundCol: UIColor, logoCol: UIColor)) {
+    func didSendDataBack(_ data: (qrPercent: CGFloat, dotVal: Int, foregroundCol: UIColor, backgroundCol: UIColor, logoCol: UIColor)) {
         
         receiveQRPercent = data.qrPercent
-        receiveDotPercent = data.dotPercent
+        receiveDotVal = data.dotVal
         receiveForegroundColor = data.foregroundCol
         receiveBackgroundColor = data.backgroundCol
         receiveDotColor = data.logoCol
@@ -36,7 +36,7 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
     var receiveData: String?
     
     var receiveQRPercent: CGFloat = 0.3
-    var receiveDotPercent: CGFloat = 0.95
+    var receiveDotVal: Int = 20
     
     var receiveForegroundColor: UIColor = .black
     var receiveBackgroundColor: UIColor = .white
@@ -139,7 +139,7 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
                     nextVC.qrType = .url(makeQRView.urlTF.text!)
                     
                     nextVC.receiveQRPercent = self.receiveQRPercent
-                    nextVC.receiveDotPercent = self.receiveDotPercent
+                    nextVC.receiveDotVal = self.receiveDotVal
                     nextVC.receiveForegroundColor = self.receiveForegroundColor
                     nextVC.receiveBackgroundColor = self.receiveBackgroundColor
                     nextVC.receiveDotColor = self.receiveDotColor
@@ -175,7 +175,7 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
                 //nextVC.receiveUrl = makeQRView.urlTF.text!
                 
                 nextVC.receiveQRPercent = self.receiveQRPercent
-                nextVC.receiveDotPercent = self.receiveDotPercent
+                nextVC.receiveDotVal = self.receiveDotVal
                 nextVC.receiveForegroundColor = self.receiveForegroundColor
                 nextVC.receiveBackgroundColor = self.receiveBackgroundColor
                 nextVC.receiveDotColor = self.receiveDotColor
@@ -209,7 +209,7 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
                 nextVC.qrType = .phone(makeQRView.urlTF.text!)
                 //nextVC.receiveUrl = makeQRView.urlTF.text!
                 nextVC.receiveQRPercent = self.receiveQRPercent
-                nextVC.receiveDotPercent = self.receiveDotPercent
+                nextVC.receiveDotVal = self.receiveDotVal
                 nextVC.receiveForegroundColor = self.receiveForegroundColor
                 nextVC.receiveBackgroundColor = self.receiveBackgroundColor
                 nextVC.receiveDotColor = self.receiveDotColor
@@ -242,7 +242,7 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
                 nextVC.qrType = .email(makeQRView.urlTF.text!)
                 //nextVC.receiveUrl = makeQRView.urlTF.text!
                 nextVC.receiveQRPercent = self.receiveQRPercent
-                nextVC.receiveDotPercent = self.receiveDotPercent
+                nextVC.receiveDotVal = self.receiveDotVal
                 nextVC.receiveForegroundColor = self.receiveForegroundColor
                 nextVC.receiveBackgroundColor = self.receiveBackgroundColor
                 nextVC.receiveDotColor = self.receiveDotColor

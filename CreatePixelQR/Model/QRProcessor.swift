@@ -230,8 +230,6 @@ class QRProcessor {
         
         UIGraphicsBeginImageContext(imageSize)
         guard let context = UIGraphicsGetCurrentContext() else { return nil }
-        let black = UIColor.black.cgColor
-        let white = UIColor.white.cgColor
         context.setFillColor(dotBack)
         context.fill(CGRect(origin: .zero, size: imageSize))
         

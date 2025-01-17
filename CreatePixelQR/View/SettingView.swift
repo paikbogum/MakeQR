@@ -18,11 +18,13 @@ class SettingView: UIView {
     func setUI() {
         self.backgroundColor = CustomColor.darkModeBackgroundColor.color
         
+        
         topButton.tintColor = CustomColor.backgroundColor.color
         topLabel.textColor = CustomColor.backgroundColor.color
         topLabel.font = UIFont.boldSystemFont(ofSize: 20)
         topLabel.text = "환경설정"
         
+        containerView.layer.cornerRadius = 16
         containerView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
         
     }

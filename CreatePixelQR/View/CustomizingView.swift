@@ -46,7 +46,6 @@ class CustomizingView: UIView {
     
     @IBOutlet weak var logoSetView: UIView!
     
-    
     @IBOutlet weak var logoDotLabel: UILabel!
     
     @IBOutlet weak var logoDotSlider: UISlider!
@@ -56,7 +55,6 @@ class CustomizingView: UIView {
     @IBOutlet weak var logoValueMin: UILabel!
     
     @IBOutlet weak var logoValueMax: UILabel!
-    
     
     @IBOutlet weak var submitButton: UIButton!
     
@@ -101,21 +99,20 @@ class CustomizingView: UIView {
         logoDotLabel.textColor = CustomColor.backgroundColor.color
         
         logoDotSlider.tintColor = CustomColor.backgroundColor.color
-        logoDotSlider.minimumValue = 0.0
-        logoDotSlider.maximumValue = 100.0
-        logoDotSlider.value = 95.0
+        logoDotSlider.minimumValue = 5
+        logoDotSlider.maximumValue = 20
+        logoDotSlider.value = 20
         
-        logoValueMax.text = String(Int(logoDotSlider.maximumValue)) + "%"
+        logoValueMax.text = String(Int(logoDotSlider.maximumValue)) + "X"
         logoValueMax.textColor = CustomColor.backgroundColor.color
         logoValueMin.textColor = CustomColor.backgroundColor.color
         
-        logoValueMin.text = String(Int(logoDotSlider.minimumValue)) + "%"
+        logoValueMin.text = String(Int(logoDotSlider.minimumValue)) + "X"
         logoValueMax.font = UIFont.boldSystemFont(ofSize: 10)
         logoValueMin.font = UIFont.boldSystemFont(ofSize: 10)
         
-        
         logoDotValueLabel.font = UIFont.boldSystemFont(ofSize: 14)
-        logoDotValueLabel.text = String(Int(logoDotSlider.value)) + "%"
+        logoDotValueLabel.text = String(Int(logoDotSlider.value)) + "X" + "  (\(String(Int(logoDotSlider.value) * 50)) * \(String(Int(logoDotSlider.value) * 50)) Pixel)"
         logoDotValueLabel.textColor = .white
     }
     
@@ -145,12 +142,14 @@ class CustomizingView: UIView {
         qrSetValueMin.font = UIFont.boldSystemFont(ofSize: 10)
         
         qrSetValueLabel.font = UIFont.boldSystemFont(ofSize: 14)
-        qrSetValueLabel.text = String(Int(qrSetSlider.value)) + "%"
+        qrSetValueLabel.text = String(Int(qrSetSlider.value * 100)) + "%"
         qrSetValueLabel.textColor = .white
         
         submitButton.tintColor = CustomColor.backgroundColor.color
         submitButton.backgroundColor = .systemBlue
-        
+        submitButton.layer.cornerRadius = 8
+        submitButton.setTitle("저장", for: .normal)
+        submitButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
     }
     
 }
