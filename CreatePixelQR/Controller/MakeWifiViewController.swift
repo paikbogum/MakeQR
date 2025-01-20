@@ -9,7 +9,15 @@ import Foundation
 import UIKit
 import Mantis
 
-class MakeWifiViewController: UIViewController,UITextFieldDelegate, UINavigationControllerDelegate  {
+class MakeWifiViewController: UIViewController,UITextFieldDelegate, UINavigationControllerDelegate, CustomizingViewControllerDelegate  {
+    
+    func didSendDataBack(_ data: (qrPercent: CGFloat, dotVal: Int, foregroundCol: UIColor, backgroundCol: UIColor, logoCol: UIColor)) {
+        receiveQRPercent = data.qrPercent
+        receiveDotVal = data.dotVal
+        receiveForegroundColor = data.foregroundCol
+        receiveBackgroundColor = data.backgroundCol
+        receiveDotColor = data.logoCol
+    }
     
     private var qrProcessor = QRProcessor()
     
@@ -25,11 +33,17 @@ class MakeWifiViewController: UIViewController,UITextFieldDelegate, UINavigation
     var selectedImageBool: Bool = false
     var urlTFBool: Bool = false
     var buttonBool: Bool = false
-    
     var wifiHiddenBool: Bool = false
     
     var selectedSecurityType: String?
     var selectedHiddenOption: String?
+    
+    var receiveQRPercent: CGFloat = 0.3
+    var receiveDotVal: Int = 20
+    
+    var receiveForegroundColor: UIColor = .black
+    var receiveBackgroundColor: UIColor = .white
+    var receiveDotColor: UIColor = .black
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,7 +95,7 @@ class MakeWifiViewController: UIViewController,UITextFieldDelegate, UINavigation
             makeWifiView.createButton.isEnabled = true
             
         } else {
-            makeWifiView.secondUIView.layer.borderColor = UIColor.white.cgColor
+            makeWifiView.secondUIView.layer.borderColor = CustomColor.darkModeDarkGrayColor.color.cgColor
             makeWifiView.secondStepButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
             makeWifiView.secondStepButton.tintColor = .lightGray
             makeWifiView.secondStepLabel.textColor = .lightGray
@@ -113,7 +127,7 @@ class MakeWifiViewController: UIViewController,UITextFieldDelegate, UINavigation
             
         } else {
             makeWifiView.selectImageButton.alpha = 1
-            makeWifiView.firstUIView.layer.borderColor = UIColor.white.cgColor
+            makeWifiView.firstUIView.layer.borderColor = CustomColor.darkModeDarkGrayColor.color.cgColor
             makeWifiView.firstStepButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
             makeWifiView.firstStepButton.tintColor = .lightGray
             makeWifiView.firstStepLabel.textColor = .lightGray
@@ -125,14 +139,29 @@ class MakeWifiViewController: UIViewController,UITextFieldDelegate, UINavigation
         changeCreateButtonState()
     }
     
+    @IBAction func customQRButtonTapped(_ sender: UIButton) {
+        if let nextVC = storyboard?.instantiateViewController(withIdentifier: "CustomizingViewController") as? CustomizingViewController {
+     
+            nextVC.delegate = self
+            
+            navigationController?.pushViewController(nextVC, animated: true)
+        }
+    }
     
     
     @IBAction func createButtonTapped(_ sender: UIButton) {
         if buttonBool {
             if let nextVC = storyboard?.instantiateViewController(withIdentifier: "ResultViewController") as? ResultViewController {
                 nextVC.receiveCroppedImage = makeWifiView.selectedImageView.image
-               // nextVC.receiveUrl = makeWifiView.urlTF.text!
+
                 nextVC.qrType = .wifi(ssid: makeWifiView.wifiNameTF.text!, password: makeWifiView.wifiPasswordTF.text!, security: makeWifiView.wifiSecurityTypeTF.text!, hidden: wifiHiddenBool)
+                
+                nextVC.receiveQRPercent = self.receiveQRPercent
+                nextVC.receiveDotVal = self.receiveDotVal
+                nextVC.receiveForegroundColor = self.receiveForegroundColor
+                nextVC.receiveBackgroundColor = self.receiveBackgroundColor
+                nextVC.receiveDotColor = self.receiveDotColor
+                
                 navigationController?.pushViewController(nextVC, animated: true)
             }
         } else {

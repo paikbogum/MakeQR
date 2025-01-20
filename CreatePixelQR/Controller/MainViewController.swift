@@ -25,6 +25,7 @@ class MainViewController: UIViewController {
         mainView.mainViewUISetting()
         registerXib()
         mainView.mainCollectionView.layoutIfNeeded()
+
         
         if let layout = mainView.mainCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.estimatedItemSize = .zero
@@ -53,11 +54,11 @@ class MainViewController: UIViewController {
             self.mainView.mainCollectionView.isHidden = false // CollectionView 표시
             UIView.animate(withDuration: 1.0) {
                 self.mainView.mainCollectionView.alpha = 1 // alpha 값을 서서히 증가
+
             }
         })
     }
 }
-
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -97,15 +98,17 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let totalSpacing: CGFloat = 20 // Safe Area 여백 (20 + 20)
+        let totalSpacing: CGFloat = 40 // Safe Area 여백 (20 + 20)
         let width = collectionView.safeAreaLayoutGuide.layoutFrame.width - totalSpacing
-        let height: CGFloat = 60 // 셀 높이 (원하는 대로 설정)
-        
+
+        // 셀의 개수에 따라 높이 계산
+        let height: CGFloat = 70
+
         return CGSize(width: width, height: height)
     }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return 20
     }
 }

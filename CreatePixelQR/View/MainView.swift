@@ -48,11 +48,11 @@ class MainView: UIView {
         exQRImageView.image = UIImage(named: "QREx")
         
         makeQRButton.setTitle("QR 만들기", for: .normal)
-        makeQRButton.backgroundColor = CustomColor.caldendarFontColor.color
-        makeQRButton.tintColor = .white
-        makeQRButton.layer.cornerRadius = 8
+        makeQRButton.backgroundColor = CustomColor.backgroundColor.color
+        makeQRButton.tintColor = .black
+        makeQRButton.layer.cornerRadius = 4
         
-        makeQRButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        makeQRButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         mainCollectionView.isHidden = true
         
         bottomContainerView.clipsToBounds = true

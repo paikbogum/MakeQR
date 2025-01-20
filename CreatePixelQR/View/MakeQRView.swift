@@ -37,7 +37,6 @@ class MakeQRView: UIView {
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var plusButton: UIButton!
     
-    
     @IBOutlet weak var customQRButton: UIButton!
     
     var animationView: LottieAnimationView?
@@ -92,7 +91,7 @@ class MakeQRView: UIView {
         urlTF.returnKeyType = .done
         
         createButton.setTitle("STEP 1", for: .normal)
-        createButton.tintColor = .white
+        createButton.tintColor = .black
         createButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         
         createButton.clipsToBounds = true
@@ -106,10 +105,7 @@ class MakeQRView: UIView {
         customQRButton.tintColor = .black
         customQRButton.setTitle("QR 커스터마이징", for: .normal)
         customQRButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-        //customQRButton.setImage(UIImage(systemName: "paintbrush.pointed"), for: .normal)
-        
-        
-        
+    
         secondUIView.isHidden = true
     }
     
