@@ -114,6 +114,13 @@ extension QRCameraViewController: AVCaptureMetadataOutputObjectsDelegate, AVCapt
         // 카메라 세션 초기화
         captureSession = AVCaptureSession()
         
+        // ✅ 후면 카메라 사용 여부 확인
+        let isRearCameraEnabled = UserDefaults.standard.bool(forKey: UserSettings.useRearCamera)
+        
+        // ✅ 후면 또는 전면 카메라 설정
+        let cameraDevice = isRearCameraEnabled ? AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
+        : AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
+        
         // 디바이스 설정 (카메라)
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
             print("카메라를 사용할 수 없습니다.")
@@ -180,9 +187,15 @@ extension QRCameraViewController: AVCaptureMetadataOutputObjectsDelegate, AVCapt
             qrCodeFrameView.isHidden = false
             
             if let stringValue = readableObject.stringValue {
-                AudioServicesPlaySystemSound(kSystemSoundID_Vibrate) // 진동
-                
                 print("QR 코드 감지: \(stringValue)")
+                
+                // ✅ 진동 설정 여부 확인 후 실행
+                let isVibrationEnabled = UserDefaults.standard.bool(forKey: "enableVibrationOnScan")
+                if isVibrationEnabled {
+                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate) // 📳 진동 발생
+                }
+                
+                
                 captureSession.stopRunning()
                 // QR 이미지 추출
                 
@@ -204,7 +217,7 @@ extension QRCameraViewController: AVCaptureMetadataOutputObjectsDelegate, AVCapt
         toastLabel.font = UIFont.systemFont(ofSize: 14)
         toastLabel.layer.cornerRadius = 10
         toastLabel.clipsToBounds = true
-
+        
         let toastWidth: CGFloat = UIScreen.main.bounds.width * 0.8
         let toastHeight: CGFloat = 50
         toastLabel.frame = CGRect(
@@ -213,9 +226,9 @@ extension QRCameraViewController: AVCaptureMetadataOutputObjectsDelegate, AVCapt
             width: toastWidth,
             height: toastHeight
         )
-
+        
         UIApplication.shared.windows.first?.addSubview(toastLabel)
-
+        
         UIView.animate(withDuration: 1.0, delay: duration, options: .curveEaseOut, animations: {
             toastLabel.alpha = 0.0
         }, completion: { _ in

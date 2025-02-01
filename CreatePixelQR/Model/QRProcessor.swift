@@ -43,22 +43,9 @@ class QRProcessor {
         // QR 코드에 색상 적용
         guard let coloredQRCode = applyColors(to: scaledImage, foregroundColor: foregroundColor, backgroundColor: backgroundColor) else { return nil }
         
-        
-        /*
-        let context = CIContext()
-        guard let cgImage = context.createCGImage(scaledImage, from: scaledImage.extent) else { return nil }
-        
-        
-        
-        let qrCodeImage = UIImage(cgImage: cgImage)*/
 
-        guard let clearedQRCode = clearCenterOfQRCode(qrCode: coloredQRCode, clearRatio: clearRatio) else { return nil }
-        
-        /*
-        if let dotImage = dotImage {
-            return overlayDotImageOnClearedQRCode(qrCode: clearedQRCode, dotImage: dotImage, clearRatio: clearRatio, dotRatio: 0.6, dotColor: dotColor)
-        }*/
-        
+        guard let clearedQRCode = clearCenterOfQRCode(qrCode: coloredQRCode, clearRatio: clearRatio, clearBackgroundColor: backgroundColor) else { return nil }
+
 
         return clearedQRCode
     }
@@ -95,7 +82,7 @@ class QRProcessor {
     }
     
     // 중앙 비우기
-    func clearCenterOfQRCode(qrCode: UIImage, clearRatio: CGFloat) -> UIImage? {
+    func clearCenterOfQRCode(qrCode: UIImage, clearRatio: CGFloat, clearBackgroundColor: UIColor) -> UIImage? {
         guard let cgImage = qrCode.cgImage else { return nil }
         
         let qrSize = CGSize(width: cgImage.width, height: cgImage.height)
@@ -107,7 +94,7 @@ class QRProcessor {
         
         guard let context = UIGraphicsGetCurrentContext() else { return nil }
         //여기가 배경색인듯
-        context.setFillColor(UIColor.white.cgColor)
+        context.setFillColor(clearBackgroundColor.cgColor)
         context.fill(CGRect(origin: clearOrigin, size: clearSize))
         
         let clearedQRCode = UIGraphicsGetImageFromCurrentImageContext()
@@ -117,7 +104,7 @@ class QRProcessor {
     
     // 도트 이미지 합성
     func overlayDotImageOnClearedQRCode(qrCode: UIImage, dotImage: UIImage, clearRatio: CGFloat, dotRatio: CGFloat, backgroundColor: UIColor) -> UIImage? {
-        guard let clearedQRCode = clearCenterOfQRCode(qrCode: qrCode, clearRatio: clearRatio) else { return nil }
+        guard let clearedQRCode = clearCenterOfQRCode(qrCode: qrCode, clearRatio: clearRatio, clearBackgroundColor: backgroundColor) else { return nil }
         
         let qrSize = qrCode.size
         let clearSize = CGSize(width: qrSize.width * clearRatio, height: qrSize.height * clearRatio)

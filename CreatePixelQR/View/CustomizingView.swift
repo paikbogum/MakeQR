@@ -101,7 +101,7 @@ class CustomizingView: UIView {
         logoDotSlider.tintColor = CustomColor.backgroundColor.color
         logoDotSlider.minimumValue = 5
         logoDotSlider.maximumValue = 20
-        logoDotSlider.value = 20
+        //logoDotSlider.value = 20
         
         logoValueMax.text = String(Int(logoDotSlider.maximumValue)) + "X"
         logoValueMax.textColor = CustomColor.backgroundColor.color
@@ -112,7 +112,7 @@ class CustomizingView: UIView {
         logoValueMin.font = UIFont.boldSystemFont(ofSize: 10)
         
         logoDotValueLabel.font = UIFont.boldSystemFont(ofSize: 14)
-        logoDotValueLabel.text = String(Int(logoDotSlider.value)) + "X" + "  (\(String(Int(logoDotSlider.value) * 50)) * \(String(Int(logoDotSlider.value) * 50)) Pixel)"
+        //logoDotValueLabel.text = String(Int(logoDotSlider.value)) + "X" + "  (\(String(Int(logoDotSlider.value) * 50)) * \(String(Int(logoDotSlider.value) * 50)) Pixel)"
         logoDotValueLabel.textColor = .white
     }
     
@@ -131,7 +131,7 @@ class CustomizingView: UIView {
         qrSetSlider.tintColor = CustomColor.backgroundColor.color
         qrSetSlider.minimumValue = 0.05
         qrSetSlider.maximumValue = 0.3
-        qrSetSlider.value = 0.3
+        //qrSetSlider.value = 0.3
         
         qrSetValueMax.text = String(Int(qrSetSlider.maximumValue * 100)) + "%"
         qrSetValueMax.textColor = CustomColor.backgroundColor.color
@@ -142,7 +142,7 @@ class CustomizingView: UIView {
         qrSetValueMin.font = UIFont.boldSystemFont(ofSize: 10)
         
         qrSetValueLabel.font = UIFont.boldSystemFont(ofSize: 14)
-        qrSetValueLabel.text = String(Int(qrSetSlider.value * 100)) + "%"
+        //qrSetValueLabel.text = String(Int(qrSetSlider.value * 100)) + "%"
         qrSetValueLabel.textColor = .white
         
         submitButton.tintColor = CustomColor.backgroundColor.color

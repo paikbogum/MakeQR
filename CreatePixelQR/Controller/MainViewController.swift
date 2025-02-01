@@ -25,7 +25,6 @@ class MainViewController: UIViewController {
         mainView.mainViewUISetting()
         registerXib()
         mainView.mainCollectionView.layoutIfNeeded()
-
         
         if let layout = mainView.mainCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.estimatedItemSize = .zero
@@ -53,7 +52,7 @@ class MainViewController: UIViewController {
             // UILabel 애니메이션 완료 후 UICollectionView 애니메이션 실행
             self.mainView.mainCollectionView.isHidden = false // CollectionView 표시
             UIView.animate(withDuration: 1.0) {
-                self.mainView.mainCollectionView.alpha = 1 // alpha 값을 서서히 증가
+                self.mainView.mainCollectionView.alpha = 1  // alpha 값을 서서히 증가
 
             }
         })
@@ -106,7 +105,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
         return CGSize(width: width, height: height)
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 20

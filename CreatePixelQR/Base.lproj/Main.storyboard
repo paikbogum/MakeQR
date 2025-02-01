@@ -309,7 +309,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lea-Eu-9LF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1529.0076335877861" y="801.4084507042254"/>
+            <point key="canvasLocation" x="-1854" y="786"/>
         </scene>
         <!--MakeQR View Controller-->
         <scene sceneID="BgT-FI-uue">
@@ -720,7 +720,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wuW-bo-gcl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="127" y="787"/>
+            <point key="canvasLocation" x="-503" y="786"/>
         </scene>
         <!--환경설정-->
         <scene sceneID="q1a-b0-rsQ">
@@ -771,6 +771,9 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="kKm-Fv-nQB"/>
                                                 </constraints>
+                                                <connections>
+                                                    <action selector="vibrateSwitchToggle:" destination="5at-vF-yYi" eventType="valueChanged" id="qTL-uP-zfR"/>
+                                                </connections>
                                             </switch>
                                         </subviews>
                                         <constraints>
@@ -791,6 +794,9 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="nRT-Oh-VYD"/>
                                                 </constraints>
+                                                <connections>
+                                                    <action selector="detectHistorySwitchToggle:" destination="5at-vF-yYi" eventType="valueChanged" id="S1w-ft-Uci"/>
+                                                </connections>
                                             </switch>
                                         </subviews>
                                         <constraints>
@@ -811,6 +817,9 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="w7c-0j-aHW"/>
                                                 </constraints>
+                                                <connections>
+                                                    <action selector="makeHistorySwitchToggle:" destination="5at-vF-yYi" eventType="valueChanged" id="DKG-vg-WQk"/>
+                                                </connections>
                                             </switch>
                                         </subviews>
                                         <constraints>
@@ -831,6 +840,9 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="qNr-7l-t41"/>
                                                 </constraints>
+                                                <connections>
+                                                    <action selector="backCameraSwitchToggle:" destination="5at-vF-yYi" eventType="valueChanged" id="bnR-uQ-Wee"/>
+                                                </connections>
                                             </switch>
                                         </subviews>
                                         <constraints>
@@ -844,6 +856,9 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="303" height="30"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="Button"/>
+                                                <connections>
+                                                    <action selector="customizingQRButtonTapped:" destination="5at-vF-yYi" eventType="touchUpInside" id="TkO-NC-jHR"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6in-vE-pgS">
                                                 <rect key="frame" x="303" y="0.0" width="30" height="30"/>
@@ -916,7 +931,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E3E-PT-RQg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="913.74045801526711" y="785.91549295774655"/>
+            <point key="canvasLocation" x="213" y="777"/>
         </scene>
         <!--QR 스캐너-->
         <scene sceneID="nBU-Se-Ht6">
@@ -980,7 +995,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bye-CX-fwa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-695" y="801"/>
+            <point key="canvasLocation" x="-1190" y="787"/>
         </scene>
         <!--Make Wifi View Controller-->
         <scene sceneID="tRy-87-h52">

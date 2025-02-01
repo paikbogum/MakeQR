@@ -8,7 +8,6 @@
 import UIKit
 
 class SettingView: UIView {
-    
     @IBOutlet weak var topButton: UIButton!
     
     @IBOutlet weak var topLabel: UILabel!
@@ -17,7 +16,6 @@ class SettingView: UIView {
     
     @IBOutlet weak var vibrateLabel: UILabel!
     @IBOutlet weak var vibrateSwitch: UISwitch!
-    
     
     @IBOutlet weak var detectHistoryLabel: UILabel!
 
@@ -31,11 +29,9 @@ class SettingView: UIView {
     
     @IBOutlet weak var backCameraSwitch: UISwitch!
     
-    
     @IBOutlet weak var customizingQRButton: UIButton!
     
     @IBOutlet weak var customizingQRButton2: UIButton!
-    
     
     
     func setUI() {
@@ -48,8 +44,7 @@ class SettingView: UIView {
         
         containerView.layer.cornerRadius = 16
         containerView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
-        
-        
+    
         vibrateLabel.text = "감지 진동"
         vibrateLabel.textColor = CustomColor.backgroundColor.color
         vibrateLabel.font = UIFont.boldSystemFont(ofSize: 17)
@@ -64,7 +59,6 @@ class SettingView: UIView {
         
         detectHistorySwitch.tintColor = CustomColor.backgroundColor.color
         detectHistorySwitch.onTintColor = CustomColor.caldendarFontColor.color
-        
         
         makeHistoryLabel.text = "제작 QR 기록 저장"
         makeHistoryLabel.textColor = CustomColor.backgroundColor.color

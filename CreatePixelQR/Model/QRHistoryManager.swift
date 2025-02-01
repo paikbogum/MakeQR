@@ -49,8 +49,23 @@ class QRHistoryManager {
 }
 
 extension QRHistoryManager {
+    
+    /// QR 생성 기록 자동 저장 설정 확인
+    private func shouldSaveGeneratedHistory() -> Bool {
+        return UserDefaults.standard.bool(forKey: HistoryUserSetting.saveGeneratedQRHistory)
+    }
+
+    /// QR 스캔 기록 자동 저장 설정 확인
+    private func shouldSaveScannedHistory() -> Bool {
+        return UserDefaults.standard.bool(forKey: HistoryUserSetting.saveScannedQRHistory)
+    }
+    
     // URL 저장
     func saveURLHistory(url: String, act: QRAction) {
+        guard (act == .generated && shouldSaveGeneratedHistory()) || (act == .scanned && shouldSaveScannedHistory()) else {
+            return
+        }
+        
         let newHistory = QRHistory(
             id: UUID(),
             type: .url,
@@ -64,6 +79,10 @@ extension QRHistoryManager {
 
     // 텍스트 저장
     func saveTextHistory(text: String, act: QRAction) {
+        guard (act == .generated && shouldSaveGeneratedHistory()) || (act == .scanned && shouldSaveScannedHistory()) else {
+            return
+        }
+        
         let newHistory = QRHistory(
             id: UUID(),
             type: .text,
@@ -77,6 +96,11 @@ extension QRHistoryManager {
 
     // Wi-Fi 저장
     func saveWiFiHistory(ssid: String, password: String, security: String, isHidden: Bool, act: QRAction) {
+        
+        guard (act == .generated && shouldSaveGeneratedHistory()) || (act == .scanned && shouldSaveScannedHistory()) else {
+            return
+        }
+        
         let hiddenValue = isHidden ? "1" : "0"
         let wifiContent = "WIFI:S:\(ssid);T:\(security);P:\(password);H:\(hiddenValue);;"
 
@@ -93,6 +117,10 @@ extension QRHistoryManager {
 
     // 전화번호 저장
     func savePhoneHistory(phoneNumber: String, act: QRAction) {
+        guard (act == .generated && shouldSaveGeneratedHistory()) || (act == .scanned && shouldSaveScannedHistory()) else {
+            return
+        }
+        
         let newHistory = QRHistory(
             id: UUID(),
             type: .phone,
@@ -106,6 +134,10 @@ extension QRHistoryManager {
     
     // 전화번호 저장
     func saveEmailHistory(email: String, act: QRAction) {
+        guard (act == .generated && shouldSaveGeneratedHistory()) || (act == .scanned && shouldSaveScannedHistory()) else {
+            return
+        }
+        
         let newHistory = QRHistory(
             id: UUID(),
             type: .email,
