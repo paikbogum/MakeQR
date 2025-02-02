@@ -21,37 +21,39 @@ class ResultView: UIView {
     var loadingLabel: UILabel?
     
     func setUI() {
+        self.backgroundColor = CustomColor.darkModeBackgroundColor.color
+        
         resultContainerView.layer.cornerRadius = 8
         resultContainerView.clipsToBounds = true
-        resultContainerView.backgroundColor = .white
+        resultContainerView.backgroundColor = CustomColor.backgroundColor.color
         
-        randomMent.textColor = .lightGray
+        randomMent.textColor = .darkGray
         randomMent.font = UIFont.boldSystemFont(ofSize: 15)
         
-        downLoadButton.layer.cornerRadius = 4
+        downLoadButton.layer.cornerRadius = 8
         downLoadButton.clipsToBounds = true
-        downLoadButton.tintColor = .white
-        downLoadButton.backgroundColor = .systemGreen
+        downLoadButton.tintColor = .black
+        downLoadButton.backgroundColor = CustomColor.backgroundColor.color
+        downLoadButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         
-        shareButton.layer.cornerRadius = 4
+        shareButton.layer.cornerRadius = 8
         shareButton.clipsToBounds = true
-        shareButton.tintColor = .white
-        shareButton.backgroundColor = .systemGreen
-        
+        shareButton.tintColor = .black
+        shareButton.backgroundColor = CustomColor.backgroundColor.color
+        shareButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
 
-        kakaoButton.layer.cornerRadius = 4
+        kakaoButton.layer.cornerRadius = 8
         kakaoButton.clipsToBounds = true
         kakaoButton.tintColor = .black
+        kakaoButton.titleLabel?.textColor = .black
         kakaoButton.backgroundColor = .systemYellow
-        
-        
+        kakaoButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         
         randomMent.isHidden = true
         downLoadButton.isHidden = true
         shareButton.isHidden = true
         kakaoButton.isHidden = true
         resultImageView.isHidden = true
-        
     }
     
     func showLottieAnimationWithLabel(text: String) {

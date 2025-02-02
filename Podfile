@@ -10,7 +10,6 @@ target 'CreatePixelQR' do
 pod 'SnapKit'
 pod 'lottie-ios'
 pod 'Mantis'
-pod 'DSF_QRCode', '~> 20.0.0'
 
 
 end

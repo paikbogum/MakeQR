@@ -14,6 +14,7 @@ class SettingViewController: UIViewController {
         super.viewDidLoad()
         
         settingView.setUI()
+        loadSwitchStates()
     }
     
     // 저장된 설정 불러오기

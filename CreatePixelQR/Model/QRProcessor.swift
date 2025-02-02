@@ -7,8 +7,6 @@
 
 import UIKit
 import CoreImage
-import QRCode
-
 
 enum Shape {
     case square
@@ -49,7 +47,6 @@ class QRProcessor {
 
         return clearedQRCode
     }
-    
     
     // QR 코드 색상 적용
     private func applyColors(to image: CIImage, foregroundColor: UIColor, backgroundColor: UIColor) -> UIImage? {

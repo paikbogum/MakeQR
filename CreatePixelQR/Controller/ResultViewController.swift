@@ -33,18 +33,17 @@ class ResultViewController: UIViewController {
         resultView.setUI()
         makeQRResult()
         resultView.showLottieAnimationWithLabel(text: "QR코드를 생성 중입니다...")
-        
-        print("qrPercent: \((receiveQRPercent * 100).rounded() / 100)", "dotVal: \(receiveDotVal)", "foreground: \(receiveForegroundColor)", "background: \(receiveBackgroundColor)", "DotColor: \(receiveDotColor)")
     
         // 5초 후 애니메이션과 레이블 제거
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             self.resultView.removeLottieAnimationAndLabel()
+            //self.resultView.resultContainerView.backgroundColor = CustomColor.backgroundColor.color
             self.resultView.resultImageView.isHidden = false
             self.resultView.randomMent.isHidden = false
             self.resultView.downLoadButton.isHidden = false
             self.resultView.shareButton.isHidden = false
             self.resultView.kakaoButton.isHidden = false
-            self.randomMent(ments: ["걸작입니다!", "재밌는 결과물인데요?", "Cool!", "갤러리에 전시해도 되겠어요."])
+            self.randomMent(ments: ["상당한 걸작입니다!", "엄청난 결과물인데요?", "Cool!", "갤러리에 전시해도 되겠어요."])
         }
     }
     

@@ -12,6 +12,7 @@ class MainViewController: UIViewController {
     @IBOutlet var mainView: MainView!
     
     @IBOutlet weak var makeQRButtonTopConstraint: NSLayoutConstraint!
+
     
     let cellName = "MainCollectionViewCell"
     let cellReuseIdentifier = "MainCollectionViewCell"
@@ -41,7 +42,8 @@ class MainViewController: UIViewController {
     
     @IBAction func makeQRButtonTapped(_ sender: UIButton) {
         self.mainView.topContainerView.isHidden = true
-        UIView.animate(withDuration: 1.0, animations: {        self.mainView.makeQRButton.isHidden = true
+        UIView.animate(withDuration: 1.0, animations: {
+            self.mainView.makeQRButton.isHidden = true
             self.makeQRButtonTopConstraint.constant = 0 // Top Constraint 변경
             self.mainView.bottomContainerView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
             self.mainView.bottomContainerViewTopSafeContraint.constant = 50

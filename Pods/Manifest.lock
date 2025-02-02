@@ -1,36 +1,24 @@
 PODS:
-  - DSF_QRCode (20.0.0):
-    - SwiftImageReadWrite (~> 1.7.2)
-    - SwiftQRCodeGenerator (~> 2.0.2)
-  - lottie-ios (4.5.0)
+  - lottie-ios (4.5.1)
   - Mantis (2.23.1)
   - SnapKit (5.7.1)
-  - SwiftImageReadWrite (1.7.2)
-  - SwiftQRCodeGenerator (2.0.2)
 
 DEPENDENCIES:
-  - DSF_QRCode (~> 20.0.0)
   - lottie-ios
   - Mantis
   - SnapKit
 
 SPEC REPOS:
   trunk:
-    - DSF_QRCode
     - lottie-ios
     - Mantis
     - SnapKit
-    - SwiftImageReadWrite
-    - SwiftQRCodeGenerator
 
 SPEC CHECKSUMS:
-  DSF_QRCode: 6558f9b71f29ddbedd546e524f6d5e505841c5c6
-  lottie-ios: a881093fab623c467d3bce374367755c272bdd59
+  lottie-ios: 248b380fa1b97d18e792c37d90da7ab2aa0d6562
   Mantis: fe6907b5287d53c57d9e6b0c791afc0d8f9f0061
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
-  SwiftImageReadWrite: ef6dfb4a78a0142a62c89cacf549623b26961fd3
-  SwiftQRCodeGenerator: cc02fed209335064d0b0dd61b2a0874b9bc6bd5a
 
-PODFILE CHECKSUM: 6f9ffcdaa672ef6f009f673cc33c77596b97983e
+PODFILE CHECKSUM: 59e52737ce537ac5e66051e44875c59081bdb16f
 
 COCOAPODS: 1.14.3
