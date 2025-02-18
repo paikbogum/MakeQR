@@ -51,4 +51,12 @@ class SettingViewController: UIViewController {
     }
     
     
+    @IBAction func infoButtonTapped(_ sender: UIButton) {
+        guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "InfoViewController") as? InfoViewController else { return }
+        
+        self.navigationController?.pushViewController(nextVC, animated: true)
+        
+    }
+    
+    
 }

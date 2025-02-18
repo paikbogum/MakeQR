@@ -43,8 +43,6 @@ class SettingView: UIView {
     
     @IBOutlet weak var privacyButton: UIButton!
     
-    
-    
     func setUI() {
         self.backgroundColor = CustomColor.darkModeBackgroundColor.color
         
@@ -61,7 +59,6 @@ class SettingView: UIView {
         
         containerView3.layer.cornerRadius = 16
         containerView3.backgroundColor = CustomColor.darkModeDarkGrayColor.color
-    
     
         vibrateLabel.text = "감지 진동"
         vibrateLabel.textColor = CustomColor.backgroundColor.color

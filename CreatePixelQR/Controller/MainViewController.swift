@@ -12,7 +12,6 @@ class MainViewController: UIViewController {
     @IBOutlet var mainView: MainView!
     
     @IBOutlet weak var makeQRButtonTopConstraint: NSLayoutConstraint!
-
     
     let cellName = "MainCollectionViewCell"
     let cellReuseIdentifier = "MainCollectionViewCell"
@@ -55,7 +54,7 @@ class MainViewController: UIViewController {
             self.mainView.mainCollectionView.isHidden = false // CollectionView 표시
             UIView.animate(withDuration: 1.0) {
                 self.mainView.mainCollectionView.alpha = 1  // alpha 값을 서서히 증가
-
+               
             }
         })
     }
@@ -89,7 +88,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             //nextVC.categoryCase = destination
             self.navigationController?.pushViewController(nextVC, animated: true)
-            
         } else {
             guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MakeQRViewController") as? MakeQRViewController else { return }
             

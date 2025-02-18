@@ -14,6 +14,10 @@
 		B770DE9A2CEF387D005D9EC1 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B770DE992CEF387D005D9EC1 /* Base */; };
 		B770DE9C2CEF3880005D9EC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B770DE9B2CEF3880005D9EC1 /* Assets.xcassets */; };
 		B770DE9F2CEF3880005D9EC1 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B770DE9E2CEF3880005D9EC1 /* Base */; };
+		B79386402D64B1920089CB19 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B793863F2D64B1920089CB19 /* InfoViewController.swift */; };
+		B79386432D64B1B30089CB19 /* InfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B79386422D64B1B20089CB19 /* InfoTableViewCell.xib */; };
+		B79386442D64B1B30089CB19 /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79386412D64B1B20089CB19 /* InfoTableViewCell.swift */; };
+		B79386462D64B3250089CB19 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79386452D64B3250089CB19 /* InfoView.swift */; };
 		B7ADAFFC2D22867C005D18B7 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ADAFFB2D22867C005D18B7 /* SettingViewController.swift */; };
 		B7ADAFFE2D23C794005D18B7 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ADAFFD2D23C794005D18B7 /* SettingView.swift */; };
 		B7ADB0002D2B324E005D18B7 /* CustomizingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ADAFFF2D2B324E005D18B7 /* CustomizingViewController.swift */; };
@@ -47,6 +51,8 @@
 		B7C774472D12F1C900BEE6EC /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7C774452D12F1C900BEE6EC /* HistoryTableViewCell.xib */; };
 		B7C774492D12F63C00BEE6EC /* QRHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C774482D12F63C00BEE6EC /* QRHistoryManager.swift */; };
 		B7C7744B2D22802B00BEE6EC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C7744A2D22802B00BEE6EC /* TabBarController.swift */; };
+		B7DB93212D55FCAD00A77C8E /* CustomAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7DB93202D55FCAD00A77C8E /* CustomAlert.storyboard */; };
+		B7DB93232D55FE1200A77C8E /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DB93222D55FE1200A77C8E /* CustomAlertViewController.swift */; };
 		B7EC5AFA2D3A36D20047BB64 /* QRCameraFrameOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EC5AF92D3A36D20047BB64 /* QRCameraFrameOverlayView.swift */; };
 		B7EC5AFD2D3A4DE90047BB64 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EC5AFC2D3A4DE90047BB64 /* CustomAlertView.swift */; };
 		B7EC5AFF2D3A4E1F0047BB64 /* CustomAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7EC5AFE2D3A4E1F0047BB64 /* CustomAlertView.xib */; };
@@ -63,6 +69,10 @@
 		B770DE9B2CEF3880005D9EC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B770DE9E2CEF3880005D9EC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B770DEA02CEF3880005D9EC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B793863F2D64B1920089CB19 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		B79386412D64B1B20089CB19 /* InfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
+		B79386422D64B1B20089CB19 /* InfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoTableViewCell.xib; sourceTree = "<group>"; };
+		B79386452D64B3250089CB19 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		B7ADAFFB2D22867C005D18B7 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		B7ADAFFD2D23C794005D18B7 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		B7ADAFFF2D2B324E005D18B7 /* CustomizingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizingViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +104,8 @@
 		B7C774452D12F1C900BEE6EC /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
 		B7C774482D12F63C00BEE6EC /* QRHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRHistoryManager.swift; sourceTree = "<group>"; };
 		B7C7744A2D22802B00BEE6EC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		B7DB93202D55FCAD00A77C8E /* CustomAlert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomAlert.storyboard; sourceTree = "<group>"; };
+		B7DB93222D55FE1200A77C8E /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
 		B7EC5AF92D3A36D20047BB64 /* QRCameraFrameOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCameraFrameOverlayView.swift; sourceTree = "<group>"; };
 		B7EC5AFC2D3A4DE90047BB64 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		B7EC5AFE2D3A4E1F0047BB64 /* CustomAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomAlertView.xib; sourceTree = "<group>"; };
@@ -154,6 +166,7 @@
 				B770DE942CEF387D005D9EC1 /* SceneDelegate.swift */,
 				B770DE922CEF387D005D9EC1 /* AppDelegate.swift */,
 				B770DE982CEF387D005D9EC1 /* Main.storyboard */,
+				B7DB93202D55FCAD00A77C8E /* CustomAlert.storyboard */,
 				B770DE9B2CEF3880005D9EC1 /* Assets.xcassets */,
 				B770DE9D2CEF3880005D9EC1 /* LaunchScreen.storyboard */,
 				B770DEA02CEF3880005D9EC1 /* Info.plist */,
@@ -191,6 +204,7 @@
 				B7C774182CF5C76400BEE6EC /* ResultView.swift */,
 				B7C7743F2D12F13F00BEE6EC /* HistoryView.swift */,
 				B7ADAFFD2D23C794005D18B7 /* SettingView.swift */,
+				B79386452D64B3250089CB19 /* InfoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -209,6 +223,8 @@
 				B770DE962CEF387D005D9EC1 /* ResultViewController.swift */,
 				B7C7743D2D12F11F00BEE6EC /* HistoryViewController.swift */,
 				B7ADAFFB2D22867C005D18B7 /* SettingViewController.swift */,
+				B793863F2D64B1920089CB19 /* InfoViewController.swift */,
+				B7DB93222D55FE1200A77C8E /* CustomAlertViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -227,6 +243,8 @@
 			children = (
 				B7C774442D12F1C900BEE6EC /* HistoryTableViewCell.swift */,
 				B7C774452D12F1C900BEE6EC /* HistoryTableViewCell.xib */,
+				B79386412D64B1B20089CB19 /* InfoTableViewCell.swift */,
+				B79386422D64B1B20089CB19 /* InfoTableViewCell.xib */,
 			);
 			path = TV;
 			sourceTree = "<group>";
@@ -317,9 +335,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7DB93212D55FCAD00A77C8E /* CustomAlert.storyboard in Resources */,
 				B770DE9C2CEF3880005D9EC1 /* Assets.xcassets in Resources */,
 				B770DE9F2CEF3880005D9EC1 /* Base in Resources */,
 				B770DE9A2CEF387D005D9EC1 /* Base in Resources */,
+				B79386432D64B1B30089CB19 /* InfoTableViewCell.xib in Resources */,
 				B7C774172CF4622800BEE6EC /* LoadingQR.json in Resources */,
 				B7C774472D12F1C900BEE6EC /* HistoryTableViewCell.xib in Resources */,
 				B7C7740B2CF3485C00BEE6EC /* MainCollectionViewCell.xib in Resources */,
@@ -384,10 +404,12 @@
 				B7C774312D0C290000BEE6EC /* QRCameraView.swift in Sources */,
 				B7C7743E2D12F11F00BEE6EC /* HistoryViewController.swift in Sources */,
 				B7ADB0022D2B3260005D18B7 /* CustomizingView.swift in Sources */,
+				B7DB93232D55FE1200A77C8E /* CustomAlertViewController.swift in Sources */,
 				B7C774402D12F13F00BEE6EC /* HistoryView.swift in Sources */,
 				B7C774332D0C292800BEE6EC /* QRCameraViewController.swift in Sources */,
 				B7C774192CF5C76500BEE6EC /* ResultView.swift in Sources */,
 				B770DE932CEF387D005D9EC1 /* AppDelegate.swift in Sources */,
+				B79386462D64B3250089CB19 /* InfoView.swift in Sources */,
 				B770DE952CEF387D005D9EC1 /* SceneDelegate.swift in Sources */,
 				B7C774352D0C2F2200BEE6EC /* QRPopViewController.swift in Sources */,
 				B7C7741F2CFC81A600BEE6EC /* QRCase.swift in Sources */,
@@ -396,9 +418,11 @@
 				B7C774062CF2443700BEE6EC /* MainViewController.swift in Sources */,
 				B7ADAFFE2D23C794005D18B7 /* SettingView.swift in Sources */,
 				B7EC5AFA2D3A36D20047BB64 /* QRCameraFrameOverlayView.swift in Sources */,
+				B79386442D64B1B30089CB19 /* InfoTableViewCell.swift in Sources */,
 				B7C774372D0C2F2E00BEE6EC /* QRPopView.swift in Sources */,
 				B7C7740E2CF34F7900BEE6EC /* MakeQRViewController.swift in Sources */,
 				B7C774462D12F1C900BEE6EC /* HistoryTableViewCell.swift in Sources */,
+				B79386402D64B1920089CB19 /* InfoViewController.swift in Sources */,
 				B7C774232D01B11A00BEE6EC /* MakeWifiView.swift in Sources */,
 				B7C774392D0C353F00BEE6EC /* HalfSizePresentationController.swift in Sources */,
 				B7F84B0A2D4DFA7D00BB493F /* SettingDefaults.swift in Sources */,

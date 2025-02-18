@@ -47,7 +47,6 @@ class MakeWifiView: UIView {
     
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var createButton: UIButton!
-    
     @IBOutlet weak var customQRButton: UIButton!
     
     func MakeQRViewUISetting() {
@@ -118,7 +117,6 @@ class MakeWifiView: UIView {
         wifiHiddenLabel.font = UIFont.boldSystemFont(ofSize: 12)
         wifiHiddenLabel.textColor = .lightGray
         wifiHiddenTF.text = "공개"
-        
         
         wifiNameTF.font = UIFont.boldSystemFont(ofSize: 15)
         wifiNameTF.textColor = .darkGray
