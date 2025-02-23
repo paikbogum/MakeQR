@@ -195,7 +195,6 @@ extension QRCameraViewController: AVCaptureMetadataOutputObjectsDelegate, AVCapt
                     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate) // 📳 진동 발생
                 }
                 
-                
                 captureSession.stopRunning()
                 // QR 이미지 추출
                 

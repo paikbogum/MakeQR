@@ -19,6 +19,7 @@ class CustomizingView: UIView {
     @IBOutlet weak var color1Button: UIButton!
     
     @IBOutlet weak var color2Label: UILabel!
+    
     @IBOutlet weak var color2Button: UIButton!
     
     @IBOutlet weak var color3Label: UILabel!
@@ -58,12 +59,20 @@ class CustomizingView: UIView {
     
     @IBOutlet weak var submitButton: UIButton!
     
+    @IBOutlet weak var qrsizeButton: UIButton!
+    
+    @IBOutlet weak var qrsizeLabel: UILabel!
+
+    
+    @IBOutlet weak var qrsizeTF: UITextField!
+    
+    
     func setColorSetUI() {
         self.backgroundColor = CustomColor.darkModeBackgroundColor.color
         
         colorSetView.layer.cornerRadius = 8
         colorSetView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
-        colorSetLabel.text = "QR코드 컬러"
+        colorSetLabel.text = "QR코드 색상"
         colorSetLabel.font = UIFont.boldSystemFont(ofSize: 15)
         colorSetLabel.textColor = CustomColor.backgroundColor.color
         
@@ -101,7 +110,6 @@ class CustomizingView: UIView {
         logoDotSlider.tintColor = CustomColor.backgroundColor.color
         logoDotSlider.minimumValue = 5
         logoDotSlider.maximumValue = 20
-        //logoDotSlider.value = 20
         
         logoValueMax.text = String(Int(logoDotSlider.maximumValue)) + "X"
         logoValueMax.textColor = CustomColor.backgroundColor.color
@@ -112,7 +120,6 @@ class CustomizingView: UIView {
         logoValueMin.font = UIFont.boldSystemFont(ofSize: 10)
         
         logoDotValueLabel.font = UIFont.boldSystemFont(ofSize: 14)
-        //logoDotValueLabel.text = String(Int(logoDotSlider.value)) + "X" + "  (\(String(Int(logoDotSlider.value) * 50)) * \(String(Int(logoDotSlider.value) * 50)) Pixel)"
         logoDotValueLabel.textColor = .white
     }
     
@@ -121,10 +128,10 @@ class CustomizingView: UIView {
         qrSetView.layer.cornerRadius = 8
         qrSetButton.tintColor = CustomColor.backgroundColor.color
         qrSetLabel.textColor = CustomColor.backgroundColor.color
-        qrSetLabel.text = "QR 관련"
+        qrSetLabel.text = "QR 손상률"
         qrSetLabel.font = UIFont.boldSystemFont(ofSize: 15)
         
-        qrLabel.text = "QR 손상율:"
+        qrLabel.text = "QR 손상률:"
         qrLabel.font = UIFont.boldSystemFont(ofSize: 13)
         qrLabel.textColor = CustomColor.backgroundColor.color
         
@@ -150,6 +157,21 @@ class CustomizingView: UIView {
         submitButton.layer.cornerRadius = 8
         submitButton.setTitle("저장", for: .normal)
         submitButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+    }
+    
+    func setQRsizeUI() {
+        qrsizeButton.tintColor = CustomColor.backgroundColor.color
+        qrsizeLabel.textColor = CustomColor.backgroundColor.color
+        
+        qrsizeLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        qrsizeLabel.text = "QR 사이즈"
+
+        
+        qrsizeTF.backgroundColor = CustomColor.darkModeDarkGrayColor.color
+        
+        
+        qrsizeTF.textColor = CustomColor
+            .backgroundColor.color
     }
     
 }

@@ -26,6 +26,9 @@ class InfoViewController: UIViewController, CustomAlertDelegate {
 
         infoView.setUI()
         registerXib()
+        
+        self.navigationItem.title = "도움말"
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: CustomColor.backgroundColor.color]
 
     }
     

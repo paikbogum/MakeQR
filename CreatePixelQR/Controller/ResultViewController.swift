@@ -13,7 +13,7 @@ class ResultViewController: UIViewController {
     @IBOutlet var resultView: ResultView!
     
     var receiveCroppedImage: UIImage?
-   // var receiveUrl: String?
+    // var receiveUrl: String?
     
     var qrType: QRCodeType = .url("https://default.com")
     
@@ -26,6 +26,7 @@ class ResultViewController: UIViewController {
     var receiveForegroundColor: UIColor = .black
     var receiveBackgroundColor: UIColor = .white
     var receiveDotColor: UIColor = .black
+    var receiveSize: String = "100"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,7 @@ class ResultViewController: UIViewController {
         resultView.setUI()
         makeQRResult()
         resultView.showLottieAnimationWithLabel(text: "QR코드를 생성 중입니다...")
-    
+        
         // 5초 후 애니메이션과 레이블 제거
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             self.resultView.removeLottieAnimationAndLabel()
@@ -90,10 +91,15 @@ class ResultViewController: UIViewController {
     
     @IBAction func downLoadButtonTapped(_ sender: UIButton) {
         PHPhotoLibrary.requestAuthorization { status in
-            guard status == .authorized, let image = self.resultView.resultImageView.image else { return }
+            guard status == .authorized, let originalImage = self.resultView.resultImageView.image else { return }
+            
+            let receiveSizeInt = Int(self.receiveSize)!
+            
+            // ✅ 강제 리사이징 (사용자 지정 사이즈)
+            let resizedImage = self.resizeImage(image: originalImage, targetSize: CGSize(width: receiveSizeInt, height: receiveSizeInt))
             
             PHPhotoLibrary.shared().performChanges({
-                PHAssetChangeRequest.creationRequestForAsset(from: image)
+                PHAssetChangeRequest.creationRequestForAsset(from: resizedImage)
             }, completionHandler: { success, error in
                 DispatchQueue.main.async {
                     if success {
@@ -156,6 +162,18 @@ class ResultViewController: UIViewController {
         
         // ActivityViewController 표시
         self.present(activityViewController, animated: true, completion: nil)
+    }
+    
+    
+    // ✅ 강제 리사이징 함수
+    private func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = 1 // ✅ 스케일 조정 방지 (원본 크기 유지)
+        
+        let renderer = UIGraphicsImageRenderer(size: targetSize, format: format)
+        return renderer.image { _ in
+            image.draw(in: CGRect(origin: .zero, size: targetSize))
+        }
     }
     
 }

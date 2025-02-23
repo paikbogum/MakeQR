@@ -12,13 +12,14 @@ import Mantis
 
 class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, CustomizingViewControllerDelegate {
     
-    func didSendDataBack(_ data: (qrPercent: CGFloat, dotVal: Int, foregroundCol: UIColor, backgroundCol: UIColor, logoCol: UIColor)) {
+    func didSendDataBack(_ data: (qrPercent: CGFloat, dotVal: Int, foregroundCol: UIColor, backgroundCol: UIColor, logoCol: UIColor, qrSizeSet: String)) {
         
         receiveQRPercent = data.qrPercent
         receiveDotVal = data.dotVal
         receiveForegroundColor = data.foregroundCol
         receiveBackgroundColor = data.backgroundCol
         receiveDotColor = data.logoCol
+        receiveSize = data.qrSizeSet
         
         print(data)
     }
@@ -41,12 +42,14 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
     var receiveForegroundColor: UIColor = .black
     var receiveBackgroundColor: UIColor = .white
     var receiveDotColor: UIColor = .black
+    var receiveSize: String = "900"
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         makeQRView.MakeQRViewUISetting()
+        loadQRSettings()
         setTextfield()
         changeStateOfTF()
         changeStateOfCategory()
@@ -143,6 +146,7 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
                     nextVC.receiveForegroundColor = self.receiveForegroundColor
                     nextVC.receiveBackgroundColor = self.receiveBackgroundColor
                     nextVC.receiveDotColor = self.receiveDotColor
+                    nextVC.receiveSize = self.receiveSize
                     
                     navigationController?.pushViewController(nextVC, animated: true)
                 }
@@ -179,6 +183,7 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
                 nextVC.receiveForegroundColor = self.receiveForegroundColor
                 nextVC.receiveBackgroundColor = self.receiveBackgroundColor
                 nextVC.receiveDotColor = self.receiveDotColor
+                nextVC.receiveSize = self.receiveSize
                 
                 navigationController?.pushViewController(nextVC, animated: true)
             }
@@ -213,6 +218,8 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
                 nextVC.receiveForegroundColor = self.receiveForegroundColor
                 nextVC.receiveBackgroundColor = self.receiveBackgroundColor
                 nextVC.receiveDotColor = self.receiveDotColor
+                nextVC.receiveSize = self.receiveSize
+                
                 
                 navigationController?.pushViewController(nextVC, animated: true)
             }
@@ -246,6 +253,7 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
                 nextVC.receiveForegroundColor = self.receiveForegroundColor
                 nextVC.receiveBackgroundColor = self.receiveBackgroundColor
                 nextVC.receiveDotColor = self.receiveDotColor
+                nextVC.receiveSize = self.receiveSize
                 
                 navigationController?.pushViewController(nextVC, animated: true)
             }
@@ -340,7 +348,6 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
         changeCreateButtonState()
     }
 
-    
     private func changeStateOfTF() {
         if urlTFBool {
             makeQRView.secondUIView.layer.borderColor = CustomColor.caldendarFontColor.color.cgColor
@@ -367,6 +374,53 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
         // 변경 사항 애니메이션 적용
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
+        }
+    }
+    
+    func loadQRSettings() {
+        let defaults = UserDefaults.standard
+        
+        // QR 전경색 (패턴 색)
+        if let foregroundHex = defaults.string(forKey: QRDefaults.qrForegroundColor) {
+            receiveForegroundColor = UIColor(hexString: foregroundHex)
+        } else {
+            receiveForegroundColor = .black // 기본값
+        }
+        
+        // QR 배경색
+        if let backgroundHex = defaults.string(forKey: QRDefaults.qrBackgroundColor) {
+            receiveBackgroundColor = UIColor(hexString: backgroundHex)
+        } else {
+            receiveBackgroundColor = .white // 기본값
+        }
+        
+        // QR 로고 색
+        if let logoHex = defaults.string(forKey: QRDefaults.qrLogoColor) {
+            receiveDotColor = UIColor(hexString: logoHex)
+        } else {
+            receiveDotColor = .black // 기본값
+        }
+        
+        // QR 손상율 (기본 30%)
+        if defaults.object(forKey: QRDefaults.qrDamageCorrection) != nil {
+            receiveQRPercent = CGFloat(defaults.float(forKey: QRDefaults.qrDamageCorrection))
+        } else {
+            receiveQRPercent = 0.3
+        }
+        
+        // QR 로고 도트 선명도 (기본 20)
+        if defaults.object(forKey: QRDefaults.qrLogoDotSharpness) != nil {
+            receiveDotVal = defaults.integer(forKey: QRDefaults.qrLogoDotSharpness)
+        } else {
+            receiveDotVal = 20
+        }
+        
+        //QR 사이즈
+        if let qrsizeString = defaults.string(forKey: QRDefaults.qrSize) {
+            receiveSize = qrsizeString
+        } else {
+            print("userDefaults 저장 안됨")
+            receiveSize = "900"
         }
     }
     

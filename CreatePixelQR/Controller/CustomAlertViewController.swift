@@ -26,7 +26,7 @@ class CustomAlertViewController: UIViewController {
     @IBOutlet weak var tipView: UIView!
     
     @IBOutlet weak var tipLabel: UILabel!
-    
+
     @IBOutlet weak var dismissButton: UIButton!
     
     var delegate: CustomAlertDelegate?

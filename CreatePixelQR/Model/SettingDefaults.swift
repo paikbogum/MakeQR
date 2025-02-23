@@ -24,4 +24,5 @@ struct QRDefaults {
     static let qrLogoColor = "qrLogoColor"  // QR 로고 색상
     static let qrDamageCorrection = "qrDamageCorrection"  // QR 손상율
     static let qrLogoDotSharpness = "qrLogoDotSharpness"  // QR 로고 도트 선명도
+    static let qrSize = "qrSize"
 }

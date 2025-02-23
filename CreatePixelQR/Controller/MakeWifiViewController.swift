@@ -11,12 +11,14 @@ import Mantis
 
 class MakeWifiViewController: UIViewController,UITextFieldDelegate, UINavigationControllerDelegate, CustomizingViewControllerDelegate  {
     
-    func didSendDataBack(_ data: (qrPercent: CGFloat, dotVal: Int, foregroundCol: UIColor, backgroundCol: UIColor, logoCol: UIColor)) {
+    func didSendDataBack(_ data: (qrPercent: CGFloat, dotVal: Int, foregroundCol: UIColor, backgroundCol: UIColor, logoCol: UIColor, qrSizeSet: String)) {
         receiveQRPercent = data.qrPercent
         receiveDotVal = data.dotVal
         receiveForegroundColor = data.foregroundCol
         receiveBackgroundColor = data.backgroundCol
         receiveDotColor = data.logoCol
+        receiveSize = data.qrSizeSet
+        
     }
     
     private var qrProcessor = QRProcessor()
@@ -44,6 +46,7 @@ class MakeWifiViewController: UIViewController,UITextFieldDelegate, UINavigation
     var receiveForegroundColor: UIColor = .black
     var receiveBackgroundColor: UIColor = .white
     var receiveDotColor: UIColor = .black
+    var receiveSize: String = "900"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -161,6 +164,7 @@ class MakeWifiViewController: UIViewController,UITextFieldDelegate, UINavigation
                 nextVC.receiveForegroundColor = self.receiveForegroundColor
                 nextVC.receiveBackgroundColor = self.receiveBackgroundColor
                 nextVC.receiveDotColor = self.receiveDotColor
+                nextVC.receiveSize = self.receiveSize
                 
                 navigationController?.pushViewController(nextVC, animated: true)
             }

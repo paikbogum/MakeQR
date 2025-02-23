@@ -7,7 +7,7 @@
 import UIKit
 
 protocol CustomizingViewControllerDelegate: AnyObject {
-    func didSendDataBack(_ data: (qrPercent: CGFloat, dotVal: Int, foregroundCol: UIColor, backgroundCol: UIColor, logoCol: UIColor))
+    func didSendDataBack(_ data: (qrPercent: CGFloat, dotVal: Int, foregroundCol: UIColor, backgroundCol: UIColor, logoCol: UIColor, qrSizeSet: String))
 }
 
 class CustomizingViewController: UIViewController, CustomAlertDelegate {
@@ -25,6 +25,9 @@ class CustomizingViewController: UIViewController, CustomAlertDelegate {
     
     var selectedQRPercent: CGFloat = 0.3
     var selectedDotVal: Int = 20
+    
+    var selectedSizeOption: String = ""
+    var sizeOptions = ["300", "600", "900", "1200", "1500"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +35,13 @@ class CustomizingViewController: UIViewController, CustomAlertDelegate {
         customizingView.setColorSetUI()
         customizingView.setLogoSetUI()
         customizingView.setQrSetUI()
+        customizingView.setQRsizeUI()
         loadQRSettings()
         updateColorSetting()
+        setupPickerViews()
+        
+        self.navigationItem.title = "QR 사용자 설정"
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: CustomColor.backgroundColor.color]
     }
     
     func loadQRSettings() {
@@ -73,6 +81,14 @@ class CustomizingViewController: UIViewController, CustomAlertDelegate {
         } else {
             selectedDotVal = 20
         }
+        
+        //QR 사이즈
+        if let qrsizeString = defaults.string(forKey: QRDefaults.qrSize) {
+            selectedSizeOption = qrsizeString
+        } else {
+            print("userDefaults 저장 안되어있음")
+            selectedSizeOption = "900"
+        }
     }
     
     private func updateColorSetting() {
@@ -86,6 +102,7 @@ class CustomizingViewController: UIViewController, CustomAlertDelegate {
         customizingView.qrSetValueLabel.text = String(Int(customizingView.qrSetSlider.value * 100)) + "%"
         
         customizingView.logoDotValueLabel.text = String(Int(customizingView.logoDotSlider.value)) + "X" + "  (\(String(Int(customizingView.logoDotSlider.value) * 50)) * \(String(Int(customizingView.logoDotSlider.value) * 50)) Pixel)"
+        
         }
     
     @IBAction func pickForegroundColor(_ sender: UIButton) {
@@ -117,7 +134,7 @@ class CustomizingViewController: UIViewController, CustomAlertDelegate {
     
     @IBAction func submitButtonTapped(_ sender: UIButton) {
         saveQRSettings()
-        delegate?.didSendDataBack((selectedQRPercent, selectedDotVal, selectedForegroundColor, selectedBackgroundColor, selectedLogoColor))
+        delegate?.didSendDataBack((selectedQRPercent, selectedDotVal, selectedForegroundColor, selectedBackgroundColor, selectedLogoColor, selectedSizeOption))
         navigationController?.popViewController(animated: true)
     }
     
@@ -139,6 +156,7 @@ class CustomizingViewController: UIViewController, CustomAlertDelegate {
         defaults.set(selectedLogoColor.toHexString(), forKey: QRDefaults.qrLogoColor)
         defaults.set(Float(selectedQRPercent), forKey: QRDefaults.qrDamageCorrection)
         defaults.set(selectedDotVal, forKey: QRDefaults.qrLogoDotSharpness)
+        defaults.set(selectedSizeOption, forKey: QRDefaults.qrSize)
         
         print("✅ QR 설정 저장 완료!")
     }
@@ -209,4 +227,50 @@ extension UIColor {
 
         self.init(red: r, green: g, blue: b, alpha: 1.0)
     }
+}
+
+extension CustomizingViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func setupPickerViews() {
+        customizingView.qrsizeTF.text = "\(selectedSizeOption) X \(selectedSizeOption) 픽셀"
+        
+        let sizePicker = UIPickerView()
+        sizePicker.delegate = self
+        sizePicker.dataSource = self
+        
+        customizingView.qrsizeTF.inputView = sizePicker
+        
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissPicker))
+        toolbar.setItems([doneButton], animated: true)
+        toolbar.isUserInteractionEnabled = true
+        
+        customizingView.qrsizeTF.inputAccessoryView = toolbar
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return sizeOptions.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return "\(sizeOptions[row]) X \(sizeOptions[row]) 픽셀"
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedSizeOption = sizeOptions[row]
+        customizingView.qrsizeTF.text = "\(selectedSizeOption) X \(selectedSizeOption) 픽셀"
+    }
+    
+    @objc func dismissPicker() {
+        view.endEditing(true)
+    }
+    
+    
+    
+    
 }
