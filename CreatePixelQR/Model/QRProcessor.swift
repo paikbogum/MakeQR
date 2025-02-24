@@ -30,6 +30,7 @@ class QRProcessor {
             data = qrDataString.data(using: .ascii) // 나머지 경우 ASCII
             print("ASCII 인코딩 시도")
         }
+
         
         filter.setValue(data, forKey: "inputMessage")
         filter.setValue("H", forKey: "inputCorrectionLevel")

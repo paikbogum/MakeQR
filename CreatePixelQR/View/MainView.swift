@@ -16,9 +16,9 @@ class MainView: UIView {
     @IBOutlet weak var exQRImageView: UIImageView!
     
     @IBOutlet weak var topContainerView: UIView!
-    @IBOutlet weak var topContainerLabel: UILabel!
     
     @IBOutlet weak var bottomContainerView: UIView!
+    
     @IBOutlet weak var mainCollectionView: UICollectionView!
 
     @IBOutlet weak var makeQRButton: UIButton!
@@ -39,20 +39,17 @@ class MainView: UIView {
         
         self.backgroundColor = CustomColor.darkModeBackgroundColor.color
         
-        topContainerView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
-        topContainerLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        
-        topContainerLabel.textColor = .white
-        topContainerLabel.text = "나만의 QR코드를 만들어보세요!"
-        
-        exQRImageView.image = UIImage(named: "QREx")
+        //topContainerView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
+        topContainerView.backgroundColor = .clear
+
+        exQRImageView.image = UIImage(named: "mainViewQRImg")
         
         makeQRButton.setTitle("QR코드 생성", for: .normal)
-        makeQRButton.backgroundColor = .darkGray
+        makeQRButton.backgroundColor = CustomColor.strongCalendarColor.color
         makeQRButton.titleLabel?.textColor = .white
-        makeQRButton.layer.cornerRadius = 8
-
-        makeQRButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        makeQRButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        makeQRButton.layer.cornerRadius = 4
+        
         mainCollectionView.isHidden = true
         
         bottomContainerView.clipsToBounds = true

@@ -8,7 +8,6 @@
 import UIKit
 import Photos
 
-
 class ResultViewController: UIViewController {
     @IBOutlet var resultView: ResultView!
     
@@ -91,30 +90,33 @@ class ResultViewController: UIViewController {
     
     @IBAction func downLoadButtonTapped(_ sender: UIButton) {
         PHPhotoLibrary.requestAuthorization { status in
-            guard status == .authorized, let originalImage = self.resultView.resultImageView.image else { return }
-            
-            let receiveSizeInt = Int(self.receiveSize)!
-            
-            // ✅ 강제 리사이징 (사용자 지정 사이즈)
-            let resizedImage = self.resizeImage(image: originalImage, targetSize: CGSize(width: receiveSizeInt, height: receiveSizeInt))
-            
-            PHPhotoLibrary.shared().performChanges({
-                PHAssetChangeRequest.creationRequestForAsset(from: resizedImage)
-            }, completionHandler: { success, error in
-                DispatchQueue.main.async {
-                    if success {
-                        // 저장 성공 시 알림 표시
-                        let alert = UIAlertController(title: "저장 완료", message: "사진이 앨범에 저장되었습니다.", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-                    } else if let error = error {
-                        // 저장 실패 시 알림 표시
-                        let alert = UIAlertController(title: "저장 실패", message: "사진 저장 중 오류가 발생했습니다: \(error.localizedDescription)", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                
+                guard status == .authorized, let originalImage = self.resultView.resultImageView.image else { return }
+                
+                let receiveSizeInt = Int(self.receiveSize)!
+                
+                // ✅ 강제 리사이징 (사용자 지정 사이즈)
+                let resizedImage = self.resizeImage(image: originalImage, targetSize: CGSize(width: receiveSizeInt, height: receiveSizeInt))
+                
+                PHPhotoLibrary.shared().performChanges({
+                    PHAssetChangeRequest.creationRequestForAsset(from: resizedImage)
+                }, completionHandler: { success, error in
+                    DispatchQueue.main.async {
+                        if success {
+                            // 저장 성공 시 알림 표시
+                            let alert = UIAlertController(title: "저장 완료", message: "사진이 앨범에 저장되었습니다.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        } else if let error = error {
+                            // 저장 실패 시 알림 표시
+                            let alert = UIAlertController(title: "저장 실패", message: "사진 저장 중 오류가 발생했습니다: \(error.localizedDescription)", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        }
                     }
-                }
-            })
+                })
+            }
         }
     }
     

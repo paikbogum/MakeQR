@@ -10,7 +10,6 @@ import UIKit
 class MainViewController: UIViewController {
     
     @IBOutlet var mainView: MainView!
-    
     @IBOutlet weak var makeQRButtonTopConstraint: NSLayoutConstraint!
     
     let cellName = "MainCollectionViewCell"

@@ -16,12 +16,16 @@ class ResultView: UIView {
     @IBOutlet weak var downLoadButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var kakaoButton: UIButton!
+
+    @IBOutlet weak var topContainerView: UIView!
     
     var animationView: LottieAnimationView?
     var loadingLabel: UILabel?
     
     func setUI() {
         self.backgroundColor = CustomColor.darkModeBackgroundColor.color
+        
+        topContainerView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
         
         resultContainerView.layer.cornerRadius = 8
         resultContainerView.clipsToBounds = true
@@ -34,6 +38,7 @@ class ResultView: UIView {
         downLoadButton.clipsToBounds = true
         downLoadButton.tintColor = .black
         downLoadButton.backgroundColor = CustomColor.backgroundColor.color
+        
         downLoadButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         
         shareButton.layer.cornerRadius = 8
