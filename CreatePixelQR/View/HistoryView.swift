@@ -16,9 +16,11 @@ class HistoryView: UIView {
     
     @IBOutlet weak var historyTableView: UITableView!
     
+    @IBOutlet weak var filterButton: UIButton!
     
     func historySetting() {
         self.backgroundColor = CustomColor.darkModeBackgroundColor.color
+        filterButton.tintColor = CustomColor.backgroundColor.color
         
         topButton.tintColor = CustomColor.backgroundColor.color
         topLabel.textColor = CustomColor.backgroundColor.color

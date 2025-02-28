@@ -38,6 +38,7 @@ class ResultViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             self.resultView.removeLottieAnimationAndLabel()
             //self.resultView.resultContainerView.backgroundColor = CustomColor.backgroundColor.color
+            self.resultView.topContainerView.alpha = 1.0
             self.resultView.resultImageView.isHidden = false
             self.resultView.randomMent.isHidden = false
             self.resultView.downLoadButton.isHidden = false

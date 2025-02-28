@@ -23,36 +23,52 @@ class ResultView: UIView {
     var loadingLabel: UILabel?
     
     func setUI() {
+        if #available(iOS 15.0, *) {
+            var config = UIButton.Configuration.plain()
+            config.imagePadding = 5
+            config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+                var outgoing = incoming
+                outgoing.font = UIFont.boldSystemFont(ofSize: 12) // 원하는 폰트 적용
+                return outgoing
+        }
+            downLoadButton.configuration = config
+            shareButton.configuration = config
+            kakaoButton.configuration = config
+        }
+        
         self.backgroundColor = CustomColor.darkModeBackgroundColor.color
         
         topContainerView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
+        topContainerView.clipsToBounds = true
+        topContainerView.layer.cornerRadius = 8
+        
+        topContainerView.alpha = 0
         
         resultContainerView.layer.cornerRadius = 8
         resultContainerView.clipsToBounds = true
         resultContainerView.backgroundColor = CustomColor.backgroundColor.color
         
-        randomMent.textColor = .darkGray
-        randomMent.font = UIFont.boldSystemFont(ofSize: 15)
+        randomMent.textColor = .black
+        randomMent.font = UIFont.boldSystemFont(ofSize: 14)
         
         downLoadButton.layer.cornerRadius = 8
         downLoadButton.clipsToBounds = true
         downLoadButton.tintColor = .black
         downLoadButton.backgroundColor = CustomColor.backgroundColor.color
         
-        downLoadButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-        
+      
         shareButton.layer.cornerRadius = 8
         shareButton.clipsToBounds = true
         shareButton.tintColor = .black
         shareButton.backgroundColor = CustomColor.backgroundColor.color
-        shareButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        
 
         kakaoButton.layer.cornerRadius = 8
         kakaoButton.clipsToBounds = true
         kakaoButton.tintColor = .black
         kakaoButton.titleLabel?.textColor = .black
         kakaoButton.backgroundColor = .systemYellow
-        kakaoButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+
         
         randomMent.isHidden = true
         downLoadButton.isHidden = true

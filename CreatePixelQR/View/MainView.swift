@@ -40,15 +40,17 @@ class MainView: UIView {
         self.backgroundColor = CustomColor.darkModeBackgroundColor.color
         
         //topContainerView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
-        topContainerView.backgroundColor = .clear
+        topContainerView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
 
-        exQRImageView.image = UIImage(named: "mainViewQRImg")
+        exQRImageView.image = UIImage(named: "mainViewQR")
         
         makeQRButton.setTitle("QR코드 생성", for: .normal)
-        makeQRButton.backgroundColor = CustomColor.strongCalendarColor.color
+        makeQRButton.backgroundColor = CustomColor.darkModeDarkGrayColor.color
         makeQRButton.titleLabel?.textColor = .white
         makeQRButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         makeQRButton.layer.cornerRadius = 4
+        makeQRButton.layer.borderWidth = 1.0
+        makeQRButton.layer.borderColor = CustomColor.backgroundColor.color.cgColor
         
         mainCollectionView.isHidden = true
         
@@ -57,6 +59,6 @@ class MainView: UIView {
         bottomContainerView.backgroundColor = .clear
         
         bottomContainerViewTopSafeContraint.constant = 300
-        
+        bottomContainerView.isHidden = true
     }
 }

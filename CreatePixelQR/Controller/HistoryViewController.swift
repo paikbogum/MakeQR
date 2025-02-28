@@ -18,6 +18,12 @@ class HistoryViewController: UIViewController {
     @IBOutlet var historyView: HistoryView!
     private let emptyStateView = UIView()
     
+    /*
+    let actionArray: [UIAction] = [UIAction(title: "스캔한 QR만 보기", image: UIImage(systemName: "qrcode.viewfinder"), handler: { _ in}),
+                                   UIAction(title: "제작한 QR만 보기", image: UIImage(systemName: "qrcode"), handler: { _ in print("제작 QR 터치")})
+    ]*/
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         registerXib()
@@ -28,9 +34,26 @@ class HistoryViewController: UIViewController {
         
         setupEmptyStateView()
         updateEmptyStateVisibility()
-    
-        
-        print(historyItems.count)
+
+        historyView.filterButton.showsMenuAsPrimaryAction = true
+        historyView.filterButton.menu = createMenu()
+    }
+     
+    func createMenu() -> UIMenu {
+        let actionArray: [UIAction] = [
+            UIAction(title: "스캔한 QR만 보기", image: UIImage(systemName: "qrcode.viewfinder"), handler: { [weak self] _ in
+                self?.filterScannedData()
+            }),
+            UIAction(title: "제작한 QR만 보기", image: UIImage(systemName: "qrcode"), handler: { [weak self] _ in
+                self?.filterGenerateData()
+            }),
+            
+            UIAction(title: "전체 보기", image: nil, handler: { [weak self] _ in
+                self?.resetData()
+            })
+        ]
+
+        return UIMenu(title: "QR 필터", children: actionArray)
     }
     
     func registerXib() {
@@ -41,39 +64,39 @@ class HistoryViewController: UIViewController {
     }
     
     // MARK: Empty State View 설정
-       private func setupEmptyStateView() {
-           emptyStateView.backgroundColor = .clear
-           emptyStateView.isHidden = true // 초기 상태는 숨김
-           emptyStateView.translatesAutoresizingMaskIntoConstraints = false
-
-           // 레이블 추가
-           let messageLabel = UILabel()
-           messageLabel.text = "아직 기록이 없습니다! 😭"
-           messageLabel.textColor = CustomColor.backgroundColor.color
-           messageLabel.textAlignment = .center
-           messageLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-           messageLabel.translatesAutoresizingMaskIntoConstraints = false
-           emptyStateView.addSubview(messageLabel)
-
-           // UIView 추가
-           view.addSubview(emptyStateView)
-
-           // AutoLayout 설정
-           NSLayoutConstraint.activate([
+    private func setupEmptyStateView() {
+        emptyStateView.backgroundColor = .clear
+        emptyStateView.isHidden = true // 초기 상태는 숨김
+        emptyStateView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // 레이블 추가
+        let messageLabel = UILabel()
+        messageLabel.text = "아직 기록이 없습니다! 😭"
+        messageLabel.textColor = CustomColor.backgroundColor.color
+        messageLabel.textAlignment = .center
+        messageLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        emptyStateView.addSubview(messageLabel)
+        
+        // UIView 추가
+        view.addSubview(emptyStateView)
+        
+        // AutoLayout 설정
+        NSLayoutConstraint.activate([
             emptyStateView.centerXAnchor.constraint(equalTo: historyView.historyTableView.centerXAnchor),
-               emptyStateView.centerYAnchor.constraint(equalTo: historyView.historyTableView.centerYAnchor),
-               emptyStateView.widthAnchor.constraint(equalTo: historyView.historyTableView.widthAnchor),
-               emptyStateView.heightAnchor.constraint(equalTo: historyView.historyTableView.heightAnchor),
-
-               messageLabel.centerXAnchor.constraint(equalTo: emptyStateView.centerXAnchor),
-               messageLabel.centerYAnchor.constraint(equalTo: emptyStateView.centerYAnchor)
-           ])
-       }
+            emptyStateView.centerYAnchor.constraint(equalTo: historyView.historyTableView.centerYAnchor),
+            emptyStateView.widthAnchor.constraint(equalTo: historyView.historyTableView.widthAnchor),
+            emptyStateView.heightAnchor.constraint(equalTo: historyView.historyTableView.heightAnchor),
+            
+            messageLabel.centerXAnchor.constraint(equalTo: emptyStateView.centerXAnchor),
+            messageLabel.centerYAnchor.constraint(equalTo: emptyStateView.centerYAnchor)
+        ])
+    }
     
     // MARK: Empty State View 업데이트
-      private func updateEmptyStateVisibility() {
-          emptyStateView.isHidden = !filteredItems.isEmpty
-      }
+    private func updateEmptyStateVisibility() {
+        emptyStateView.isHidden = !filteredItems.isEmpty
+    }
     
     func formatDateWithAmPm(date: Date) -> String {
         let dateFormatter = DateFormatter()
@@ -107,6 +130,36 @@ class HistoryViewController: UIViewController {
         historyView.historyTableView.reloadData()
     }
     
+    func filterScannedData() {
+        filteredItems = historyItems.filter { $0.action == .scanned }
+        
+        // 날짜 순 정렬 (최신 항목이 상단)
+        filteredItems.sort { $0.date > $1.date }
+        
+        historyView.historyTableView.reloadData()
+    }
+    
+    func filterGenerateData() {
+        filteredItems = historyItems.filter { $0.action == .generated }
+        
+        // 날짜 순 정렬 (최신 항목이 상단)
+        filteredItems.sort { $0.date > $1.date }
+        
+        historyView.historyTableView.reloadData()
+    }
+    
+    
+    func resetData() {
+        filteredItems = historyItems
+        // 날짜 순 정렬 (최신 항목이 상단)
+        filteredItems.sort { $0.date > $1.date }
+        
+        historyView.historyTableView.reloadData()
+        
+    }
+    
+    
+    
     func parseWiFiData(_ data: String) -> (ssid: String, password: String, security: String, hidden: Bool)? {
         guard data.hasPrefix("WIFI:") else { return nil }
 
@@ -135,6 +188,13 @@ class HistoryViewController: UIViewController {
     
     @IBAction func caseSegmentControlTapped(_ sender: UISegmentedControl) {
         filterData(for: sender.selectedSegmentIndex)
+        
+        if sender.selectedSegmentIndex != 0 {
+            historyView.filterButton.isEnabled = false
+        } else {
+            historyView.filterButton.isEnabled = true
+        }
+        
         updateEmptyStateVisibility()
     }
     
@@ -162,7 +222,11 @@ class HistoryViewController: UIViewController {
 
          // TableView 갱신
          historyView.historyTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+         
+         self.historyItems = QRHistoryManager.shared.loadHistory()
+         historyView.historyTableView.reloadData()
      }
+    
 }
 
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {

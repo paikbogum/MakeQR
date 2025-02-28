@@ -10,7 +10,7 @@ import UIKit
 class MainViewController: UIViewController {
     
     @IBOutlet var mainView: MainView!
-    @IBOutlet weak var makeQRButtonTopConstraint: NSLayoutConstraint!
+    //@IBOutlet weak var makeQRButtonTopConstraint: NSLayoutConstraint!
     
     let cellName = "MainCollectionViewCell"
     let cellReuseIdentifier = "MainCollectionViewCell"
@@ -21,9 +21,12 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         mainView.mainViewUISetting()
         registerXib()
         mainView.mainCollectionView.layoutIfNeeded()
+        showToast(message: "QR코드 생성 버튼을 눌러 나만의 QR을 생성하세요!")
+        
         
         if let layout = mainView.mainCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.estimatedItemSize = .zero
@@ -42,19 +45,48 @@ class MainViewController: UIViewController {
         self.mainView.topContainerView.isHidden = true
         UIView.animate(withDuration: 1.0, animations: {
             self.mainView.makeQRButton.isHidden = true
-            self.makeQRButtonTopConstraint.constant = 0 // Top Constraint 변경
+            //self.makeQRButtonTopConstraint.constant = 0 // Top Constraint 변경
             self.mainView.bottomContainerView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
+            self.mainView.bottomContainerView.isHidden = false
             self.mainView.bottomContainerViewTopSafeContraint.constant = 50
             
             self.view.layoutIfNeeded() // 레이아웃 갱신
         }, completion: { _ in
- 
             // UILabel 애니메이션 완료 후 UICollectionView 애니메이션 실행
             self.mainView.mainCollectionView.isHidden = false // CollectionView 표시
             UIView.animate(withDuration: 1.0) {
                 self.mainView.mainCollectionView.alpha = 1  // alpha 값을 서서히 증가
                
             }
+        })
+    }
+    
+    
+    func showToast(message: String, duration: TimeInterval = 2.0) {
+        let toastLabel = UILabel()
+        toastLabel.text = message
+        toastLabel.textAlignment = .center
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        toastLabel.textColor = .white
+        toastLabel.font = UIFont.systemFont(ofSize: 14)
+        toastLabel.layer.cornerRadius = 10
+        toastLabel.clipsToBounds = true
+        
+        let toastWidth: CGFloat = UIScreen.main.bounds.width * 0.8
+        let toastHeight: CGFloat = 50
+        toastLabel.frame = CGRect(
+            x: (UIScreen.main.bounds.width - toastWidth) / 2,
+            y: UIScreen.main.bounds.height - toastHeight - 150,
+            width: toastWidth,
+            height: toastHeight
+        )
+        
+        UIApplication.shared.windows.first?.addSubview(toastLabel)
+        
+        UIView.animate(withDuration: 1.0, delay: duration, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: { _ in
+            toastLabel.removeFromSuperview()
         })
     }
 }

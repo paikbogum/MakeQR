@@ -10,7 +10,6 @@ import KakaoSDKCommon
 import KakaoSDKShare
 import KakaoSDKTemplate
 
-
 class KakaoImageShareManager {
     static let shared = KakaoImageShareManager()
     

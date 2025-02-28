@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B6B370535DFA5E9497D97FAD /* Pods_CreatePixelQR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94442BF4BF6784D1B9BBD55E /* Pods_CreatePixelQR.framework */; };
+		B766DCF62D71A0330086F321 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B766DCF52D71A0330086F321 /* PrivacyViewController.swift */; };
+		B766DCFA2D71A3490086F321 /* [QR]개인정보처리방침.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B766DCF92D71A3490086F321 /* [QR]개인정보처리방침.pdf */; };
 		B770DE932CEF387D005D9EC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B770DE922CEF387D005D9EC1 /* AppDelegate.swift */; };
 		B770DE952CEF387D005D9EC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B770DE942CEF387D005D9EC1 /* SceneDelegate.swift */; };
 		B770DE972CEF387D005D9EC1 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B770DE962CEF387D005D9EC1 /* ResultViewController.swift */; };
@@ -61,6 +63,8 @@
 
 /* Begin PBXFileReference section */
 		94442BF4BF6784D1B9BBD55E /* Pods_CreatePixelQR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CreatePixelQR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B766DCF52D71A0330086F321 /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
+		B766DCF92D71A3490086F321 /* [QR]개인정보처리방침.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "[QR]개인정보처리방침.pdf"; sourceTree = "<group>"; };
 		B770DE8F2CEF387D005D9EC1 /* CreatePixelQR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CreatePixelQR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B770DE922CEF387D005D9EC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B770DE942CEF387D005D9EC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 		B770DE912CEF387D005D9EC1 /* CreatePixelQR */ = {
 			isa = PBXGroup;
 			children = (
+				B766DCF92D71A3490086F321 /* [QR]개인정보처리방침.pdf */,
 				B7C7743A2D1043E800BEE6EC /* CreatePixelQR.entitlements */,
 				B7C774162CF4622800BEE6EC /* LoadingQR.json */,
 				B7C774002CF243C800BEE6EC /* Model */,
@@ -225,6 +230,7 @@
 				B7ADAFFB2D22867C005D18B7 /* SettingViewController.swift */,
 				B793863F2D64B1920089CB19 /* InfoViewController.swift */,
 				B7DB93222D55FE1200A77C8E /* CustomAlertViewController.swift */,
+				B766DCF52D71A0330086F321 /* PrivacyViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -341,6 +347,7 @@
 				B770DE9A2CEF387D005D9EC1 /* Base in Resources */,
 				B79386432D64B1B30089CB19 /* InfoTableViewCell.xib in Resources */,
 				B7C774172CF4622800BEE6EC /* LoadingQR.json in Resources */,
+				B766DCFA2D71A3490086F321 /* [QR]개인정보처리방침.pdf in Resources */,
 				B7C774472D12F1C900BEE6EC /* HistoryTableViewCell.xib in Resources */,
 				B7C7740B2CF3485C00BEE6EC /* MainCollectionViewCell.xib in Resources */,
 				B7EC5AFF2D3A4E1F0047BB64 /* CustomAlertView.xib in Resources */,
@@ -427,6 +434,7 @@
 				B7C774392D0C353F00BEE6EC /* HalfSizePresentationController.swift in Sources */,
 				B7F84B0A2D4DFA7D00BB493F /* SettingDefaults.swift in Sources */,
 				B7C7743C2D12F02600BEE6EC /* QRHistory.swift in Sources */,
+				B766DCF62D71A0330086F321 /* PrivacyViewController.swift in Sources */,
 				B7ADB0002D2B324E005D18B7 /* CustomizingViewController.swift in Sources */,
 				B7ADAFFC2D22867C005D18B7 /* SettingViewController.swift in Sources */,
 				B7C774492D12F63C00BEE6EC /* QRHistoryManager.swift in Sources */,

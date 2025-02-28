@@ -59,11 +59,19 @@ class SettingViewController: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
         
     }
-    
+
     
     @IBAction func feedBackButtonTapped(_ sender: UIButton) {
         sendFeedbackEmail()
     }
+    
+    
+    @IBAction func privacyButtonTapped(_ sender: UIButton) {
+        guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "PrivacyViewController") as? PrivacyViewController else { return }
+        
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
     
     func showToast(message: String, duration: TimeInterval = 2.0) {
         let toastLabel = UILabel()
@@ -92,21 +100,24 @@ class SettingViewController: UIViewController {
             toastLabel.removeFromSuperview()
         })
     }
-    
-    
 }
 
+
+//MARK: - 이메일 관련
 extension SettingViewController: MFMailComposeViewControllerDelegate {
     func sendFeedbackEmail() {
         guard MFMailComposeViewController.canSendMail() else {
             print("이메일을 보낼 수 없습니다.")
-            showToast(message: "이메일을 보낼 수 없습니다.")
+            showToast(message: "이메일을 보낼 수 없습니다. 메일 앱을 확인해주세요.")
+            
+            // 메일 앱이 없거나, 메일 계정이 없을 경우 mailto 링크 열기 시도
+            openMailAppAlternative()
             return
         }
         
         let mailVC = MFMailComposeViewController()
         mailVC.mailComposeDelegate = self
-        mailVC.setToRecipients(["support@example.com"])
+        mailVC.setToRecipients(["qorguswls00@gmail.com"])
         mailVC.setSubject("앱 피드백")
         mailVC.setMessageBody("여기에 피드백 내용을 작성해주세요.", isHTML: false)
         
@@ -117,6 +128,36 @@ extension SettingViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
         
-        showToast(message: "성공적으로 메일을 보냈습니다!")
+        switch result {
+        case .sent:
+            showToast(message: "성공적으로 메일을 보냈습니다!")
+        case .saved:
+            showToast(message: "메일이 임시 저장되었습니다.")
+        case .cancelled:
+            showToast(message: "메일 전송이 취소되었습니다.")
+        case .failed:
+            showToast(message: "메일 전송에 실패했습니다.")
+        @unknown default:
+            showToast(message: "알 수 없는 오류가 발생했습니다.")
+        }
+    }
+    
+    // 📌 메일 앱이 없는 경우 mailto 링크를 열어 기본 메일 앱을 실행하도록 처리
+    func openMailAppAlternative() {
+        // 만약, 디바이스에 email 기능이 비활성화 일 때, 사용자에게 알림
+        let alertController = UIAlertController(title: "메일 계정 활성화 필요",
+                                                message: "Mail 앱에서 사용자의 Email을 계정을 설정해 주세요.",
+                                                preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "확인", style: .default) { _ in
+            guard let mailSettingsURL = URL(string: UIApplication.openSettingsURLString + "&&path=MAIL") else { return }
+            
+            if UIApplication.shared.canOpenURL(mailSettingsURL) {
+                UIApplication.shared.open(mailSettingsURL, options: [:], completionHandler: nil)
+            }
+        }
+        alertController.addAction(alertAction)
+        
+        self.present(alertController, animated: true)
     }
 }
+
