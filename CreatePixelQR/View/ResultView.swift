@@ -48,7 +48,7 @@ class ResultView: UIView {
         resultContainerView.clipsToBounds = true
         resultContainerView.backgroundColor = CustomColor.backgroundColor.color
         
-        randomMent.textColor = .black
+        randomMent.textColor = CustomColor.backgroundColor.color
         randomMent.font = UIFont.boldSystemFont(ofSize: 14)
         
         downLoadButton.layer.cornerRadius = 8

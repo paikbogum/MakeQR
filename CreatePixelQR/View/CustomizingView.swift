@@ -9,6 +9,11 @@ import UIKit
 
 class CustomizingView: UIView {
     
+    
+    @IBOutlet weak var scollView: UIScrollView!
+    
+    @IBOutlet weak var inScrollView: UIView!
+    
     @IBOutlet weak var colorSetView: UIView!
     @IBOutlet weak var colorSetButton: UIButton!
     
@@ -63,12 +68,13 @@ class CustomizingView: UIView {
     
     @IBOutlet weak var qrsizeLabel: UILabel!
 
-    
     @IBOutlet weak var qrsizeTF: UITextField!
     
-    
+
     func setColorSetUI() {
         self.backgroundColor = CustomColor.darkModeBackgroundColor.color
+        scollView.backgroundColor = .clear
+        inScrollView.backgroundColor = .clear
         
         colorSetView.layer.cornerRadius = 8
         colorSetView.backgroundColor = CustomColor.darkModeDarkGrayColor.color

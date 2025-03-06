@@ -19,9 +19,9 @@ class HistoryViewController: UIViewController {
     private let emptyStateView = UIView()
     
     /*
-    let actionArray: [UIAction] = [UIAction(title: "스캔한 QR만 보기", image: UIImage(systemName: "qrcode.viewfinder"), handler: { _ in}),
-                                   UIAction(title: "제작한 QR만 보기", image: UIImage(systemName: "qrcode"), handler: { _ in print("제작 QR 터치")})
-    ]*/
+     let actionArray: [UIAction] = [UIAction(title: "스캔한 QR만 보기", image: UIImage(systemName: "qrcode.viewfinder"), handler: { _ in}),
+     UIAction(title: "제작한 QR만 보기", image: UIImage(systemName: "qrcode"), handler: { _ in print("제작 QR 터치")})
+     ]*/
     
     
     override func viewDidLoad() {
@@ -34,11 +34,11 @@ class HistoryViewController: UIViewController {
         
         setupEmptyStateView()
         updateEmptyStateVisibility()
-
+        
         historyView.filterButton.showsMenuAsPrimaryAction = true
         historyView.filterButton.menu = createMenu()
     }
-     
+    
     func createMenu() -> UIMenu {
         let actionArray: [UIAction] = [
             UIAction(title: "스캔한 QR만 보기", image: UIImage(systemName: "qrcode.viewfinder"), handler: { [weak self] _ in
@@ -52,7 +52,7 @@ class HistoryViewController: UIViewController {
                 self?.resetData()
             })
         ]
-
+        
         return UIMenu(title: "QR 필터", children: actionArray)
     }
     
@@ -148,7 +148,6 @@ class HistoryViewController: UIViewController {
         historyView.historyTableView.reloadData()
     }
     
-    
     func resetData() {
         filteredItems = historyItems
         // 날짜 순 정렬 (최신 항목이 상단)
@@ -162,16 +161,16 @@ class HistoryViewController: UIViewController {
     
     func parseWiFiData(_ data: String) -> (ssid: String, password: String, security: String, hidden: Bool)? {
         guard data.hasPrefix("WIFI:") else { return nil }
-
+        
         let components = data
             .replacingOccurrences(of: "WIFI:", with: "")
             .components(separatedBy: ";")
-
+        
         var ssid = ""
         var password = ""
         var security = "WPA" // 기본값
         var hidden = false
-
+        
         for component in components {
             if component.hasPrefix("S:") {
                 ssid = component.replacingOccurrences(of: "S:", with: "")
@@ -199,33 +198,33 @@ class HistoryViewController: UIViewController {
     }
     
     // MARK: 액션 메서드
-     func showDetails(for index: Int) {
-         let target = filteredItems[index]
-         let alertController = UIAlertController(
-             title: "자세히 보기",
-             message: """
+    func showDetails(for index: Int) {
+        let target = filteredItems[index]
+        let alertController = UIAlertController(
+            title: "자세히 보기",
+            message: """
              타입: \(target.type.rawValue)
              내용: \(target.content)
              날짜: \(formatDateWithAmPm(date: target.date))
              """,
-             preferredStyle: .alert
-         )
-         alertController.addAction(UIAlertAction(title: "닫기", style: .cancel))
-         present(alertController, animated: true)
-     }
-
-     func deleteItem(at index: Int) {
-         // 데이터 삭제
-         let target = filteredItems[index]
-         QRHistoryManager.shared.deleteSpecificHistory(by: target.id)
-         filteredItems.remove(at: index)
-
-         // TableView 갱신
-         historyView.historyTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
-         
-         self.historyItems = QRHistoryManager.shared.loadHistory()
-         historyView.historyTableView.reloadData()
-     }
+            preferredStyle: .alert
+        )
+        alertController.addAction(UIAlertAction(title: "닫기", style: .cancel))
+        present(alertController, animated: true)
+    }
+    
+    func deleteItem(at index: Int) {
+        // 데이터 삭제
+        let target = filteredItems[index]
+        QRHistoryManager.shared.deleteSpecificHistory(by: target.id)
+        filteredItems.remove(at: index)
+        
+        // TableView 갱신
+        historyView.historyTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+        
+        self.historyItems = QRHistoryManager.shared.loadHistory()
+        historyView.historyTableView.reloadData()
+    }
     
 }
 
@@ -248,7 +247,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
             cell.dateLabel.text = "탐지 날짜: \(formatDateWithAmPm(date: target.date))"
             cell.dateLabel.textColor = CustomColor.backgroundColor.color
         }
-
+        
         cell.typeImageView.image = UIImage(named: stringTarget + "White32px")
         
         if target.type == .wifi, let wifiInfo = parseWiFiData(target.content) {
@@ -260,7 +259,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             cell.mainLabel.text = target.content
         }
-
+        
         return cell
     }
     
@@ -295,7 +294,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
             self.deleteItem(at: indexPath.row)
             completionHandler(true) // 액션 완료 표시
         }
-
+        
         return UISwipeActionsConfiguration(actions: [deleteAction, detailAction])
     }
     

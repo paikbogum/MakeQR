@@ -28,6 +28,7 @@ class CustomizingViewController: UIViewController, CustomAlertDelegate {
     
     var selectedSizeOption: String = ""
     var sizeOptions = ["300", "600", "900", "1200", "1500"]
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

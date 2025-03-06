@@ -31,21 +31,21 @@ class ResultViewController: UIViewController {
         super.viewDidLoad()
         
         resultView.setUI()
-        makeQRResult()
         resultView.showLottieAnimationWithLabel(text: "QR코드를 생성 중입니다...")
         
-        // 5초 후 애니메이션과 레이블 제거
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.resultView.removeLottieAnimationAndLabel()
-            //self.resultView.resultContainerView.backgroundColor = CustomColor.backgroundColor.color
-            self.resultView.topContainerView.alpha = 1.0
-            self.resultView.resultImageView.isHidden = false
-            self.resultView.randomMent.isHidden = false
-            self.resultView.downLoadButton.isHidden = false
-            self.resultView.shareButton.isHidden = false
-            self.resultView.kakaoButton.isHidden = false
-            self.randomMent(ments: ["상당한 걸작입니다!", "엄청난 결과물인데요?", "Cool!", "갤러리에 전시해도 되겠어요."])
+        makeQRResult {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+             self.resultView.removeLottieAnimationAndLabel()
+             self.resultView.topContainerView.alpha = 1.0
+             self.resultView.resultImageView.isHidden = false
+             self.resultView.randomMent.isHidden = false
+             self.resultView.downLoadButton.isHidden = false
+             self.resultView.shareButton.isHidden = false
+             self.resultView.kakaoButton.isHidden = false
+             self.randomMent(ments: ["상당한 걸작입니다!", "엄청난 결과물인데요?", "자랑해도 될 만한 결과입니다.", "갤러리에 전시해도 되겠어요."])
+             }
         }
+        
     }
     
     private func randomMent(ments: [String]) {
@@ -53,7 +53,7 @@ class ResultViewController: UIViewController {
     }
     
     //dotImageQR Making
-    private func makeQRResult() {
+    private func makeQRResult(completion: (() -> Void)? = nil) {
         guard let croppedImage = receiveCroppedImage else {
             print("Cropped image not found.")
             return
@@ -84,6 +84,8 @@ class ResultViewController: UIViewController {
             
             // 결과를 이미지 뷰에 표시
             resultView.resultImageView.image = finalQRCode
+            
+            completion?()
         } else {
             print("Failed to generate QR code with dot overlay.")
         }
