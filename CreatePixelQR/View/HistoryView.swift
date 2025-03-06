@@ -28,7 +28,13 @@ class HistoryView: UIView {
         topLabel.text = "기록"
         
         historyTableView.backgroundColor = .clear
+        
+        // 선택되지 않은 상태의 텍스트 색상 변경
+        caseSegmentControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
+
+        // 선택된 상태의 텍스트 색상 변경
+        caseSegmentControl.setTitleTextAttributes([.foregroundColor: UIColor.black], for: .selected)
+
+        
     }
-    
-    
 }

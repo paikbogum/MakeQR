@@ -10,7 +10,6 @@ import UIKit
 class MainViewController: UIViewController {
     
     @IBOutlet var mainView: MainView!
-    //@IBOutlet weak var makeQRButtonTopConstraint: NSLayoutConstraint!
     
     let cellName = "MainCollectionViewCell"
     let cellReuseIdentifier = "MainCollectionViewCell"
@@ -112,6 +111,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        //destination
         let destination = categoryList[indexPath.row].0
         
         if destination == "Wi-Fi" {
@@ -130,8 +130,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let totalSpacing: CGFloat = 40 // Safe Area 여백 (20 + 20)
         let width = collectionView.safeAreaLayoutGuide.layoutFrame.width - totalSpacing
-
-        // 셀의 개수에 따라 높이 계산
+        
         let height: CGFloat = 70
 
         return CGSize(width: width, height: height)

@@ -714,6 +714,7 @@
                                     <segment title="Text"/>
                                     <segment title="Email"/>
                                 </segments>
+                                <color key="selectedSegmentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="caseSegmentControlTapped:" destination="Qb8-3j-nci" eventType="valueChanged" id="u2Q-cv-uTw"/>
                                 </connections>

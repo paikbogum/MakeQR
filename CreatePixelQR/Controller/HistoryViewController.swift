@@ -15,14 +15,12 @@ class HistoryViewController: UIViewController {
     var historyItems: [QRHistory] = []
     var filteredItems: [QRHistory] = []
     
+    var filterCase: Int = 0
+    
     @IBOutlet var historyView: HistoryView!
     private let emptyStateView = UIView()
     
-    /*
-     let actionArray: [UIAction] = [UIAction(title: "스캔한 QR만 보기", image: UIImage(systemName: "qrcode.viewfinder"), handler: { _ in}),
-     UIAction(title: "제작한 QR만 보기", image: UIImage(systemName: "qrcode"), handler: { _ in print("제작 QR 터치")})
-     ]*/
-    
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +35,34 @@ class HistoryViewController: UIViewController {
         
         historyView.filterButton.showsMenuAsPrimaryAction = true
         historyView.filterButton.menu = createMenu()
+        
+        setupRefreshControl()
+    }
+    
+    // RefreshControl 설정
+    private func setupRefreshControl() {
+        refreshControl.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
+        refreshControl.tintColor = CustomColor.backgroundColor.color // 로딩 인디케이터 색상 설정
+        refreshControl.attributedTitle = NSAttributedString(string: "데이터 새로고침 중...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray])
+        
+        // TableView에 RefreshControl 연결
+        historyView.historyTableView.refreshControl = refreshControl
+    }
+    
+    // 실제 데이터 리로드 메서드
+    @objc private func refreshTableView() {
+        self.historyItems = QRHistoryManager.shared.loadHistory()
+        print("🔄 테이블 뷰 새로고침 시작")
+        
+        // 인디케이터 표시
+        refreshControl.beginRefreshing()
+        
+        // 2초간 가짜 데이터 로딩 시뮬레이션 (예: API 호출)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.filterData(for: self.filterCase)
+            self.refreshControl.endRefreshing() // 로딩 인디케이터 종료
+            print("✅ 새로고침 완료")
+        }
     }
     
     func createMenu() -> UIMenu {
@@ -109,24 +135,35 @@ class HistoryViewController: UIViewController {
     func filterData(for category: Int) {
         switch category {
         case 0:
+            filterCase = 0
             filteredItems = historyItems
         case 1:
+            filterCase = 1
             filteredItems = historyItems.filter { $0.type == .wifi }
         case 2:
+            filterCase = 2
             filteredItems = historyItems.filter { $0.type == .url }
         case 3:
+            filterCase = 3
             filteredItems = historyItems.filter { $0.type == .phone }
         case 4:
+            filterCase = 4
             filteredItems = historyItems.filter { $0.type == .text }
         case 5:
+            filterCase = 5
             filteredItems = historyItems.filter { $0.type == .email }
         default:
             filteredItems = []
         }
         
         // 날짜 순 정렬 (최신 항목이 상단)
+        reloadTableViewData()
+    }
+    
+    
+    
+    func reloadTableViewData() {
         filteredItems.sort { $0.date > $1.date }
-        
         historyView.historyTableView.reloadData()
     }
     
@@ -134,26 +171,20 @@ class HistoryViewController: UIViewController {
         filteredItems = historyItems.filter { $0.action == .scanned }
         
         // 날짜 순 정렬 (최신 항목이 상단)
-        filteredItems.sort { $0.date > $1.date }
-        
-        historyView.historyTableView.reloadData()
+        reloadTableViewData()
     }
     
     func filterGenerateData() {
         filteredItems = historyItems.filter { $0.action == .generated }
         
         // 날짜 순 정렬 (최신 항목이 상단)
-        filteredItems.sort { $0.date > $1.date }
-        
-        historyView.historyTableView.reloadData()
+        reloadTableViewData()
     }
     
     func resetData() {
         filteredItems = historyItems
         // 날짜 순 정렬 (최신 항목이 상단)
-        filteredItems.sort { $0.date > $1.date }
-        
-        historyView.historyTableView.reloadData()
+        reloadTableViewData()
         
     }
     

@@ -40,6 +40,7 @@ class CustomizingView: UIView {
     @IBOutlet weak var qrLabel: UILabel!
     
     @IBOutlet weak var qrSetValueLabel: UILabel!
+    
     @IBOutlet weak var qrSetSlider: UISlider!
     
     @IBOutlet weak var qrSetValueMin: UILabel!
@@ -128,7 +129,7 @@ class CustomizingView: UIView {
         logoDotValueLabel.font = UIFont.boldSystemFont(ofSize: 14)
         logoDotValueLabel.textColor = .white
     }
-    
+
     func setQrSetUI() {
         qrSetView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
         qrSetView.layer.cornerRadius = 8

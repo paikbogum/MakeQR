@@ -41,7 +41,7 @@ class KakaoImageShareManager {
         let content = Content(
             title: "나만의 QR코드를 만들어보세요!",
             imageUrl: imageUrl,
-            description: "#QR DIY #나만의 QR을 만들어보세요!",
+            description: "#QR DIY # ",
             link: link
         )
         
