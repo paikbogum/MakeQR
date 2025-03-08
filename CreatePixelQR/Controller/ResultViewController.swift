@@ -45,7 +45,6 @@ class ResultViewController: UIViewController {
              self.randomMent(ments: ["상당한 걸작입니다!", "엄청난 결과물인데요?", "자랑해도 될 만한 결과입니다.", "갤러리에 전시해도 되겠어요."])
              }
         }
-        
     }
     
     private func randomMent(ments: [String]) {

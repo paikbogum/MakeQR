@@ -97,10 +97,17 @@ class HistoryViewController: UIViewController {
         
         // 레이블 추가
         let messageLabel = UILabel()
-        messageLabel.text = "아직 기록이 없습니다! 😭"
-        messageLabel.textColor = CustomColor.backgroundColor.color
+        messageLabel.numberOfLines = 0
+        
+        if historyItems.count == 0 {
+            messageLabel.text = "아직 기록이 없습니다! 😭\n\n환경설정 탭에서 QR 기록 저장 \nOn/Off 상태를 확인해주세요."
+        } else {
+            messageLabel.text = "아직 기록이 없습니다! 😭"
+        }
+
+        messageLabel.textColor = .lightGray
         messageLabel.textAlignment = .center
-        messageLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        messageLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         emptyStateView.addSubview(messageLabel)
         
@@ -318,7 +325,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
             
             completionHandler(true) // 액션 완료 표시
         }
-        detailAction.backgroundColor = .systemBlue
+        detailAction.backgroundColor = CustomColor.caldendarFontColor.color
         
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { [weak self] _, _, completionHandler in
             guard let self = self else { return }
@@ -336,8 +343,10 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         
         nextVC.receiveData = target.content
         nextVC.isCamera = false
+        
         nextVC.modalPresentationStyle = .custom
         nextVC.transitioningDelegate = halfSizeTransitioningDelegate
+        
         
         self.present(nextVC, animated: true)
     }

@@ -42,7 +42,7 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
     var receiveForegroundColor: UIColor = .black
     var receiveBackgroundColor: UIColor = .white
     var receiveDotColor: UIColor = .black
-    var receiveSize: String = "900"
+    var receiveSize: String = "900" 
     
 
     override func viewDidLoad() {
