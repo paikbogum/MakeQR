@@ -56,7 +56,7 @@ class KakaoImageShareManager {
             toastLabel.removeFromSuperview()
         })
     }
-    
+     
     func shareImageViaKakao(imageUrl: URL) {
         // 웹/앱 링크도 모두 빠진 상황
         let content = Content(

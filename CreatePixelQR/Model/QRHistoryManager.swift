@@ -10,7 +10,7 @@ import Foundation
 class QRHistoryManager {
     static let shared = QRHistoryManager()
     private let historyKey = "QRHistory"
-
+     
     // 히스토리 저장
     func saveHistory(item: QRHistory) {
         var history = loadHistory()
