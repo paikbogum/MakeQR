@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B6B370535DFA5E9497D97FAD /* Pods_CreatePixelQR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94442BF4BF6784D1B9BBD55E /* Pods_CreatePixelQR.framework */; };
+		B73303172D80287600C200F8 /* NewQRProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73303162D80287600C200F8 /* NewQRProcessor.swift */; };
+		B73303192D803CA300C200F8 /* QREyeShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73303182D803CA300C200F8 /* QREyeShape.swift */; };
+		B733031B2D82D90F00C200F8 /* QRBodyShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B733031A2D82D90F00C200F8 /* QRBodyShape.swift */; };
 		B766DCF62D71A0330086F321 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B766DCF52D71A0330086F321 /* PrivacyViewController.swift */; };
 		B766DCFA2D71A3490086F321 /* [QR]개인정보처리방침.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B766DCF92D71A3490086F321 /* [QR]개인정보처리방침.pdf */; };
 		B770DE932CEF387D005D9EC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B770DE922CEF387D005D9EC1 /* AppDelegate.swift */; };
@@ -63,6 +66,9 @@
 
 /* Begin PBXFileReference section */
 		94442BF4BF6784D1B9BBD55E /* Pods_CreatePixelQR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CreatePixelQR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B73303162D80287600C200F8 /* NewQRProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewQRProcessor.swift; sourceTree = "<group>"; };
+		B73303182D803CA300C200F8 /* QREyeShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QREyeShape.swift; sourceTree = "<group>"; };
+		B733031A2D82D90F00C200F8 /* QRBodyShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRBodyShape.swift; sourceTree = "<group>"; };
 		B766DCF52D71A0330086F321 /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		B766DCF92D71A3490086F321 /* [QR]개인정보처리방침.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "[QR]개인정보처리방침.pdf"; sourceTree = "<group>"; };
 		B770DE8F2CEF387D005D9EC1 /* CreatePixelQR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CreatePixelQR.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,6 +189,9 @@
 			isa = PBXGroup;
 			children = (
 				B7C7741A2CF5CABB00BEE6EC /* QRProcessor.swift */,
+				B73303162D80287600C200F8 /* NewQRProcessor.swift */,
+				B73303182D803CA300C200F8 /* QREyeShape.swift */,
+				B733031A2D82D90F00C200F8 /* QRBodyShape.swift */,
 				B7C7741C2CFC7DFD00BEE6EC /* CustomColor.swift */,
 				B7C7741E2CFC81A600BEE6EC /* QRCase.swift */,
 				B7C774272D04774900BEE6EC /* KakaoImageShareManager.swift */,
@@ -405,6 +414,7 @@
 			files = (
 				B770DE972CEF387D005D9EC1 /* ResultViewController.swift in Sources */,
 				B7C7744B2D22802B00BEE6EC /* TabBarController.swift in Sources */,
+				B73303192D803CA300C200F8 /* QREyeShape.swift in Sources */,
 				B7C7740C2CF3485C00BEE6EC /* MainCollectionViewCell.swift in Sources */,
 				B7C774212D01B10C00BEE6EC /* MakeWifiViewController.swift in Sources */,
 				B7C7741D2CFC7DFD00BEE6EC /* CustomColor.swift in Sources */,
@@ -413,6 +423,7 @@
 				B7ADB0022D2B3260005D18B7 /* CustomizingView.swift in Sources */,
 				B7DB93232D55FE1200A77C8E /* CustomAlertViewController.swift in Sources */,
 				B7C774402D12F13F00BEE6EC /* HistoryView.swift in Sources */,
+				B73303172D80287600C200F8 /* NewQRProcessor.swift in Sources */,
 				B7C774332D0C292800BEE6EC /* QRCameraViewController.swift in Sources */,
 				B7C774192CF5C76500BEE6EC /* ResultView.swift in Sources */,
 				B770DE932CEF387D005D9EC1 /* AppDelegate.swift in Sources */,
@@ -437,6 +448,7 @@
 				B766DCF62D71A0330086F321 /* PrivacyViewController.swift in Sources */,
 				B7ADB0002D2B324E005D18B7 /* CustomizingViewController.swift in Sources */,
 				B7ADAFFC2D22867C005D18B7 /* SettingViewController.swift in Sources */,
+				B733031B2D82D90F00C200F8 /* QRBodyShape.swift in Sources */,
 				B7C774492D12F63C00BEE6EC /* QRHistoryManager.swift in Sources */,
 				B7C774102CF34F9D00BEE6EC /* MakeQRView.swift in Sources */,
 				B7EC5AFD2D3A4DE90047BB64 /* CustomAlertView.swift in Sources */,

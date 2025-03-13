@@ -7,6 +7,7 @@
 //
 import UIKit
 import Photos
+import QRCode
 
 class ResultViewController: UIViewController {
     @IBOutlet var resultView: ResultView!
@@ -19,6 +20,9 @@ class ResultViewController: UIViewController {
     let qrManager = QRHistoryManager.shared
     
     private var qrProcessor = QRProcessor()
+    
+    // 2) QR 생성 담당 객체
+    private let newQRProcessor = NewQRProcessor()
     
     var receiveQRPercent: CGFloat = 0.3
     var receiveDotVal: Int = 20
@@ -33,7 +37,8 @@ class ResultViewController: UIViewController {
         resultView.setUI()
         resultView.showLottieAnimationWithLabel(text: "QR코드를 생성 중입니다...")
         
-        makeQRResult {
+        
+        newGenerateQRCode {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
              self.resultView.removeLottieAnimationAndLabel()
              self.resultView.topContainerView.alpha = 1.0
@@ -45,7 +50,46 @@ class ResultViewController: UIViewController {
              self.randomMent(ments: ["상당한 걸작입니다!", "엄청난 결과물인데요?", "자랑해도 될 만한 결과입니다.", "갤러리에 전시해도 되겠어요."])
              }
         }
+        
+        /*
+        makeQRResult {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+             self.resultView.removeLottieAnimationAndLabel()
+             self.resultView.topContainerView.alpha = 1.0
+             self.resultView.resultImageView.isHidden = false
+             self.resultView.randomMent.isHidden = false
+             self.resultView.downLoadButton.isHidden = false
+             self.resultView.shareButton.isHidden = false
+             self.resultView.kakaoButton.isHidden = false
+             self.randomMent(ments: ["상당한 걸작입니다!", "엄청난 결과물인데요?", "자랑해도 될 만한 결과입니다.", "갤러리에 전시해도 되겠어요."])
+             }
+        }*/
     }
+    
+    
+    private func newGenerateQRCode(completion: (() -> Void)? = nil) {
+        do {
+            // 여기서 text, dimension, 색상 등 원하는 값으로 조절
+            let qrImage = try newQRProcessor.createQRCodeBuilderStyle(
+                text: "https://www.worldwildlife.org/about",
+                dimension: 600,
+                foreColor: .systemRed,
+                backColor: .white
+            )
+            
+            // 이미지뷰에 표시
+            resultView.resultImageView.image = qrImage
+            
+            completion?()
+            
+        } catch {
+            print("QR 코드 생성 중 오류 발생:", error)
+        }
+    }
+    
+    
+    
+    
     
     private func randomMent(ments: [String]) {
         resultView.randomMent.text = ments[Int.random(in: 0...3)]

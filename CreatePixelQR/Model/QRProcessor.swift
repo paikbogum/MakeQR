@@ -8,11 +8,6 @@
 import UIKit
 import CoreImage
 
-enum Shape {
-    case square
-    case circle
-    case triangle
-}
 
 class QRProcessor {
     // QR 코드 생성
