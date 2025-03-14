@@ -11,6 +11,10 @@
 		B73303172D80287600C200F8 /* NewQRProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73303162D80287600C200F8 /* NewQRProcessor.swift */; };
 		B73303192D803CA300C200F8 /* QREyeShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73303182D803CA300C200F8 /* QREyeShape.swift */; };
 		B733031B2D82D90F00C200F8 /* QRBodyShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B733031A2D82D90F00C200F8 /* QRBodyShape.swift */; };
+		B733031E2D84100200C200F8 /* EyeShapeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B733031C2D84100200C200F8 /* EyeShapeCollectionViewCell.swift */; };
+		B733031F2D84100200C200F8 /* EyeShapeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B733031D2D84100200C200F8 /* EyeShapeCollectionViewCell.xib */; };
+		B73303222D84101400C200F8 /* BodyShapeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73303202D84101400C200F8 /* BodyShapeCollectionViewCell.swift */; };
+		B73303232D84101400C200F8 /* BodyShapeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73303212D84101400C200F8 /* BodyShapeCollectionViewCell.xib */; };
 		B766DCF62D71A0330086F321 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B766DCF52D71A0330086F321 /* PrivacyViewController.swift */; };
 		B766DCFA2D71A3490086F321 /* [QR]개인정보처리방침.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B766DCF92D71A3490086F321 /* [QR]개인정보처리방침.pdf */; };
 		B770DE932CEF387D005D9EC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B770DE922CEF387D005D9EC1 /* AppDelegate.swift */; };
@@ -69,6 +73,10 @@
 		B73303162D80287600C200F8 /* NewQRProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewQRProcessor.swift; sourceTree = "<group>"; };
 		B73303182D803CA300C200F8 /* QREyeShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QREyeShape.swift; sourceTree = "<group>"; };
 		B733031A2D82D90F00C200F8 /* QRBodyShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRBodyShape.swift; sourceTree = "<group>"; };
+		B733031C2D84100200C200F8 /* EyeShapeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeShapeCollectionViewCell.swift; sourceTree = "<group>"; };
+		B733031D2D84100200C200F8 /* EyeShapeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EyeShapeCollectionViewCell.xib; sourceTree = "<group>"; };
+		B73303202D84101400C200F8 /* BodyShapeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyShapeCollectionViewCell.swift; sourceTree = "<group>"; };
+		B73303212D84101400C200F8 /* BodyShapeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BodyShapeCollectionViewCell.xib; sourceTree = "<group>"; };
 		B766DCF52D71A0330086F321 /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		B766DCF92D71A3490086F321 /* [QR]개인정보처리방침.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "[QR]개인정보처리방침.pdf"; sourceTree = "<group>"; };
 		B770DE8F2CEF387D005D9EC1 /* CreatePixelQR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CreatePixelQR.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -249,6 +257,10 @@
 			children = (
 				B7C774092CF3485C00BEE6EC /* MainCollectionViewCell.swift */,
 				B7C7740A2CF3485C00BEE6EC /* MainCollectionViewCell.xib */,
+				B733031C2D84100200C200F8 /* EyeShapeCollectionViewCell.swift */,
+				B733031D2D84100200C200F8 /* EyeShapeCollectionViewCell.xib */,
+				B73303202D84101400C200F8 /* BodyShapeCollectionViewCell.swift */,
+				B73303212D84101400C200F8 /* BodyShapeCollectionViewCell.xib */,
 			);
 			path = CV;
 			sourceTree = "<group>";
@@ -352,11 +364,13 @@
 			files = (
 				B7DB93212D55FCAD00A77C8E /* CustomAlert.storyboard in Resources */,
 				B770DE9C2CEF3880005D9EC1 /* Assets.xcassets in Resources */,
+				B73303232D84101400C200F8 /* BodyShapeCollectionViewCell.xib in Resources */,
 				B770DE9F2CEF3880005D9EC1 /* Base in Resources */,
 				B770DE9A2CEF387D005D9EC1 /* Base in Resources */,
 				B79386432D64B1B30089CB19 /* InfoTableViewCell.xib in Resources */,
 				B7C774172CF4622800BEE6EC /* LoadingQR.json in Resources */,
 				B766DCFA2D71A3490086F321 /* [QR]개인정보처리방침.pdf in Resources */,
+				B733031F2D84100200C200F8 /* EyeShapeCollectionViewCell.xib in Resources */,
 				B7C774472D12F1C900BEE6EC /* HistoryTableViewCell.xib in Resources */,
 				B7C7740B2CF3485C00BEE6EC /* MainCollectionViewCell.xib in Resources */,
 				B7EC5AFF2D3A4E1F0047BB64 /* CustomAlertView.xib in Resources */,
@@ -422,9 +436,11 @@
 				B7C7743E2D12F11F00BEE6EC /* HistoryViewController.swift in Sources */,
 				B7ADB0022D2B3260005D18B7 /* CustomizingView.swift in Sources */,
 				B7DB93232D55FE1200A77C8E /* CustomAlertViewController.swift in Sources */,
+				B733031E2D84100200C200F8 /* EyeShapeCollectionViewCell.swift in Sources */,
 				B7C774402D12F13F00BEE6EC /* HistoryView.swift in Sources */,
 				B73303172D80287600C200F8 /* NewQRProcessor.swift in Sources */,
 				B7C774332D0C292800BEE6EC /* QRCameraViewController.swift in Sources */,
+				B73303222D84101400C200F8 /* BodyShapeCollectionViewCell.swift in Sources */,
 				B7C774192CF5C76500BEE6EC /* ResultView.swift in Sources */,
 				B770DE932CEF387D005D9EC1 /* AppDelegate.swift in Sources */,
 				B79386462D64B3250089CB19 /* InfoView.swift in Sources */,

@@ -34,8 +34,8 @@ class NewQRProcessor {
             .foregroundColor(foreColor.cgColor)
             .backgroundColor(backColor.cgColor)
             .background.cornerRadius(3)
-            .onPixels.shape(QRCode.PixelShape.CurvePixel())
-            .eye.shape(QRCode.EyeShape.Teardrop())
+            .onPixels.shape(QRCode.PixelShape.Square())
+            .eye.shape(QRCode.EyeShape.Square())
             .generate
             // 이 메서드가 PNG 등 인코딩된 Data를 반환
             .image(dimension: Int(dimension), representation: .png())

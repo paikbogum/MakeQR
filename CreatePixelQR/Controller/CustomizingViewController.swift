@@ -7,7 +7,7 @@
 import UIKit
 
 protocol CustomizingViewControllerDelegate: AnyObject {
-    func didSendDataBack(_ data: (qrPercent: CGFloat, dotVal: Int, foregroundCol: UIColor, backgroundCol: UIColor, logoCol: UIColor, qrSizeSet: String))
+    func didSendDataBack(_ data: (qrPercent: CGFloat, dotVal: Int, foregroundCol: UIColor, backgroundCol: UIColor, logoCol: UIColor, qrSizeSet: String, eyeShape: QREyeShape, bodyShape: QRBodyShape))
 }
 
 class CustomizingViewController: UIViewController, CustomAlertDelegate {
@@ -29,6 +29,18 @@ class CustomizingViewController: UIViewController, CustomAlertDelegate {
     var selectedSizeOption: String = ""
     var sizeOptions = ["300", "600", "900", "1200", "1500"]
     
+    var selectedEyeShape: QREyeShape = .eye_square
+    var selectedBodyShape: QRBodyShape = .data_square
+    
+    let cellName = "EyeShapeCollectionViewCell"
+    let cellReuseIdentifier = "EyeShapeCollectionViewCell"
+    
+    let cellName2 = "BodyShapeCollectionViewCell"
+    let cellReuseIdentifier2 = "BodyShapeCollectionViewCell"
+    
+    let eyeShapes = QREyeShape.allCases
+    let bodyShapes = QRBodyShape.allCases
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,12 +49,33 @@ class CustomizingViewController: UIViewController, CustomAlertDelegate {
         customizingView.setLogoSetUI()
         customizingView.setQrSetUI()
         customizingView.setQRsizeUI()
+        customizingView.setEyeShapeUI()
+        customizingView.setBodyShapeUI()
+        registerXib()
+        
         loadQRSettings()
         updateColorSetting()
         setupPickerViews()
         
+        print(eyeShapes.count, bodyShapes.count)
+        
         self.navigationItem.title = "QR 사용자 설정"
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: CustomColor.backgroundColor.color]
+    }
+    
+    private func registerXib() {
+        let nibName = UINib(nibName: cellName, bundle: nil)
+        customizingView.eyeShapeCollectionView.register(nibName, forCellWithReuseIdentifier: cellReuseIdentifier)
+        
+        customizingView.eyeShapeCollectionView.delegate = self
+        customizingView.eyeShapeCollectionView.dataSource = self
+        
+        
+        let nibName2 = UINib(nibName: cellName2, bundle: nil)
+        customizingView.bodyShapeCollectionView.register(nibName2, forCellWithReuseIdentifier: cellReuseIdentifier2)
+        
+        customizingView.bodyShapeCollectionView.delegate = self
+        customizingView.bodyShapeCollectionView.dataSource = self
     }
     
     func loadQRSettings() {
@@ -135,7 +168,7 @@ class CustomizingViewController: UIViewController, CustomAlertDelegate {
     
     @IBAction func submitButtonTapped(_ sender: UIButton) {
         saveQRSettings()
-        delegate?.didSendDataBack((selectedQRPercent, selectedDotVal, selectedForegroundColor, selectedBackgroundColor, selectedLogoColor, selectedSizeOption))
+        delegate?.didSendDataBack((selectedQRPercent, selectedDotVal, selectedForegroundColor, selectedBackgroundColor, selectedLogoColor, selectedSizeOption, selectedEyeShape, selectedBodyShape))
         navigationController?.popViewController(animated: true)
     }
     
@@ -180,6 +213,7 @@ class CustomizingViewController: UIViewController, CustomAlertDelegate {
     
 }
 
+//MARK: - ColorPicker
 extension CustomizingViewController: UIColorPickerViewControllerDelegate {
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
         // 사용자가 색상을 선택하고 완료했을 때
@@ -199,37 +233,7 @@ extension CustomizingViewController: UIColorPickerViewControllerDelegate {
     }
 }
 
-
-extension UIColor {
-    // UIColor → HEX String 변환
-    func toHexString() -> String {
-        guard let components = self.cgColor.components, components.count >= 3 else {
-            return "#000000"
-        }
-        
-        let r = Int(components[0] * 255)
-        let g = Int(components[1] * 255)
-        let b = Int(components[2] * 255)
-        
-        return String(format: "#%02X%02X%02X", r, g, b)
-    }
-    
-    // HEX String → UIColor 변환
-    convenience init(hexString: String) {
-        var hexSanitized = hexString.trimmingCharacters(in: .whitespacesAndNewlines)
-        hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
-
-        var rgb: UInt64 = 0
-        Scanner(string: hexSanitized).scanHexInt64(&rgb)
-
-        let r = CGFloat((rgb >> 16) & 0xFF) / 255.0
-        let g = CGFloat((rgb >> 8) & 0xFF) / 255.0
-        let b = CGFloat(rgb & 0xFF) / 255.0
-
-        self.init(red: r, green: g, blue: b, alpha: 1.0)
-    }
-}
-
+//MARK: - PickerView
 extension CustomizingViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func setupPickerViews() {
@@ -272,6 +276,99 @@ extension CustomizingViewController: UIPickerViewDelegate, UIPickerViewDataSourc
     }
     
     
+}
+
+//MARK: - CollectionView
+
+extension CustomizingViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == customizingView.eyeShapeCollectionView {
+           return self.eyeShapes.count
+        } else {
+            return self.bodyShapes.count
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if collectionView == customizingView.eyeShapeCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as?
+                    EyeShapeCollectionViewCell else {
+                return UICollectionViewCell() }
+            
+            let target = self.eyeShapes[indexPath.row]
+            
+            // 버튼 이미지 렌더링
+            cell.eyeShapeImageButton.setImage(UIImage(named: "\(target)")?.withRenderingMode(.alwaysOriginal), for: .normal)
+            
+            return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier2, for: indexPath) as?
+                    BodyShapeCollectionViewCell else {
+                return UICollectionViewCell() }
+            
+            let target = self.bodyShapes[indexPath.row]
+            
+            cell.bodyShapeImageButton.setImage(UIImage(named: "\(target)")?.withRenderingMode(.alwaysOriginal), for: .normal)
+            
+            
+            return cell
+        }
+    }
     
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = 40
+        let height = 40
+        
+        return CGSize(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if collectionView == customizingView.eyeShapeCollectionView {
+            let target = self.eyeShapes[indexPath.row]
+            print(target)
+            
+            
+        } else {
+            let target = self.bodyShapes[indexPath.row]
+            print(target)
+            
+        }
+        
+    }
+
+    
+}
+
+extension UIColor {
+    // UIColor → HEX String 변환
+    func toHexString() -> String {
+        guard let components = self.cgColor.components, components.count >= 3 else {
+            return "#000000"
+        }
+        
+        let r = Int(components[0] * 255)
+        let g = Int(components[1] * 255)
+        let b = Int(components[2] * 255)
+        
+        return String(format: "#%02X%02X%02X", r, g, b)
+    }
+    
+    // HEX String → UIColor 변환
+    convenience init(hexString: String) {
+        var hexSanitized = hexString.trimmingCharacters(in: .whitespacesAndNewlines)
+        hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
+
+        var rgb: UInt64 = 0
+        Scanner(string: hexSanitized).scanHexInt64(&rgb)
+
+        let r = CGFloat((rgb >> 16) & 0xFF) / 255.0
+        let g = CGFloat((rgb >> 8) & 0xFF) / 255.0
+        let b = CGFloat(rgb & 0xFF) / 255.0
+
+        self.init(red: r, green: g, blue: b, alpha: 1.0)
+    }
 }

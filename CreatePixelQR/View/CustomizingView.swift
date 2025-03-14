@@ -71,6 +71,23 @@ class CustomizingView: UIView {
 
     @IBOutlet weak var qrsizeTF: UITextField!
     
+    @IBOutlet weak var eyeShapeButton: UIButton!
+    
+    @IBOutlet weak var eyeShapeLabel: UILabel!
+    
+    @IBOutlet weak var eyeShapeView: UIView!
+    
+    @IBOutlet weak var bodyShapeView: UIView!
+    
+    @IBOutlet weak var bodyShapeCollectionView: UICollectionView!
+    
+    @IBOutlet weak var bodyShapeButton: UIButton!
+    
+    @IBOutlet weak var bodyShapeLabel: UILabel!
+    
+    
+    @IBOutlet weak var eyeShapeCollectionView: UICollectionView!
+    
 
     func setColorSetUI() {
         self.backgroundColor = CustomColor.darkModeBackgroundColor.color
@@ -175,10 +192,32 @@ class CustomizingView: UIView {
 
         
         qrsizeTF.backgroundColor = CustomColor.darkModeDarkGrayColor.color
-        
-        
         qrsizeTF.textColor = CustomColor
             .backgroundColor.color
+    }
+    
+    func setEyeShapeUI() {
+        eyeShapeView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
+        eyeShapeView.layer.cornerRadius = 8
+        eyeShapeButton.tintColor = CustomColor.backgroundColor.color
+        eyeShapeLabel.textColor = CustomColor.backgroundColor.color
+        
+        eyeShapeLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        eyeShapeLabel.text = "QR EYE 모양"
+        
+        eyeShapeCollectionView.backgroundColor = .clear
+    }
+    
+    func setBodyShapeUI() {
+        bodyShapeView.backgroundColor = CustomColor.darkModeDarkGrayColor.color
+        bodyShapeView.layer.cornerRadius = 8
+        bodyShapeButton.tintColor = CustomColor.backgroundColor.color
+        bodyShapeLabel.textColor = CustomColor.backgroundColor.color
+        
+        bodyShapeLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        bodyShapeLabel.text = "QR Body 모양"
+        
+        bodyShapeCollectionView.backgroundColor = .clear
     }
     
 }

@@ -31,6 +31,9 @@ class ResultViewController: UIViewController {
     var receiveDotColor: UIColor = .black
     var receiveSize: String = "100"
     
+    var receiveEyeShape: QREyeShape = .eye_square
+    var receiveBodyShape: QRBodyShape = .data_square
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

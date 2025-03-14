@@ -12,7 +12,7 @@ import Mantis
 
 class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, CustomizingViewControllerDelegate {
     
-    func didSendDataBack(_ data: (qrPercent: CGFloat, dotVal: Int, foregroundCol: UIColor, backgroundCol: UIColor, logoCol: UIColor, qrSizeSet: String)) {
+    func didSendDataBack(_ data: (qrPercent: CGFloat, dotVal: Int, foregroundCol: UIColor, backgroundCol: UIColor, logoCol: UIColor, qrSizeSet: String, eyeShape: QREyeShape, bodyShape: QRBodyShape)) {
         
         receiveQRPercent = data.qrPercent
         receiveDotVal = data.dotVal
@@ -20,6 +20,9 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
         receiveBackgroundColor = data.backgroundCol
         receiveDotColor = data.logoCol
         receiveSize = data.qrSizeSet
+        
+        receiveEyeShape = data.eyeShape
+        receiveBodyShape = data.bodyShape
         
         print(data)
     }
@@ -42,7 +45,10 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
     var receiveForegroundColor: UIColor = .black
     var receiveBackgroundColor: UIColor = .white
     var receiveDotColor: UIColor = .black
-    var receiveSize: String = "900" 
+    var receiveSize: String = "900"
+    
+    var receiveEyeShape: QREyeShape = .eye_square
+    var receiveBodyShape: QRBodyShape = .data_square
     
 
     override func viewDidLoad() {
@@ -147,6 +153,8 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
                     nextVC.receiveBackgroundColor = self.receiveBackgroundColor
                     nextVC.receiveDotColor = self.receiveDotColor
                     nextVC.receiveSize = self.receiveSize
+                    nextVC.receiveEyeShape = self.receiveEyeShape
+                    nextVC.receiveBodyShape = self.receiveBodyShape
                     
                     navigationController?.pushViewController(nextVC, animated: true)
                 }
@@ -184,6 +192,8 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
                 nextVC.receiveBackgroundColor = self.receiveBackgroundColor
                 nextVC.receiveDotColor = self.receiveDotColor
                 nextVC.receiveSize = self.receiveSize
+                nextVC.receiveEyeShape = self.receiveEyeShape
+                nextVC.receiveBodyShape = self.receiveBodyShape
                 
                 navigationController?.pushViewController(nextVC, animated: true)
             }
@@ -219,6 +229,8 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
                 nextVC.receiveBackgroundColor = self.receiveBackgroundColor
                 nextVC.receiveDotColor = self.receiveDotColor
                 nextVC.receiveSize = self.receiveSize
+                nextVC.receiveEyeShape = self.receiveEyeShape
+                nextVC.receiveBodyShape = self.receiveBodyShape
                 
                 
                 navigationController?.pushViewController(nextVC, animated: true)
@@ -254,6 +266,8 @@ class MakeQRViewController: UIViewController, UITextFieldDelegate, UINavigationC
                 nextVC.receiveBackgroundColor = self.receiveBackgroundColor
                 nextVC.receiveDotColor = self.receiveDotColor
                 nextVC.receiveSize = self.receiveSize
+                nextVC.receiveEyeShape = self.receiveEyeShape
+                nextVC.receiveBodyShape = self.receiveBodyShape
                 
                 navigationController?.pushViewController(nextVC, animated: true)
             }

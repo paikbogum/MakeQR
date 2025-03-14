@@ -11,13 +11,15 @@ import Mantis
 
 class MakeWifiViewController: UIViewController,UITextFieldDelegate, UINavigationControllerDelegate, CustomizingViewControllerDelegate  {
     
-    func didSendDataBack(_ data: (qrPercent: CGFloat, dotVal: Int, foregroundCol: UIColor, backgroundCol: UIColor, logoCol: UIColor, qrSizeSet: String)) {
+    func didSendDataBack(_ data: (qrPercent: CGFloat, dotVal: Int, foregroundCol: UIColor, backgroundCol: UIColor, logoCol: UIColor, qrSizeSet: String, eyeShape: QREyeShape, bodyShape: QRBodyShape)) {
         receiveQRPercent = data.qrPercent
         receiveDotVal = data.dotVal
         receiveForegroundColor = data.foregroundCol
         receiveBackgroundColor = data.backgroundCol
         receiveDotColor = data.logoCol
         receiveSize = data.qrSizeSet
+        receiveEyeShape = data.eyeShape
+        receiveBodyShape = data.bodyShape
         
     }
     
@@ -47,6 +49,9 @@ class MakeWifiViewController: UIViewController,UITextFieldDelegate, UINavigation
     var receiveBackgroundColor: UIColor = .white
     var receiveDotColor: UIColor = .black
     var receiveSize: String = "900"
+    
+    var receiveEyeShape: QREyeShape = .eye_square
+    var receiveBodyShape: QRBodyShape = .data_square
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -165,6 +170,8 @@ class MakeWifiViewController: UIViewController,UITextFieldDelegate, UINavigation
                 nextVC.receiveBackgroundColor = self.receiveBackgroundColor
                 nextVC.receiveDotColor = self.receiveDotColor
                 nextVC.receiveSize = self.receiveSize
+                nextVC.receiveEyeShape = self.receiveEyeShape
+                nextVC.receiveBodyShape = self.receiveBodyShape
                 
                 navigationController?.pushViewController(nextVC, animated: true)
             }
